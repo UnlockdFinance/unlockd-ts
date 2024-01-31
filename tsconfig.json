@@ -4,9 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true
-  },
-  "exclude": [
-    "tests"
-  ]
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
 }

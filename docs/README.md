@@ -1,3 +1,5 @@
+@unlockdfinance/unlockd-ts / [Exports](modules.md)
+
 #
 
 <p align="center" style="margin-bottom:32px">
@@ -15,8 +17,7 @@
 
 <p align="center">
     <a href="https://app.unlockd.finance/"><b>Website</b></a> •
-    <a href="https://devs.unlockd.finance/"><b>Gitbook</b></a> •
-    <a href="/docs"><b>Docs</b></a>
+    <a href="https://devs.unlockd.finance/"><b>Documentation</b></a>
 </p>
 
 [//]: # ()
@@ -27,7 +28,6 @@
 [//]: # ([![code coverage]&#40;https://img.shields.io/coveralls/mzabriskie/unlockd-ts.svg?style=flat-square&#41;]&#40;https://coveralls.io/r/mzabriskie/unlockd-ts&#41;)
 
 [//]: # ([![npm bundle size]&#40;https://img.shields.io/bundlephobia/minzip/unlockd-ts?style=flat-square&#41;]&#40;https://bundlephobia.com/package/unlockd-ts@latest&#41;)
-
 
 ## 🗂️ Table of Contents
 
@@ -51,7 +51,6 @@
 - Calculate the liquidation price of a loan
 - Calculate health factor of a loan
 - Calculate the available amount to borrow
-
 
 ## Browser Support
 
@@ -191,7 +190,6 @@ const params = {
 const result = healthFactor(params)
 ````
 
-
 ### Available to borrow
 ```javascript
 import {availableToBorrow} from "@unlockdfinance/unlockd-ts";
@@ -231,4 +229,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Alejandro Roige** - *All the other cool stuff* - [roigecode](https://github.com/roigecode)
 
 See also the list of [contributors](https://github.com/UnlockdFinance/unlockd-ts/contributors) who participated in this project.
-

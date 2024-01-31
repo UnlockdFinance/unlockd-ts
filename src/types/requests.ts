@@ -6,3 +6,10 @@ export type ActionRequest = {
   loanId: string
   nfts: Array<Nft>
 }
+
+export type SellNowRequest = {
+  loanId?: string
+  nft: Nft
+}
+
+export type MarketRequest = Nft

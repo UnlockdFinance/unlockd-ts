@@ -1,1 +1,5 @@
 export * from './UnlockdApi'
+export * from './availableToBorrow'
+export * from './healthFactor'
+export * from './minimumToRepay'
+export * from './liquidationPrice'
