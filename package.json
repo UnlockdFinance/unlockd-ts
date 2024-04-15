@@ -5,20 +5,25 @@
   },
   "version": "0.0.2",
   "description": "",
+  "type": "module",
   "main": "dist/unlockd-ts.cjs",
   "module": "dist/unlockd-ts.esm",
   "browser": "dist/unlockd-ts.umd",
   "files": [
     "dist"
   ],
+  "engines": {
+    "npm": ">=8.0.0 <9.0.0",
+    "node": ">=16.0.0 <17.0.0"
+  },
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js -w",
-    "build": "npm run build:clean && npm run build:code && npm run build:types",
-    "build:code": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js",
-    "build:types": "tsc -p ./tsconfig-build.json --outDir build --declaration true && api-extractor run",
+    "build": "npm run build:clean && npm run build:types && npm run build:code ",
+    "build:code": "node --experimental-json-modules ./node_modules/.bin/rollup --bundleConfigAsCjs --inlineDynamicImports --config rollup.config.js",
+    "build:types": "tsc -p ./tsconfig-build.json --outDir build --declaration true ",
     "build:clean": "rm -r build; rm -r dist;exit 0",
-    "docs": "typedoc --plugin typedoc-plugin-markdown  --out docs src/index.ts ",
+    "docs": "typedoc --options typedoc.json --plugin typedoc-plugin-markdown  --out docs src/index.ts ",
     "deploy": "npm run build && npm publish",
     "test": "jest",
     "changelog": " npx auto-changelog --output CHANGELOG.md --template keepachangelog --commit-limit false --package",
@@ -35,7 +40,6 @@
   },
   "homepage": "https://github.com/UnlockdFinance/unlockd-ts#readme",
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.38.0",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.1",
@@ -50,16 +54,19 @@
     "nock": "^13.3.3",
     "prettier": "^3.0.3",
     "rollup": "^3.29.4",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-import-assert": "^3.0.1",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.2",
+    "tsx": "^4.7.2",
     "typedoc": "^0.25.7",
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "joi": "^17.10.2"
+    "joi": "^17.10.2",
+    "viem": "^2.9.17"
   }
 }

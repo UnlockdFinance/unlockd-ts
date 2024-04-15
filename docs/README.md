@@ -17,7 +17,8 @@
 
 <p align="center">
     <a href="https://app.unlockd.finance/"><b>Website</b></a> •
-    <a href="https://devs.unlockd.finance/"><b>Documentation</b></a>
+    <a href="https://devs.unlockd.finance/"><b>Gitbook</b></a> •
+    <a href="/docs"><b>Docs</b></a>
 </p>
 
 [//]: # ()
@@ -50,7 +51,7 @@
 - Calculate minimum amount to repay a loan
 - Calculate the liquidation price of a loan
 - Calculate health factor of a loan
-- Calculate the available amount to borrow
+- Calculate the available amount to action
 
 ## Browser Support
 
@@ -190,7 +191,7 @@ const params = {
 const result = healthFactor(params)
 ````
 
-### Available to borrow
+### Available to action
 ```javascript
 import {availableToBorrow} from "@unlockdfinance/unlockd-ts";
 

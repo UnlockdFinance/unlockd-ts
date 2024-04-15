@@ -1,16 +1,16 @@
 import fs from "fs";
 import axios from "axios";
 import {Contract, ethers, JsonRpcProvider} from "ethers";
-import {abis} from "./src/abis";
+import {abis} from "./abis";
 
 const alquemyKey = process.argv[2]
 const etherscanKey = process.argv[3]
 const network = process.argv[4]
 const path = process.argv[5]
 
-const provider = new JsonRpcProvider(`https://eth-sepolia.g.alchemy.com/v2/${alquemyKey}`)
+const provider = new JsonRpcProvider(`https://eth-${network}.g.alchemy.com/v2/${alquemyKey}`)
 
-const unlockd = new Contract('0xC4b665F019bdF18a8a558F1A7254Bb7142453C2B', abis.unlockd, provider)
+const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', abis.unlockd, provider)
 
 
 enum ModuleId {
@@ -32,7 +32,11 @@ function enumToArray<T>(enumeration: T): any {
 }
 
 async function abi(address: string) {
-    const response = await axios.get(`https://api-${network}.etherscan.io/api?module=contract&action=getabi&address=${address}&apikey=${etherscanKey}`)
+    let domain=`https://api.etherscan.io`
+    if(network!=='mainnet'){
+        domain=`https://api-${network}.etherscan.io`
+    }
+    const response = await axios.get(`${domain}/api?module=contract&action=getabi&address=${address}&apikey=${etherscanKey}`)
     if (isJson(response.data.result) === false) return ''
     return response.data.result
 }

@@ -1,16 +1,16 @@
 export const LIQUIDATION_THRESHOLD = BigInt(8500)
 
 export type NFTWithValuation = {
-    valuation: bigint,
-    ltv: bigint,
+  valuation: bigint
+  ltv: bigint
 }
 
 export type MinimumRepayParams = {
-    initialLoans: NFTWithValuation[]
-    indicesToDelete: number[]
-    totalDebt: bigint
-    auction?: boolean
-    liquidationThreshold?: bigint
+  initialLoans: NFTWithValuation[]
+  indicesToDelete: number[]
+  totalDebt: bigint
+  auction?: boolean
+  liquidationThreshold?: bigint
 }
 
 /**
@@ -39,35 +39,36 @@ export type MinimumRepayParams = {
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export function minimumToRepay(params: MinimumRepayParams): bigint {
-    if (params.initialLoans.length == 0) throw new Error('Must provide at least one loan')
-    if (params.indicesToDelete.length == 0 && !params.auction) throw new Error('Must provide at least one index to delete')
-    if (params.auction && !params.liquidationThreshold) throw new Error('Must provide liquidation threshold for auction')
+  if (params.initialLoans.length == 0) throw new Error('Must provide at least one loan')
+  if (params.indicesToDelete.length == 0 && !params.auction)
+    throw new Error('Must provide at least one index to delete')
+  if (params.auction && !params.liquidationThreshold) throw new Error('Must provide liquidation threshold for auction')
 
-    const totalDebt = params.totalDebt
+  const totalDebt = params.totalDebt
 
-    let totalValuation = BigInt(0)
-    let initialAvailableToBorrow = BigInt(0)
-    let finalAvailableToBorrow = BigInt(0)
+  let totalValuation = BigInt(0)
+  let initialAvailableToBorrow = BigInt(0)
+  let finalAvailableToBorrow = BigInt(0)
 
-    for (const loan of params.initialLoans) {
-        totalValuation += loan.valuation
-        initialAvailableToBorrow += loan.valuation * loan.ltv
-    }
+  for (const loan of params.initialLoans) {
+    totalValuation += loan.valuation
+    initialAvailableToBorrow += loan.valuation * loan.ltv
+  }
 
-    if (params.auction) return params.totalDebt - (totalValuation*params.liquidationThreshold!)/BigInt(10000)
+  if (params.auction) return params.totalDebt - (totalValuation * params.liquidationThreshold!) / BigInt(10000)
 
-    initialAvailableToBorrow = initialAvailableToBorrow / BigInt(10000)
+  initialAvailableToBorrow = initialAvailableToBorrow / BigInt(10000)
 
-    const finalArray: NFTWithValuation[] = params.initialLoans.filter((_, i) => !params.indicesToDelete.includes(i))
+  const finalArray: NFTWithValuation[] = params.initialLoans.filter((_, i) => !params.indicesToDelete.includes(i))
 
-    for (const loan of finalArray) {
-        finalAvailableToBorrow += loan.valuation * loan.ltv
-    }
+  for (const loan of finalArray) {
+    finalAvailableToBorrow += loan.valuation * loan.ltv
+  }
 
-    finalAvailableToBorrow = finalAvailableToBorrow / BigInt(10000)
+  finalAvailableToBorrow = finalAvailableToBorrow / BigInt(10000)
 
-    const minimumRepay = totalDebt - finalAvailableToBorrow
+  const minimumRepay = totalDebt - finalAvailableToBorrow
 
-    if(minimumRepay < BigInt(0)) return BigInt(0)
-    return minimumRepay
+  if (minimumRepay < BigInt(0)) return BigInt(0)
+  return minimumRepay
 }

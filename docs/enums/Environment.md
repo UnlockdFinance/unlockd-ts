@@ -20,7 +20,7 @@ Environment to use in the SDK
 
 #### Defined in
 
-[UnlockdApi.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/05277b2/src/UnlockdApi.ts#L21)
+[src/UnlockdApi.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L21)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[UnlockdApi.ts:22](https://github.com/UnlockdFinance/unlockd-ts/blob/05277b2/src/UnlockdApi.ts#L22)
+[src/UnlockdApi.ts:22](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L22)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[UnlockdApi.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/05277b2/src/UnlockdApi.ts#L20)
+[src/UnlockdApi.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L20)

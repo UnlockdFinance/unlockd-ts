@@ -1,4 +1,4 @@
-import {availableToBorrow} from "../src/availableToBorrow";
+import { availableToBorrow } from '../src/availableToBorrow'
 
 const oneEth = BigInt(1e18)
 

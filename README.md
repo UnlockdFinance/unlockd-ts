@@ -50,7 +50,7 @@
 - Calculate minimum amount to repay a loan
 - Calculate the liquidation price of a loan
 - Calculate health factor of a loan
-- Calculate the available amount to borrow
+- Calculate the available amount to action
 
 
 ## Browser Support
@@ -192,7 +192,7 @@ const result = healthFactor(params)
 ````
 
 
-### Available to borrow
+### Available to action
 ```javascript
 import {availableToBorrow} from "@unlockdfinance/unlockd-ts";
 
