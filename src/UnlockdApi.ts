@@ -42,7 +42,7 @@ export class UnlockdApi {
         this.url = 'https://api.example.com'
         break
       case Environment.STAGING:
-        this.url = 'https://api-sepolia-sdk.unlockd.finance'
+        this.url = 'https://unlockd-api.staging.unlockd.finance'
         break
       case Environment.PRODUCTION:
         this.url = 'https://api-sdk.unlockd.finance'
@@ -66,11 +66,7 @@ export class UnlockdApi {
    */
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
     validateAddress(address)
-    const response = await axios.get(`${this.url}/auth/${address}/message`, {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    }).catch(error => {
+    const response = await axios.get(`${this.url}/auth/${address}/message`, ).catch(error => {
       throw new UnexpectedException()
     })
     return response.data
@@ -91,11 +87,7 @@ export class UnlockdApi {
    */
   async validateMessage(address: string, signature: string): Promise<ValidateMessageResponse> {
     validateAddress(address)
-    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }, {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    }).catch(error => {
+    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }).catch(error => {
       throw new UnexpectedException()
     })
     return response.data
@@ -123,7 +115,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/loan/borrow`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`,
-          'Access-Control-Allow-Origin': '*'
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -151,7 +142,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/loan/repay`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`,
-          'Access-Control-Allow-Origin': '*'
 
         }
       })
@@ -180,7 +170,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/sellnow`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`,
-          'Access-Control-Allow-Origin': '*'
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -206,7 +195,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/market`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`,
-          'Access-Control-Allow-Origin': '*'
 
         }
       })
@@ -232,11 +220,7 @@ export class UnlockdApi {
   async prices(nfts: { collection: string; tokenId: string }[], underlyingAsset: string): Promise<PricesResponse[]> {
     validatePrices({ nfts, underlyingAsset })
     const response = await axios
-      .post(`${this.url}/prices`, { nfts, underlyingAsset }, {
-        headers: {
-          'Access-Control-Allow-Origin': '*'
-        }
-      })
+      .post(`${this.url}/prices`, { nfts, underlyingAsset })
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }
