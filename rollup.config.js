@@ -21,8 +21,6 @@ export default [
 
         plugins: [
             importAssertionsPlugin(),
-            resolve(),
-            commonjs(),
             typescript({tsconfig: "./tsconfig.json"}),
             json(),
         ],
