@@ -66,7 +66,11 @@ export class UnlockdApi {
    */
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
     validateAddress(address)
-    const response = await axios.get(`${this.url}/auth/${address}/message`).catch(error => {
+    const response = await axios.get(`${this.url}/auth/${address}/message`, {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }).catch(error => {
       throw new UnexpectedException()
     })
     return response.data
@@ -87,7 +91,11 @@ export class UnlockdApi {
    */
   async validateMessage(address: string, signature: string): Promise<ValidateMessageResponse> {
     validateAddress(address)
-    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }).catch(error => {
+    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }).catch(error => {
       throw new UnexpectedException()
     })
     return response.data
@@ -114,7 +122,8 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/loan/borrow`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`
+          Authorization: `Bearer ${tokenAuth}`,
+          'Access-Control-Allow-Origin': '*'
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -141,7 +150,9 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/loan/repay`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`
+          Authorization: `Bearer ${tokenAuth}`,
+          'Access-Control-Allow-Origin': '*'
+
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -168,7 +179,8 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/sellnow`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`
+          Authorization: `Bearer ${tokenAuth}`,
+          'Access-Control-Allow-Origin': '*'
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -193,7 +205,9 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/market`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`
+          Authorization: `Bearer ${tokenAuth}`,
+          'Access-Control-Allow-Origin': '*'
+
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -218,7 +232,11 @@ export class UnlockdApi {
   async prices(nfts: { collection: string; tokenId: string }[], underlyingAsset: string): Promise<PricesResponse[]> {
     validatePrices({ nfts, underlyingAsset })
     const response = await axios
-      .post(`${this.url}/prices`, { nfts, underlyingAsset })
+      .post(`${this.url}/prices`, { nfts, underlyingAsset }, {
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }
