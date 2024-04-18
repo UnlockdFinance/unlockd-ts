@@ -91,13 +91,13 @@ export const validatePrices = (body: { nfts: { collection: string; tokenId: stri
           collection: Joi.string()
             .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
             .required(),
-          tokenId: Joi.string().required()
+          tokenId: Joi.string().required(),
+          underlyingAsset:Joi.string()
+            .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
+            .required()
         }).required()
       )
       .max(100)
-      .required(),
-    underlyingAsset: Joi.string()
-      .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
       .required()
   }).required()
 
