@@ -122,7 +122,7 @@ describe('UnlockdApi', () => {
           tokenId: '10',
           underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
         }
-      ],
+      ]
     }
     const expectedResponse = {
       result: [

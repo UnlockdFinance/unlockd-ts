@@ -142,7 +142,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/loan/repay`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
-
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -195,7 +194,6 @@ export class UnlockdApi {
       .post(`${this.url}/signature/market`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
-
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -216,7 +214,7 @@ export class UnlockdApi {
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async prices(nfts: { collection: string; tokenId: string, underlyingAsset: string }[]): Promise<PricesResponse[]> {
+  async prices(nfts: { collection: string; tokenId: string; underlyingAsset: string }[]): Promise<PricesResponse[]> {
     validatePrices({ nfts })
     const response = await axios
       .post(`${this.url}/prices`, { nfts })

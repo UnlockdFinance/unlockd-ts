@@ -83,7 +83,7 @@ export const validateMarket = (body: MarketRequest) => {
   }
 }
 
-export const validatePrices = (body: { nfts: { collection: string; tokenId: string ,underlyingAsset: string}[];  }) => {
+export const validatePrices = (body: { nfts: { collection: string; tokenId: string; underlyingAsset: string }[] }) => {
   const schema = Joi.object({
     nfts: Joi.array()
       .items(
@@ -92,7 +92,7 @@ export const validatePrices = (body: { nfts: { collection: string; tokenId: stri
             .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
             .required(),
           tokenId: Joi.string().required(),
-          underlyingAsset:Joi.string()
+          underlyingAsset: Joi.string()
             .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
             .required()
         }).required()
