@@ -1,13 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "./dist",
     "rootDir": "./src",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "declarationDir": "build",
-    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
   },
   "exclude": [
     "tests",
