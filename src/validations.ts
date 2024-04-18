@@ -83,7 +83,7 @@ export const validateMarket = (body: MarketRequest) => {
   }
 }
 
-export const validatePrices = (body: { nfts: { collection: string; tokenId: string }[]; underlyingAsset: string }) => {
+export const validatePrices = (body: { nfts: { collection: string; tokenId: string ,underlyingAsset: string}[];  }) => {
   const schema = Joi.object({
     nfts: Joi.array()
       .items(

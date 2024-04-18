@@ -9,6 +9,7 @@ export class InvalidSellNowRequestParams extends Error {}
 export class InvalidMarketRequestParams extends Error {}
 
 export class InvalidPricesRequestParams extends Error {}
+export class InvalidSignatureException extends Error {}
 
 export class UnexpectedException extends Error {}
 

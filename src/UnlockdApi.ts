@@ -9,7 +9,7 @@ import {
 import { PricesResponse, Signature, SignatureMessageResponse, ValidateMessageResponse } from './types/responses'
 import { ActionRequest, MarketRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError, HttpStatusCode } from 'axios'
-import { mapAxiosException, UnauthorizedException, UnexpectedException } from './errors'
+import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from './errors'
 
 /**
  * Environment to use in the SDK
@@ -66,7 +66,7 @@ export class UnlockdApi {
    */
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
     validateAddress(address)
-    const response = await axios.get(`${this.url}/auth/${address}/message`, ).catch(error => {
+    const response = await axios.get(`${this.url}/auth/${address}/message`).catch(error => {
       throw new UnexpectedException()
     })
     return response.data
@@ -88,7 +88,7 @@ export class UnlockdApi {
   async validateMessage(address: string, signature: string): Promise<ValidateMessageResponse> {
     validateAddress(address)
     const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }).catch(error => {
-      throw new UnexpectedException()
+      throw new InvalidSignatureException()
     })
     return response.data
   }
@@ -114,7 +114,7 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/loan/borrow`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`,
+          Authorization: `Bearer ${tokenAuth}`
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -141,7 +141,7 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/loan/repay`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`,
+          Authorization: `Bearer ${tokenAuth}`
 
         }
       })
@@ -169,7 +169,7 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/sellnow`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`,
+          Authorization: `Bearer ${tokenAuth}`
         }
       })
       .catch((error: AxiosError) => mapAxiosException(error))
@@ -194,7 +194,7 @@ export class UnlockdApi {
     const response = await axios
       .post(`${this.url}/signature/market`, params, {
         headers: {
-          Authorization: `Bearer ${tokenAuth}`,
+          Authorization: `Bearer ${tokenAuth}`
 
         }
       })
@@ -210,17 +210,16 @@ export class UnlockdApi {
    * @example
    * ```ts
    * const nfts = [
-   * {collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10'}
+   * {collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10',underlyingAsset : '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'}
    * ]
-   * const underlyingAsset = '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
-   * const result = await api.prices(nfts, underlyingAsset)
+   * const result = await api.prices(nfts)
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async prices(nfts: { collection: string; tokenId: string }[], underlyingAsset: string): Promise<PricesResponse[]> {
-    validatePrices({ nfts, underlyingAsset })
+  async prices(nfts: { collection: string; tokenId: string, underlyingAsset: string }[]): Promise<PricesResponse[]> {
+    validatePrices({ nfts })
     const response = await axios
-      .post(`${this.url}/prices`, { nfts, underlyingAsset })
+      .post(`${this.url}/prices`, { nfts })
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }

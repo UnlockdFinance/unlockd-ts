@@ -1,6 +1,6 @@
 import nock from 'nock'
 import { Environment, UnlockdApi } from '../src'
-import { mapAxiosException, UnauthorizedException, UnexpectedException } from '../src/errors'
+import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from '../src/errors'
 import { AxiosError } from 'axios'
 import { SignatureMessageResponse, ValidateMessageResponse } from '../src/types/responses'
 import { ActionRequest, MarketRequest, SellNowRequest } from '../src/types/requests'
@@ -51,7 +51,7 @@ describe('UnlockdApi', () => {
 
     nock(api.url).post(`/auth/${address}/validate`, { signature }).reply(500)
 
-    await expect(api.validateMessage(address, signature)).rejects.toThrow(UnexpectedException)
+    await expect(api.validateMessage(address, signature)).rejects.toThrow(InvalidSignatureException)
   })
 
   it('should fetch a borrow signature', async () => {
@@ -119,10 +119,10 @@ describe('UnlockdApi', () => {
       nfts: [
         {
           collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358',
-          tokenId: '10'
+          tokenId: '10',
+          underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
         }
       ],
-      underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
     }
     const expectedResponse = {
       result: [
@@ -138,7 +138,7 @@ describe('UnlockdApi', () => {
 
     nock(api.url).post('/prices', params).reply(200, expectedResponse)
 
-    const response = await api.prices(params.nfts, params.underlyingAsset)
+    const response = await api.prices(params.nfts)
     expect(response).toEqual(expectedResponse.result)
   })
   it('should handle an unauthorized exception when the request fails with 401 status', async () => {
