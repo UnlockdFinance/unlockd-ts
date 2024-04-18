@@ -9,11 +9,12 @@ export enum ModuleId {
 }
 
 export enum Collections {
-  Unikura,
-  WatchesIo,
+  Unikura = 'unikura',
+  WatchesIo = 'watchesIo'
 }
+
 export enum UnderlyingsAsset {
-  USDC,
+  USDC = 'usdc',
 }
 
 export type Address = `0x${string}`
@@ -46,10 +47,10 @@ const sepoliaCollections: CollectionMap = {
 }
 
 const mainnetUnderlyingsAssets: UnderlyingsAssetMap = {
-  [UnderlyingsAsset.USDC]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+  [UnderlyingsAsset.USDC]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
 }
 const sepoliaUnderlyingsAssets: UnderlyingsAssetMap = {
-  [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8',
+  [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8'
 }
 
 export const collections = (chain?: Chain): CollectionMap => {
@@ -62,15 +63,15 @@ export const collections = (chain?: Chain): CollectionMap => {
       return mainnetCollections
   }
 }
-export const underlyingsAssets= (chain?: Chain):UnderlyingsAssetMap=>{
-switch (chain) {
-  case 'mainnet':
-    return mainnetUnderlyingsAssets
-  case 'sepolia':
-    return sepoliaUnderlyingsAssets
-  default:
-    return mainnetUnderlyingsAssets
-}
+export const underlyingsAssets = (chain?: Chain): UnderlyingsAssetMap => {
+  switch (chain) {
+    case 'mainnet':
+      return mainnetUnderlyingsAssets
+    case 'sepolia':
+      return sepoliaUnderlyingsAssets
+    default:
+      return mainnetUnderlyingsAssets
+  }
 }
 export const addresses = (options?: ClientOptions): AddressMap => {
   switch (options?.network) {

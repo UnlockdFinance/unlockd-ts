@@ -26,7 +26,17 @@ export const validateBorrow = (body: ActionRequest) => {
         tokenId: Joi.string().required()
       })
     )
-  }).min(1)
+  })
+    .min(1)
+    .when('.loanId', {
+      not: Joi.exist(),
+      then: Joi.object({
+        underlyingAsset: Joi.string()
+          .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
+          .required()
+      }).required(),
+      otherwise: Joi.object({ underlyingAsset: Joi.forbidden() })
+    })
 
   const validate = schema.validate(body)
   if (validate.error) {
