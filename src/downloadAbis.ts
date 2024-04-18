@@ -22,8 +22,7 @@ enum ModuleId {
 
 function enumToArray<T>(enumeration: T): any {
   // @ts-ignore
-  return (
-    Object.keys(enumeration)
+  return (Object.keys(enumeration)
       .filter(key => isNaN(Number(key)))
       // @ts-ignore
       .map(key => enumeration[key])
