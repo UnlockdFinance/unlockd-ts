@@ -1,4 +1,4 @@
-import { ClientOptions } from './client'
+import { Chain, ClientOptions } from './client'
 
 export enum ModuleId {
   Action = 3,
@@ -7,8 +7,19 @@ export enum ModuleId {
   BuyNow = 6,
   SellNow = 7
 }
+
+export enum Collections {
+  Unikura,
+  WatchesIo,
+}
+export enum UnderlyingsAsset {
+  USDC,
+}
+
 export type Address = `0x${string}`
 type AddressMap = { [key in ModuleId]: Address }
+type CollectionMap = { [key in Collections]: Address }
+type UnderlyingsAssetMap = { [key in UnderlyingsAsset]: Address }
 
 const mainnetAddresses: AddressMap = {
   [ModuleId.Action]: '0xF617D821F9DA0A8e3354Cf5E5eA151270c814C87',
@@ -17,11 +28,56 @@ const mainnetAddresses: AddressMap = {
   [ModuleId.BuyNow]: '0xDFfe658124e2bbCa924077E9c3a888e45195cc59',
   [ModuleId.SellNow]: '0xd2041ee19BA6218B3bc2c67668cB2eC3945f8adb'
 }
+const sepoliaAddresses: AddressMap = {
+  [ModuleId.Action]: '0xdE3FbfEAc8763D6F597c609AB1637bF5ebBB95f5',
+  [ModuleId.Auction]: '0xFA2896810dB8646c140d26578622C94e88f8A17B',
+  [ModuleId.Market]: '0x6e00a46D98B3f6A0c42fa0DbC69d01256Ea45289',
+  [ModuleId.BuyNow]: '0x145F60D426174b03Af818fbC6221ff4482BD2AD8',
+  [ModuleId.SellNow]: '0xCC67de978AB829778e7a28E38eE808B2E15a1Fa7'
+}
+const mainnetCollections: CollectionMap = {
+  [Collections.Unikura]: '0xea89a88284ff9a9a9a54f4c43fc4efbf099e992f',
+  [Collections.WatchesIo]: '0xd7ab81881c8a0a8fbfda70072d56ac6d7b3c3eff'
+}
 
+const sepoliaCollections: CollectionMap = {
+  [Collections.Unikura]: '0x8be936362832cfbd3bf800a5e6537dd17fa538b0',
+  [Collections.WatchesIo]: '0x388043e55a388e07a75e9a1412fe2d64e48343a5'
+}
+
+const mainnetUnderlyingsAssets: UnderlyingsAssetMap = {
+  [UnderlyingsAsset.USDC]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+}
+const sepoliaUnderlyingsAssets: UnderlyingsAssetMap = {
+  [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8',
+}
+
+export const collections = (chain?: Chain): CollectionMap => {
+  switch (chain) {
+    case 'mainnet':
+      return mainnetCollections
+    case 'sepolia':
+      return sepoliaCollections
+    default:
+      return mainnetCollections
+  }
+}
+export const underlyingsAssets= (chain?: Chain):UnderlyingsAssetMap=>{
+switch (chain) {
+  case 'mainnet':
+    return mainnetUnderlyingsAssets
+  case 'sepolia':
+    return sepoliaUnderlyingsAssets
+  default:
+    return mainnetUnderlyingsAssets
+}
+}
 export const addresses = (options?: ClientOptions): AddressMap => {
   switch (options?.network) {
     case 'mainnet':
       return mainnetAddresses
+    case 'sepolia':
+      return sepoliaAddresses
     default:
       return mainnetAddresses
   }

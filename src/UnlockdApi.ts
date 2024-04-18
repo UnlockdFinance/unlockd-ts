@@ -15,7 +15,7 @@ import { InvalidSignatureException, mapAxiosException, UnauthorizedException, Un
  * Environment to use in the SDK
  * @enum {number}
  */
-export enum Environment {
+export enum UnlockdEnvironment {
   TEST,
   PRODUCTION,
   STAGING
@@ -30,21 +30,21 @@ export class UnlockdApi {
   public readonly url
 
   /**
-   * @param {Environment} env - Environment to use in the SDK
+   * @param {UnlockdEnvironment} env - Environment to use in the SDK
    * @example
    * ```ts
    * const api = new UnlockdApi(Environment.PRODUCTION)
    * ```
    */
-  constructor(private env = Environment.PRODUCTION) {
+  constructor(private env = UnlockdEnvironment.PRODUCTION) {
     switch (this.env) {
-      case Environment.TEST:
+      case UnlockdEnvironment.TEST:
         this.url = 'https://api.example.com'
         break
-      case Environment.STAGING:
+      case UnlockdEnvironment.STAGING:
         this.url = 'https://unlockd-api.staging.unlockd.finance'
         break
-      case Environment.PRODUCTION:
+      case UnlockdEnvironment.PRODUCTION:
         this.url = 'https://api-sdk.unlockd.finance'
         break
       default:

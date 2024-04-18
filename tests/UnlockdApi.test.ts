@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { Environment, UnlockdApi } from '../src'
+import { UnlockdEnvironment, UnlockdApi } from '../src'
 import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from '../src/errors'
 import { AxiosError } from 'axios'
 import { SignatureMessageResponse, ValidateMessageResponse } from '../src/types/responses'
@@ -10,7 +10,7 @@ describe('UnlockdApi', () => {
   const tokenAuth = 'valid-token'
 
   beforeAll(() => {
-    api = new UnlockdApi(Environment.TEST)
+    api = new UnlockdApi(UnlockdEnvironment.TEST)
   })
 
   afterEach(() => {
