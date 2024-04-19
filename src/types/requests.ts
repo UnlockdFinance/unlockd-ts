@@ -3,8 +3,9 @@ export type Nft = {
   tokenId: string
 }
 export type ActionRequest = {
-  loanId: string
+  loanId?: string
   nfts: Array<Nft>
+  underlyingAsset?: string
 }
 
 export type SellNowRequest = {
