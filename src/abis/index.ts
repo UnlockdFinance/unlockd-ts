@@ -4,6 +4,8 @@ import auction from './Auction.json'
 import market from './Market.json'
 import buyNow from './BuyNow.json'
 import sellNow from './SellNow.json'
+import walletRegistry from './WalletRegistry.json'
+import walletFactory from './WalletFactory.json'
 
 export const abis = {
   unlockd,
@@ -11,5 +13,7 @@ export const abis = {
   auction,
   market,
   buyNow,
-  sellNow
+  sellNow,
+  walletRegistry,
+  walletFactory
 }

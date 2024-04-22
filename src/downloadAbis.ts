@@ -2,6 +2,12 @@ import fs from 'fs'
 import axios from 'axios'
 import { Contract, ethers, JsonRpcProvider } from 'ethers'
 import { abis } from './abis'
+import { addresses, ModuleId } from './addresses'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const alquemyKey = process.argv[2]
 const etherscanKey = process.argv[3]
@@ -12,13 +18,6 @@ const provider = new JsonRpcProvider(`https://eth-${network}.g.alchemy.com/v2/${
 
 const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', abis.unlockd, provider)
 
-enum ModuleId {
-  Action = 3,
-  Auction = 4,
-  Market = 5,
-  BuyNow = 6,
-  SellNow = 7
-}
 
 function enumToArray<T>(enumeration: T): any {
   // @ts-ignore
@@ -53,8 +52,10 @@ function isJson(str: string) {
 
 async function handle() {
   try {
-    await storeUnlockd()
-    await storeModulesAbi()
+    //await storeUnlockd()
+    //await storeWalletRegistry()
+    //await storeWalletFactory()
+    //await storeModulesAbi()
   } catch (e) {
     console.log(e)
   }
@@ -65,6 +66,18 @@ async function storeUnlockd() {
   const _ = await abi(address)
 
   storeAbi('Unlockd', _)
+}
+async function storeWalletRegistry() {
+  const address =addresses().walletRegistry
+  const _ = await abi(address)
+
+  storeAbi('WalletRegistry', _)
+}
+async function storeWalletFactory() {
+  const address =addresses().walletFactory
+  const _ = await abi(address)
+
+  storeAbi('WalletFactory', _)
 }
 
 async function storeModulesAbi() {

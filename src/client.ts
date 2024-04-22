@@ -6,18 +6,18 @@ export type ClientOptions = {
 }
 export type Chain = 'mainnet' | 'sepolia'
 
+
 // @ts-ignore
 const mainnetClient = () => createWalletClient({ chain: mainnet, transport: custom(window.ethereum!) })
+// @ts-ignore
+const mainnetPublicClient = () => createPublicClient({ chain: mainnet, transport: custom(window.ethereum!) })
 
 // @ts-ignore
 const sepoliaClient = () => createWalletClient({ chain: sepolia, transport: custom(window.ethereum!) })
+// @ts-ignore
+const sepoliaPublicClient = () => createPublicClient({ chain: sepolia, transport: custom(window.ethereum!) })
 
-export const publicClient = (network?: Chain) => {
-  return createPublicClient({
-    chain: network === 'sepolia' ? sepolia : mainnet,
-    transport: http()
-  })
-}
+
 export const client = (network?: Chain) => {
   switch (network) {
     case 'mainnet':
@@ -26,5 +26,15 @@ export const client = (network?: Chain) => {
       return sepoliaClient()
     default:
       return mainnetClient()
+  }
+}
+export const publicClient = (network?: Chain) => {
+  switch (network) {
+    case 'mainnet':
+      return mainnetPublicClient()
+    case 'sepolia':
+      return sepoliaPublicClient()
+    default:
+      return mainnetPublicClient()
   }
 }
