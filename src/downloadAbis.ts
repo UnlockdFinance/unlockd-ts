@@ -55,6 +55,7 @@ async function handle() {
     //await storeUnlockd()
     //await storeWalletRegistry()
     //await storeWalletFactory()
+    //await storeNftBatchTransfer()
     //await storeModulesAbi()
   } catch (e) {
     console.log(e)
@@ -66,6 +67,12 @@ async function storeUnlockd() {
   const _ = await abi(address)
 
   storeAbi('Unlockd', _)
+}
+async function storeNftBatchTransfer() {
+  const address = addresses().nftBatchTransfer
+  const _ = await abi(address)
+
+  storeAbi('NftBatchTransfer', _)
 }
 async function storeWalletRegistry() {
   const address =addresses().walletRegistry

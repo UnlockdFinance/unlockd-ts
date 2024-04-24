@@ -3,17 +3,17 @@ import { client, ClientOptions, publicClient } from '../client'
 import { abis } from '../abis'
 
 /**
- * @returns The transaction hash of the create wallet operation.
+ * @description Create the Unlockd abstract wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const createWallet = async (options?: ClientOptions) => {
+export const createWallet = async (options?: ClientOptions):Promise<void> => {
   const delegationController = '0x0000000000000000000000000000000000000000'
   const contractAddress = addresses(options).walletFactory
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+   await walletCli.writeContract({
     address: contractAddress,
     abi: abis.walletFactory,
     functionName: 'deploy',
@@ -22,7 +22,11 @@ export const createWallet = async (options?: ClientOptions) => {
   })
 }
 
-
+/**
+ * @return The wallet address of the user
+ *
+ * @param options
+ */
 export const getWallet = async (options?: ClientOptions): Promise<any> => {
 
   const contractAddress = addresses(options).walletRegistry

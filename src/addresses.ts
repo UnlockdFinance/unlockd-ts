@@ -10,6 +10,7 @@ export enum ModuleId {
 export enum ProtocolAddresses {
   WalletRegistry= 'walletRegistry',
   WalletFactory= 'walletFactory',
+  NftBatchTransfer= 'nftBatchTransfer',
 }
 export type Addresses = ModuleId | ProtocolAddresses;
 
@@ -35,6 +36,7 @@ const mainnetAddresses: AddressMap = {
   [ModuleId.SellNow]: '0xd2041ee19BA6218B3bc2c67668cB2eC3945f8adb',
   [ProtocolAddresses.WalletRegistry]: '0x715988afcbaef9f99a6796f6d6699eeddb48eb20',
   [ProtocolAddresses.WalletFactory]: '0xae00df7e92923f9c2adcdf7c5e9f16f984cf7379',
+  [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725',
 
 }
 const sepoliaAddresses: AddressMap = {
@@ -44,7 +46,8 @@ const sepoliaAddresses: AddressMap = {
   [ModuleId.BuyNow]: '0x145F60D426174b03Af818fbC6221ff4482BD2AD8',
   [ModuleId.SellNow]: '0xCC67de978AB829778e7a28E38eE808B2E15a1Fa7',
   [ProtocolAddresses.WalletRegistry]: '0xbf1cd9b8a51ea64d07f49b7966e2bfe383899386',
-  [ProtocolAddresses.WalletFactory]: '0x946F2b7d70ef266b636414bB9B08795B0DDa819D'
+  [ProtocolAddresses.WalletFactory]: '0x946F2b7d70ef266b636414bB9B08795B0DDa819D',
+  [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d',
 
 }
 const mainnetCollections: CollectionMap = {
@@ -53,8 +56,8 @@ const mainnetCollections: CollectionMap = {
 }
 
 const sepoliaCollections: CollectionMap = {
-  [Collections.Unikura]: '0x8be936362832cfbd3bf800a5e6537dd17fa538b0',
-  [Collections.WatchesIo]: '0x388043e55a388e07a75e9a1412fe2d64e48343a5'
+  [Collections.Unikura]: '0x8be936362832cfbd3bf800a5e6537dd17fa538b0', //0xA6a9AcFDD1F64EC324eE936344cDB1457BDbDDF0
+  [Collections.WatchesIo]: '0x388043e55a388e07a75e9a1412fe2d64e48343a5' //0x388043e55a388e07A75E9A1412FE2d64e48343A5
 }
 
 const mainnetUnderlyingsAssets: UnderlyingsAssetMap = {
