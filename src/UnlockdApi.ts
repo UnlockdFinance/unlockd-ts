@@ -7,7 +7,7 @@ import {
   validateSellNow
 } from './validations'
 import { PricesResponse, Signature, SignatureMessageResponse, ValidateMessageResponse } from './types/responses'
-import { ActionRequest, MarketRequest, SellNowRequest } from './types/requests'
+import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError, HttpStatusCode } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from './errors'
 
@@ -167,6 +167,32 @@ export class UnlockdApi {
     validateSellNow(params)
     const response = await axios
       .post(`${this.url}/signature/sellnow`, params, {
+        headers: {
+          Authorization: `Bearer ${tokenAuth}`
+        }
+      })
+      .catch((error: AxiosError) => mapAxiosException(error))
+    return response.data
+  }
+  /**
+   * Use this method to retrieve the signature to do the sell now.
+   * @returns The signature to create a sell now.
+   * @param tokenAuth - The token retrieved from the validateMessage method.
+   * @param params - The parameters to create a sell now. LoanId is optional.
+   * @example
+   * ```ts
+   * const params: SellNowRequest = {
+   * loanId: '0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0',
+   * nft: {collection: '0x1234567890abcdefABCDEF1234567890abcdefAB', tokenId: 'testTokenId'}
+   * }
+   * const authToken = await api.sellNowSignature(authToken, params)
+   * ```
+   *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
+   */
+  async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature> {
+    validateSellNow(params)
+    const response = await axios
+      .post(`${this.url}/signature/buynow`, params, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }

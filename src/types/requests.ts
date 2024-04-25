@@ -12,5 +12,9 @@ export type SellNowRequest = {
   loanId?: string
   nft: Nft
 }
+export type BuyNowRequest = {
+  underlyingAsset: string
+  nft: Nft
+}
 
 export type MarketRequest = Nft
