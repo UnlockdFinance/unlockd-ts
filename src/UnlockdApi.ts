@@ -175,10 +175,10 @@ export class UnlockdApi {
     return response.data
   }
   /**
-   * Use this method to retrieve the signature to do the sell now.
-   * @returns The signature to create a sell now.
+   * Use this method to retrieve the signature to do the buy now.
+   * @returns The signature to create a buy now.
    * @param tokenAuth - The token retrieved from the validateMessage method.
-   * @param params - The parameters to create a sell now. LoanId is optional.
+   * @param params - The parameters to create a buy now.
    * @example
    * ```ts
    * const params: SellNowRequest = {
