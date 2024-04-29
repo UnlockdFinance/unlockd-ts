@@ -81,7 +81,7 @@ export const validateSellNow = (body: SellNowRequest) => {
 }
 export const validateBuyNow = (body: SellNowRequest) => {
   const schema = Joi.object({
-    underlyingAsset: Joi.string().pattern(new RegExp(/^0x[0-9A-Fa-f]{64}$/)).required(),
+    underlyingAsset: Joi.string().pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/)).required(),
     nft: Joi.object({
       collection: Joi.string()
         .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
