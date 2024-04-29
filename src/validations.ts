@@ -79,6 +79,22 @@ export const validateSellNow = (body: SellNowRequest) => {
     throw new InvalidSellNowRequestParams(validate.error.message)
   }
 }
+export const validateBuyNow = (body: SellNowRequest) => {
+  const schema = Joi.object({
+    underlyingAsset: Joi.string().pattern(new RegExp(/^0x[0-9A-Fa-f]{64}$/)).required(),
+    nft: Joi.object({
+      collection: Joi.string()
+        .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
+        .required(),
+      tokenId: Joi.string().required()
+    }).required()
+  }).required()
+
+  const validate = schema.validate(body)
+  if (validate.error) {
+    throw new InvalidSellNowRequestParams(validate.error.message)
+  }
+}
 export const validateMarket = (body: MarketRequest) => {
   const schema = Joi.object({
     collection: Joi.string()

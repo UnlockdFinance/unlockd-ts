@@ -1,6 +1,6 @@
 import {
   validateAddress,
-  validateBorrow,
+  validateBorrow, validateBuyNow,
   validateMarket,
   validatePrices,
   validateRepay,
@@ -190,7 +190,7 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature> {
-    validateSellNow(params)
+    validateBuyNow(params)
     const response = await axios
       .post(`${this.url}/signature/buynow`, params, {
         headers: {
