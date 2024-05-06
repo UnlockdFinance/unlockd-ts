@@ -21,6 +21,7 @@ export enum Collections {
 
 export enum UnderlyingsAsset {
   USDC = 'usdc',
+  WETH = 'weth',
 }
 
 export type Address = `0x${string}`
@@ -61,10 +62,12 @@ const sepoliaCollections: CollectionMap = {
 }
 
 const mainnetUnderlyingsAssets: UnderlyingsAssetMap = {
-  [UnderlyingsAsset.USDC]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+  [UnderlyingsAsset.USDC]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+  [UnderlyingsAsset.WETH]: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
 }
 const sepoliaUnderlyingsAssets: UnderlyingsAssetMap = {
-  [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8'
+  [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8',
+  [UnderlyingsAsset.WETH]: '0xfff9976782d46cc05630d1f6ebab18b2324d6b14'
 }
 
 export const collections = (chain?: Chain): CollectionMap => {
