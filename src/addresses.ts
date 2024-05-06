@@ -67,7 +67,7 @@ const mainnetUnderlyingsAssets: UnderlyingsAssetMap = {
 }
 const sepoliaUnderlyingsAssets: UnderlyingsAssetMap = {
   [UnderlyingsAsset.USDC]: '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8',
-  [UnderlyingsAsset.WETH]: '0xfff9976782d46cc05630d1f6ebab18b2324d6b14'
+  [UnderlyingsAsset.WETH]: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
 }
 
 export const collections = (chain?: Chain): CollectionMap => {
