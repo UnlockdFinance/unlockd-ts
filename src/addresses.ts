@@ -46,8 +46,8 @@ const sepoliaAddresses: AddressMap = {
   [ModuleId.Market]: '0x6e00a46D98B3f6A0c42fa0DbC69d01256Ea45289',
   [ModuleId.BuyNow]: '0x145F60D426174b03Af818fbC6221ff4482BD2AD8',
   [ModuleId.SellNow]: '0xCC67de978AB829778e7a28E38eE808B2E15a1Fa7',
-  [ProtocolAddresses.WalletRegistry]: '0xbf1cd9b8a51ea64d07f49b7966e2bfe383899386',
-  [ProtocolAddresses.WalletFactory]: '0x946F2b7d70ef266b636414bB9B08795B0DDa819D',
+  [ProtocolAddresses.WalletRegistry]: '0xa24481e94a81a624fadd3c0f833af241023d996e',
+  [ProtocolAddresses.WalletFactory]: '0x4abb1ee1fa5fc610f01b33cb9f0f31b95c2163dd',
   [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d',
 
 }
