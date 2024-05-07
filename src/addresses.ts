@@ -1,4 +1,5 @@
 import { Chain, ClientOptions } from './client'
+import contractsAddresses from './contractsAddresses'
 
 export enum ModuleId {
   Action = 3,
@@ -41,11 +42,11 @@ const mainnetAddresses: AddressMap = {
 
 }
 const sepoliaAddresses: AddressMap = {
-  [ModuleId.Action]: '0xdE3FbfEAc8763D6F597c609AB1637bF5ebBB95f5',
-  [ModuleId.Auction]: '0xFA2896810dB8646c140d26578622C94e88f8A17B',
-  [ModuleId.Market]: '0x6e00a46D98B3f6A0c42fa0DbC69d01256Ea45289',
-  [ModuleId.BuyNow]: '0x145F60D426174b03Af818fbC6221ff4482BD2AD8',
-  [ModuleId.SellNow]: '0xCC67de978AB829778e7a28E38eE808B2E15a1Fa7',
+  [ModuleId.Action]: contractsAddresses.action,
+  [ModuleId.Auction]: contractsAddresses.auction,
+  [ModuleId.Market]: contractsAddresses.market,
+  [ModuleId.BuyNow]: contractsAddresses.buyNow,
+  [ModuleId.SellNow]: contractsAddresses.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0xa24481e94a81a624fadd3c0f833af241023d996e',
   [ProtocolAddresses.WalletFactory]: '0x4abb1ee1fa5fc610f01b33cb9f0f31b95c2163dd',
   [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d',

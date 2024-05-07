@@ -1,8 +1,8 @@
 import fs from 'fs'
 import axios from 'axios'
 import { Contract, ethers, JsonRpcProvider } from 'ethers'
-import { abis } from './abis'
-import { addresses, ModuleId } from './addresses'
+import { abis } from './index'
+import { addresses, ModuleId } from '../addresses'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
