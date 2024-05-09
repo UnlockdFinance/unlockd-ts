@@ -2,16 +2,7 @@ import { Address, addresses, ModuleId } from '../addresses'
 import { Signature } from '../types/responses'
 import { client, ClientOptions } from '../client'
 import { abis } from '../abis'
-
-export enum OrderType {
-  TYPE_LIQUIDATION_AUCTION,
-  //Auction with BIDs
-  TYPE_AUCTION,
-  // Fixed price only buynow function
-  TYPE_FIXED_PRICE,
-  // Fixed price and auction with bids
-  TYPE_FIXED_PRICE_AND_AUCTION
-}
+import { OrderType } from '../types/subgraph'
 
 export type CreateOrderInput = {
   startAmount: BigInt

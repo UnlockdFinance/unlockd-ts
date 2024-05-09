@@ -10,16 +10,7 @@ import { PricesResponse, Signature, SignatureMessageResponse, ValidateMessageRes
 import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError, HttpStatusCode } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from './errors'
-
-/**
- * Environment to use in the SDK
- * @enum {number}
- */
-export enum UnlockdEnvironment {
-  TEST,
-  PRODUCTION,
-  STAGING
-}
+import { Chain, Chains } from './client'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
@@ -30,21 +21,21 @@ export class UnlockdApi {
   public readonly url
 
   /**
-   * @param {UnlockdEnvironment} env - Environment to use in the SDK
+   * @param {Chain} env - Environment to use in the SDK
    * @example
    * ```ts
-   * const api = new UnlockdApi(Environment.PRODUCTION)
+   * const api = new UnlockdApi(Chain.Mainnet)
    * ```
    */
-  constructor(private env = UnlockdEnvironment.PRODUCTION) {
+  constructor(private env: Chains = Chains.Mainnet ) {
     switch (this.env) {
-      case UnlockdEnvironment.TEST:
+      case Chains.Localhost:
         this.url = 'https://api.example.com'
         break
-      case UnlockdEnvironment.STAGING:
+      case Chains.Sepolia:
         this.url = 'https://unlockd-api.staging.unlockd.finance'
         break
-      case UnlockdEnvironment.PRODUCTION:
+      case Chains.Mainnet:
         this.url = 'https://api-sdk.unlockd.finance'
         break
       default:
@@ -174,6 +165,7 @@ export class UnlockdApi {
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data
   }
+
   /**
    * Use this method to retrieve the signature to do the buy now.
    * @returns The signature to create a buy now.

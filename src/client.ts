@@ -4,8 +4,12 @@ import { anvil, foundry, mainnet, sepolia } from 'viem/chains'
 export type ClientOptions = {
   network?: Chain
 }
-export type Chain = 'mainnet' | 'sepolia'
-
+export type Chain = 'mainnet' | 'sepolia' | 'localhost'
+export enum Chains {
+  Mainnet = 'mainnet',
+  Sepolia = 'sepolia',
+  Localhost = 'localhost',
+}
 
 // @ts-ignore
 const mainnetClient = () => createWalletClient({ chain: mainnet, transport: custom(window.ethereum!) })
