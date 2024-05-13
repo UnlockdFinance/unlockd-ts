@@ -55,7 +55,10 @@ export const validateRepay = (body: ActionRequest) => {
           .required(),
         tokenId: Joi.string().required()
       })
-    )
+    ),
+    underlyingAsset: Joi.string()
+      .pattern(new RegExp(/^0x[0-9A-Fa-f]{40}$/))
+      .required()
   })
 
   const validate = schema.validate(body)
