@@ -24,7 +24,7 @@ export class Subgraph {
         break
       case Chains.Sepolia:
         this.httpClient = axios.create({
-          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockd-subgraph-development/api'
+          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-ethereum-sepolia/api'
         })
         break
       case Chains.Mainnet:
