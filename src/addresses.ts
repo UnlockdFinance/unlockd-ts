@@ -58,7 +58,7 @@ const mainnetCollections: CollectionMap = {
 }
 
 const sepoliaCollections: CollectionMap = {
-  [Collections.Unikura]: '0x8be936362832cfbd3bf800a5e6537dd17fa538b0', //0xA6a9AcFDD1F64EC324eE936344cDB1457BDbDDF0
+  [Collections.Unikura]: '0xa6a9acfdd1f64ec324ee936344cdb1457bdbddf0',
   [Collections.WatchesIo]: '0x388043e55a388e07a75e9a1412fe2d64e48343a5' //0x388043e55a388e07A75E9A1412FE2d64e48343A5
 }
 
