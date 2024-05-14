@@ -1,16 +1,17 @@
 import nock from 'nock'
-import { UnlockdEnvironment, UnlockdApi } from '../src'
+import {  UnlockdApi } from '../src'
 import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from '../src/errors'
 import { AxiosError } from 'axios'
 import { SignatureMessageResponse, ValidateMessageResponse } from '../src/types/responses'
 import { ActionRequest, MarketRequest, SellNowRequest } from '../src/types/requests'
+import { Chains } from '../src'
 
 describe('UnlockdApi', () => {
   let api: UnlockdApi
   const tokenAuth = 'valid-token'
 
   beforeAll(() => {
-    api = new UnlockdApi(UnlockdEnvironment.TEST)
+    api = new UnlockdApi(Chains.Localhost)
   })
 
   afterEach(() => {
