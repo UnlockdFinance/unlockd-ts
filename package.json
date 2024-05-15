@@ -1,9 +1,6 @@
 {
   "name": "@unlockdfinance/unlockd-ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "version": "0.0.20",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "main": "dist/index.js",

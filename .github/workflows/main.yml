@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Publish package to NPM REGISTRY
 on:
   release:
     types: [published]
@@ -11,19 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Setup .npmrc file to publish to GitHub Packages
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '14.x'
-          registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@octocat'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm i
       - name: Test 🔬
         run: npm test
       - name: Build 🔧
         run:  npm run build
-      - name: Publish package on GitHub NPM 📦
-        run: npm publish
+      - name: Publish package on NPM REGISTRY 📦
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
