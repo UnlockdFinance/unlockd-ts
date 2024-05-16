@@ -8,9 +8,9 @@ import {
 } from './validations'
 import { PricesResponse, Signature, SignatureMessageResponse, ValidateMessageResponse } from './types/responses'
 import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
-import axios, { AxiosError, HttpStatusCode } from 'axios'
-import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from './errors'
-import { Chain, Chains } from './client'
+import axios, { AxiosError } from 'axios'
+import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
+import {  Chains } from './client'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
