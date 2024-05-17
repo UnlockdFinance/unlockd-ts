@@ -42,7 +42,7 @@ export const bid = async (amountToPay: BigInt, amountOfDebt: BigInt, signature: 
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const redeem = async (signature: Signature, options?: ClientOptions) => {
+export const redeem = async (signature: Signature, options?: ClientOptions): Promise<>  => {
   const contractAddress = addresses(options)[ModuleId.Auction]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()

@@ -17,7 +17,7 @@ export const sendNftsToWallet = async (nfts: {
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
   const unlockdWallet = await getWallet(options)
-console.log([nfts, unlockdWallet])
+
   await walletCli.writeContract({
     address: contractAddress,
     abi: abis.nftBatchTransfer,
