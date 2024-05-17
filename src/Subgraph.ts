@@ -1,11 +1,10 @@
-import { Chain, Chains } from './client'
 import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
 import { Nft } from './types/requests'
 import { Address } from './addresses'
+import { Chains } from './types/networks'
 
 export class Subgraph {
-
   public readonly httpClient
 
   /**
@@ -40,7 +39,7 @@ export class Subgraph {
     }
   }
 
-  async allOrders(limit = 100, offset = 0, order = OrderTypes.DESC, ended=false): Promise<Array<Order>> {
+  async allOrders(limit = 100, offset = 0, order = OrderTypes.DESC, ended = false): Promise<Array<Order>> {
     const results = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`
@@ -89,7 +88,13 @@ export class Subgraph {
     return results
   }
 
-  async ordersByCollection(limit = 100, offset = 0, order = OrderTypes.DESC, collections: Array<Address> = [], ended=false): Promise<Array<Order>> {
+  async ordersByCollection(
+    limit = 100,
+    offset = 0,
+    order = OrderTypes.DESC,
+    collections: Array<Address> = [],
+    ended = false
+  ): Promise<Array<Order>> {
     const results = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`

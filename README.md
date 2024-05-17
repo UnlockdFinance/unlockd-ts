@@ -59,21 +59,6 @@
 --- | --- | --- | --- | --- | --- |
 Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
 
-## Installing
-
-- Creates token https://github.com/settings/tokens
-   - Login, the GitHub token should has enabled
-      - [x] **write:packages** Upload packages to GitHub Package Registry
-      - [x] **read:packages** Download packages from GitHub Package Registry
-
-```sh
-npm login --scope=@unlockdfinance --registry=https://npm.pkg.github.com
-
-Username: <your github user>
-Password: <github token>
-Email: <your github user>
-```
-
 ### Package manager
 
 Using npm:

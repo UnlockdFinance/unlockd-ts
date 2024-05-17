@@ -1,14 +1,15 @@
 import { Signature } from '../types/responses'
-import { client, ClientOptions } from '../client'
+import { client } from '../client'
 import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
-import { Nft } from '../types/requests'
+import { Auction } from '../types/responses'
+import { ClientOptions } from '../types/networks'
 
 /**
  * @returns The transaction hash of the bid.
  * @param {BigInt} amountToPay - The amount to pay.
  * @param {BigInt} amountOfDebt - The amount of debt.
- * @param {Signature} signature - The signature of the bid.
+ * @param {Signature<Auction>} signature - The signature of the bid.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  * @example
  * ```ts
@@ -17,7 +18,12 @@ import { Nft } from '../types/requests'
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const bid = async (amountToPay: BigInt, amountOfDebt: BigInt, signature: Signature, options?: ClientOptions) => {
+export const bid = async (
+  amountToPay: BigInt,
+  amountOfDebt: BigInt,
+  signature: Signature<Auction>,
+  options?: ClientOptions
+) => {
   const contractAddress = addresses(options)[ModuleId.Auction]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
@@ -33,7 +39,7 @@ export const bid = async (amountToPay: BigInt, amountOfDebt: BigInt, signature: 
 
 /**
  * @returns The transaction hash of the redeem.
- * @param {Signature} signature - The signature of the redeem.
+ * @param {Signature<Auction>} signature - The signature of the redeem.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  * @example
  * ```ts
@@ -42,7 +48,7 @@ export const bid = async (amountToPay: BigInt, amountOfDebt: BigInt, signature: 
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const redeem = async (signature: Signature, options?: ClientOptions): Promise<>  => {
+export const redeem = async (signature: Signature<Auction>, options?: ClientOptions): Promise<any> => {
   const contractAddress = addresses(options)[ModuleId.Auction]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
@@ -59,7 +65,7 @@ export const redeem = async (signature: Signature, options?: ClientOptions): Pro
  * @returns The transaction hash of the redeem.
  * @param {Boolean} claimOnUWallet - The claimOnUWallet flag.
  * @param {String} orderId - The orderId.
- * @param {Signature} signature - The signature of the redeem.
+ * @param {Signature<Auction>} signature - The signature of the redeem.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  * @example
  * ```ts
@@ -71,7 +77,7 @@ export const redeem = async (signature: Signature, options?: ClientOptions): Pro
 export const finalize = async (
   claimOnUWallet: boolean,
   orderId: string,
-  signature: Signature,
+  signature: Signature<Auction>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Auction]

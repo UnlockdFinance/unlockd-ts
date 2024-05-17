@@ -15,38 +15,38 @@
 
 ### TYPE\_AUCTION
 
-• **TYPE\_AUCTION** = ``1``
+• **TYPE\_AUCTION** = ``"1"``
 
 #### Defined in
 
-[src/protocol/market.ts:9](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/protocol/market.ts#L9)
+[types/subgraph.ts:32](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L32)
 
 ___
 
 ### TYPE\_FIXED\_PRICE
 
-• **TYPE\_FIXED\_PRICE** = ``2``
+• **TYPE\_FIXED\_PRICE** = ``"2"``
 
 #### Defined in
 
-[src/protocol/market.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/protocol/market.ts#L11)
+[types/subgraph.ts:34](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L34)
 
 ___
 
 ### TYPE\_FIXED\_PRICE\_AND\_AUCTION
 
-• **TYPE\_FIXED\_PRICE\_AND\_AUCTION** = ``3``
+• **TYPE\_FIXED\_PRICE\_AND\_AUCTION** = ``"3"``
 
 #### Defined in
 
-[src/protocol/market.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/protocol/market.ts#L13)
+[types/subgraph.ts:36](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L36)
 
 ___
 
 ### TYPE\_LIQUIDATION\_AUCTION
 
-• **TYPE\_LIQUIDATION\_AUCTION** = ``0``
+• **TYPE\_LIQUIDATION\_AUCTION** = ``"0"``
 
 #### Defined in
 
-[src/protocol/market.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/protocol/market.ts#L7)
+[types/subgraph.ts:30](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L30)

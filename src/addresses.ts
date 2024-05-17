@@ -1,5 +1,5 @@
-import { Chain, ClientOptions } from './client'
-import contractsAddresses from './contractsAddresses'
+import { Chain, ClientOptions } from './types/networks'
+import { contractsAddresses } from './contractsAddresses'
 
 export enum ModuleId {
   Action = 3,
@@ -9,11 +9,11 @@ export enum ModuleId {
   SellNow = 7
 }
 export enum ProtocolAddresses {
-  WalletRegistry= 'walletRegistry',
-  WalletFactory= 'walletFactory',
-  NftBatchTransfer= 'nftBatchTransfer',
+  WalletRegistry = 'walletRegistry',
+  WalletFactory = 'walletFactory',
+  NftBatchTransfer = 'nftBatchTransfer'
 }
-export type Addresses = ModuleId | ProtocolAddresses;
+export type Addresses = ModuleId | ProtocolAddresses
 
 export enum Collections {
   Unikura = 'unikura',
@@ -22,35 +22,33 @@ export enum Collections {
 
 export enum UnderlyingsAsset {
   USDC = 'usdc',
-  WETH = 'weth',
+  WETH = 'weth'
 }
 
 export type Address = `0x${string}`
-type AddressMap = { [key in Addresses ]: Address }
+type AddressMap = { [key in Addresses]: Address }
 type CollectionMap = { [key in Collections]: Address }
 type UnderlyingsAssetMap = { [key in UnderlyingsAsset]: Address }
 
 const mainnetAddresses: AddressMap = {
-  [ModuleId.Action]: '0xF617D821F9DA0A8e3354Cf5E5eA151270c814C87',
-  [ModuleId.Auction]: '0x46E7A89fDa0dB09d0Ad651B7fb62A2C9dce9d152',
-  [ModuleId.Market]: '0xF3B83Cccd6d870F245e7f0ef4333540cF0063944',
-  [ModuleId.BuyNow]: '0xDFfe658124e2bbCa924077E9c3a888e45195cc59',
-  [ModuleId.SellNow]: '0xd2041ee19BA6218B3bc2c67668cB2eC3945f8adb',
+  [ModuleId.Action]: contractsAddresses.mainnet.action,
+  [ModuleId.Auction]: contractsAddresses.mainnet.auction,
+  [ModuleId.Market]: contractsAddresses.mainnet.market,
+  [ModuleId.BuyNow]: contractsAddresses.mainnet.buyNow,
+  [ModuleId.SellNow]: contractsAddresses.mainnet.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0x715988afcbaef9f99a6796f6d6699eeddb48eb20',
   [ProtocolAddresses.WalletFactory]: '0xae00df7e92923f9c2adcdf7c5e9f16f984cf7379',
-  [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725',
-
+  [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725'
 }
 const sepoliaAddresses: AddressMap = {
-  [ModuleId.Action]: contractsAddresses.action,
-  [ModuleId.Auction]: contractsAddresses.auction,
-  [ModuleId.Market]: contractsAddresses.market,
-  [ModuleId.BuyNow]: contractsAddresses.buyNow,
-  [ModuleId.SellNow]: contractsAddresses.sellNow,
+  [ModuleId.Action]: contractsAddresses.sepolia.action,
+  [ModuleId.Auction]: contractsAddresses.sepolia.auction,
+  [ModuleId.Market]: contractsAddresses.sepolia.market,
+  [ModuleId.BuyNow]: contractsAddresses.sepolia.buyNow,
+  [ModuleId.SellNow]: contractsAddresses.sepolia.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0xa24481e94a81a624fadd3c0f833af241023d996e',
   [ProtocolAddresses.WalletFactory]: '0x4abb1ee1fa5fc610f01b33cb9f0f31b95c2163dd',
-  [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d',
-
+  [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d'
 }
 const mainnetCollections: CollectionMap = {
   [Collections.Unikura]: '0xea89a88284ff9a9a9a54f4c43fc4efbf099e992f',

@@ -1,6 +1,6 @@
 import nock from 'nock'
 import {
-  ActionRequest,
+  ActionRequest, Chains,
   MarketRequest,
   SellNowRequest,
   SignatureMessageResponse,
@@ -9,7 +9,6 @@ import {
 } from '../src'
 import { InvalidSignatureException, mapAxiosException, UnauthorizedException, UnexpectedException } from '../src/errors'
 import { AxiosError } from 'axios'
-import { Chains } from '../src/client'
 
 describe('UnlockdApi', () => {
   let api: UnlockdApi

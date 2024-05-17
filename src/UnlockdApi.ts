@@ -1,16 +1,26 @@
 import {
   validateAddress,
-  validateBorrow, validateBuyNow,
+  validateBorrow,
+  validateBuyNow,
   validateMarket,
   validatePrices,
   validateRepay,
   validateSellNow
 } from './validations'
-import { PricesResponse, Signature, SignatureMessageResponse, ValidateMessageResponse } from './types/responses'
+import {
+  Action,
+  BuyNow,
+  Market,
+  PricesResponse,
+  SellNow,
+  Signature,
+  SignatureMessageResponse,
+  ValidateMessageResponse
+} from './types/responses'
 import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
-import {  Chains } from './client'
+import { Chains } from './types/networks'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
@@ -27,7 +37,7 @@ export class UnlockdApi {
    * const api = new UnlockdApi(Chain.Mainnet)
    * ```
    */
-  constructor(private env: Chains = Chains.Mainnet ) {
+  constructor(private env: Chains = Chains.Mainnet) {
     switch (this.env) {
       case Chains.Localhost:
         this.url = 'https://api.example.com'
@@ -100,7 +110,7 @@ export class UnlockdApi {
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async borrowSignature(tokenAuth: string, params: ActionRequest): Promise<Signature> {
+  async borrowSignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
     validateBorrow(params)
     const response = await axios
       .post(`${this.url}/signature/loan/borrow`, params, {
@@ -127,7 +137,7 @@ export class UnlockdApi {
    *  ```
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async repaySignature(tokenAuth: string, params: ActionRequest): Promise<Signature> {
+  async repaySignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
     validateRepay(params)
     const response = await axios
       .post(`${this.url}/signature/loan/repay`, params, {
@@ -154,7 +164,7 @@ export class UnlockdApi {
    * ```
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async sellNowSignature(tokenAuth: string, params: SellNowRequest): Promise<Signature> {
+  async sellNowSignature(tokenAuth: string, params: SellNowRequest): Promise<Signature<SellNow>> {
     validateSellNow(params)
     const response = await axios
       .post(`${this.url}/signature/sellnow`, params, {
@@ -181,7 +191,7 @@ export class UnlockdApi {
    * ```
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature> {
+  async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature<BuyNow>> {
     validateBuyNow(params)
     const response = await axios
       .post(`${this.url}/signature/buynow`, params, {
@@ -205,7 +215,7 @@ export class UnlockdApi {
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async marketSignature(tokenAuth: string, params: MarketRequest): Promise<Signature> {
+  async marketSignature(tokenAuth: string, params: MarketRequest): Promise<Signature<Market>> {
     validateMarket(params)
 
     const response = await axios
@@ -222,7 +232,6 @@ export class UnlockdApi {
    * Use this method to retrieve the prices for a given nfts and underlying asset.
    * @returns The prices for a given nfts and underlying asset.
    * @param nfts - The nfts to get the prices.
-   * @param underlyingAsset - The underlying asset to get the prices.
    * @example
    * ```ts
    * const nfts = [

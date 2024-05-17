@@ -1,8 +1,9 @@
-import { Signature } from '../types/responses'
-import { client, ClientOptions } from '../client'
+import { Action, Signature } from '../types/responses'
+import { client } from '../client'
 import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
 import { Nft } from '../types/requests'
+import { ClientOptions } from '../types/networks'
 
 /**
  * @returns The transaction hash of the borrow action.
@@ -19,7 +20,12 @@ import { Nft } from '../types/requests'
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const borrow = async (amount: BigInt, assets: Array<Nft>, signature: Signature, options?: ClientOptions) => {
+export const borrow = async (
+  amount: BigInt,
+  assets: Array<Nft>,
+  signature: Signature<Action>,
+  options?: ClientOptions
+) => {
   const contractAddress = addresses(options)[ModuleId.Action]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
@@ -46,7 +52,7 @@ export const borrow = async (amount: BigInt, assets: Array<Nft>, signature: Sign
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const repay = async (amount: BigInt, signature: Signature, options?: ClientOptions) => {
+export const repay = async (amount: BigInt, signature: Signature<Action>, options?: ClientOptions) => {
   const contractAddress = addresses(options)[ModuleId.Action]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()

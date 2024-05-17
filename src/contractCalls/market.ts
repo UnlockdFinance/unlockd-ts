@@ -1,8 +1,9 @@
 import { Address, addresses, ModuleId } from '../addresses'
-import { Signature } from '../types/responses'
-import { client, ClientOptions } from '../client'
+import { Market, Signature } from '../types/responses'
+import { client } from '../client'
 import { abis } from '../abis'
 import { OrderType } from '../types/subgraph'
+import { ClientOptions } from '../types/networks'
 
 export type CreateOrderInput = {
   startAmount: BigInt
@@ -16,7 +17,7 @@ export type CreateOrderInput = {
  * @param {Address} underlyingAsset - The address of the underlying asset.
  * @param {OrderType} orderType - The type of the order.
  * @param {CreateOrderInput} config - The configuration of the order.
- * @param {Signature} signature - The signature of the create order.
+ * @param {Signature<Market>} signature - The signature of the create order.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
@@ -25,7 +26,7 @@ export const create = async (
   underlyingAsset: Address,
   orderType: OrderType,
   config: CreateOrderInput,
-  signature: Signature,
+  signature: Signature<Market>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
@@ -67,7 +68,7 @@ export const cancel = async (orderId: string, options?: ClientOptions) => {
  * @param {string} orderId - The order id to bid.
  * @param {BigInt} amountToPay - The amount to pay.
  * @param {BigInt} amountOfDebt - The amount of debt.
- * @param {Signature} signature - The signature of the bid.
+ * @param {Signature<Market>} signature - The signature of the bid.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
@@ -76,7 +77,7 @@ export const marketBid = async (
   orderId: string,
   amountToPay: BigInt,
   amountOfDebt: BigInt,
-  signature: Signature,
+  signature: Signature<Market>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
@@ -96,7 +97,7 @@ export const marketBid = async (
  * @returns The transaction hash of the claim market item.
  * @param {Boolean} claimOnUWallet - The claimOnUWallet flag.
  * @param {string} orderId - The order id to claim.
- * @param {Signature} signature - The signature of the claim.
+ * @param {Signature<Market>} signature - The signature of the claim.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
@@ -104,7 +105,7 @@ export const marketBid = async (
 export const claim = async (
   claimOnUWallet: boolean,
   orderId: string,
-  signature: Signature,
+  signature: Signature<Market>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
@@ -123,12 +124,12 @@ export const claim = async (
 /**
  * @returns The transaction hash of the cancel claim market item.
  * @param {string} orderId - The order id to cancel.
- * @param {Signature} signature - The signature of the cancel claim.
+ * @param {Signature<Market>} signature - The signature of the cancel claim.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const cancelClaim = async (orderId: string, signature: Signature, options?: ClientOptions) => {
+export const cancelClaim = async (orderId: string, signature: Signature<Market>, options?: ClientOptions) => {
   const contractAddress = addresses(options)[ModuleId.Market]
   const walletCli = client(options?.network)
   const [account] = await walletCli.requestAddresses()
@@ -148,7 +149,7 @@ export const cancelClaim = async (orderId: string, signature: Signature, options
  * @param {string} orderId - The order id to claim.
  * @param {BigInt} amountToPay - The amount to pay.
  * @param {BigInt} amountOfDebt - The amount of debt.
- * @param {Signature} signature - The signature of the claim.
+ * @param {Signature<Market>} signature - The signature of the claim.
  * @param {ClientOptions} options - The client options, default value is browser wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
@@ -158,7 +159,7 @@ export const buyNow = async (
   orderId: string,
   amountToPay: BigInt,
   amountOfDebt: BigInt,
-  signature: Signature,
+  signature: Signature<Market>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]

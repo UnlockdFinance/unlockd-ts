@@ -1,13 +1,13 @@
 import fs from 'fs'
 import axios from 'axios'
 import { Contract, ethers, JsonRpcProvider } from 'ethers'
-import { abis } from './index'
-import { addresses, ModuleId } from '../addresses'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { abis } from '../src/abis'
+import { addresses, ModuleId } from '../src/addresses'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const alquemyKey = process.argv[2]
 const etherscanKey = process.argv[3]
@@ -18,10 +18,9 @@ const provider = new JsonRpcProvider(`https://eth-${network}.g.alchemy.com/v2/${
 
 const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', abis.unlockd, provider)
 
-
-function enumToArray<T>(enumeration: T): any {
-  // @ts-ignore
-  return (Object.keys(enumeration)
+function enumToArray<T extends object>(enumeration: T): any {
+  return (
+    Object.keys(enumeration)
       .filter(key => isNaN(Number(key)))
       // @ts-ignore
       .map(key => enumeration[key])
@@ -75,13 +74,13 @@ async function storeNftBatchTransfer() {
   storeAbi('NftBatchTransfer', _)
 }
 async function storeWalletRegistry() {
-  const address =addresses().walletRegistry
+  const address = addresses().walletRegistry
   const _ = await abi(address)
 
   storeAbi('WalletRegistry', _)
 }
 async function storeWalletFactory() {
-  const address =addresses().walletFactory
+  const address = addresses().walletFactory
   const _ = await abi(address)
 
   storeAbi('WalletFactory', _)

@@ -17,6 +17,7 @@ UnlockdApi wrapper of the Unlockd REST API
 ### Methods
 
 - [borrowSignature](UnlockdApi.md#borrowsignature)
+- [buyNowSignature](UnlockdApi.md#buynowsignature)
 - [marketSignature](UnlockdApi.md#marketsignature)
 - [prices](UnlockdApi.md#prices)
 - [repaySignature](UnlockdApi.md#repaysignature)
@@ -34,7 +35,7 @@ UnlockdApi wrapper of the Unlockd REST API
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `env` | [`Environment`](../enums/Environment.md) | `Environment.PRODUCTION` | Environment to use in the SDK |
+| `env` | [`Chains`](../enums/Chains.md) | `Chains.Mainnet` | Environment to use in the SDK |
 
 #### Returns
 
@@ -43,30 +44,30 @@ UnlockdApi wrapper of the Unlockd REST API
 **`Example`**
 
 ```ts
-const api = new UnlockdApi(Environment.PRODUCTION)
+const api = new UnlockdApi(Chain.Mainnet)
 ```
 
 #### Defined in
 
-[src/UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L40)
+[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L40)
 
 ## Properties
 
 ### env
 
-• `Private` **env**: [`Environment`](../enums/Environment.md) = `Environment.PRODUCTION`
+• `Private` **env**: [`Chains`](../enums/Chains.md) = `Chains.Mainnet`
 
 Environment to use in the SDK
 
 #### Defined in
 
-[src/UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L40)
+[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L40)
 
 ## Methods
 
 ### borrowSignature
 
-▸ **borrowSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\>
+▸ **borrowSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\<[`Action`](../modules.md#action)\>\>
 
 Use this method to retrieve the signature to do the borrow.
 
@@ -79,7 +80,7 @@ Use this method to retrieve the signature to do the borrow.
 
 #### Returns
 
-`Promise`\<[`Signature`](../modules.md#signature)\>
+`Promise`\<[`Signature`](../modules.md#signature)\<[`Action`](../modules.md#action)\>\>
 
 The signature to create a borrow.
 
@@ -99,13 +100,52 @@ const authToken = await api.borrowSignature(authToken, params)
 
 #### Defined in
 
-[src/UnlockdApi.ts:115](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L115)
+[UnlockdApi.ts:113](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L113)
+
+___
+
+### buyNowSignature
+
+▸ **buyNowSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\<[`BuyNow`](../modules.md#buynow)\>\>
+
+Use this method to retrieve the signature to do the buy now.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `tokenAuth` | `string` | The token retrieved from the validateMessage method. |
+| `params` | [`BuyNowRequest`](../modules.md#buynowrequest) | The parameters to create a buy now. |
+
+#### Returns
+
+`Promise`\<[`Signature`](../modules.md#signature)\<[`BuyNow`](../modules.md#buynow)\>\>
+
+The signature to create a buy now.
+
+**`Example`**
+
+```ts
+const params: SellNowRequest = {
+loanId: '0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0',
+nft: {collection: '0x1234567890abcdefABCDEF1234567890abcdefAB', tokenId: 'testTokenId'}
+}
+const authToken = await api.sellNowSignature(authToken, params)
+```
+
+**`See`**
+
+[📚Gitbook](http://devs.unlockd.finance)
+
+#### Defined in
+
+[UnlockdApi.ts:194](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L194)
 
 ___
 
 ### marketSignature
 
-▸ **marketSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\>
+▸ **marketSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\<[`Market`](../modules.md#market)\>\>
 
 Use this method to retrieve the signature to interact with a market.
 
@@ -118,7 +158,7 @@ Use this method to retrieve the signature to interact with a market.
 
 #### Returns
 
-`Promise`\<[`Signature`](../modules.md#signature)\>
+`Promise`\<[`Signature`](../modules.md#signature)\<[`Market`](../modules.md#market)\>\>
 
 The signature to interact with a market.
 
@@ -135,13 +175,13 @@ const authToken = await api.marketSignature(authToken, params)
 
 #### Defined in
 
-[src/UnlockdApi.ts:187](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L187)
+[UnlockdApi.ts:218](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L218)
 
 ___
 
 ### prices
 
-▸ **prices**(`nfts`, `underlyingAsset`): `Promise`\<[`PricesResponse`](../modules.md#pricesresponse)[]\>
+▸ **prices**(`nfts`): `Promise`\<[`PricesResponse`](../modules.md#pricesresponse)[]\>
 
 Use this method to retrieve the prices for a given nfts and underlying asset.
 
@@ -149,8 +189,7 @@ Use this method to retrieve the prices for a given nfts and underlying asset.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `nfts` | \{ `collection`: `string` ; `tokenId`: `string`  }[] | The nfts to get the prices. |
-| `underlyingAsset` | `string` | The underlying asset to get the prices. |
+| `nfts` | \{ `collection`: `string` ; `tokenId`: `string` ; `underlyingAsset`: `string`  }[] | The nfts to get the prices. |
 
 #### Returns
 
@@ -162,10 +201,9 @@ The prices for a given nfts and underlying asset.
 
 ```ts
 const nfts = [
-{collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10'}
+{collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10',underlyingAsset : '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'}
 ]
-const underlyingAsset = '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
-const result = await api.prices(nfts, underlyingAsset)
+const result = await api.prices(nfts)
 ```
 
 **`See`**
@@ -174,13 +212,13 @@ const result = await api.prices(nfts, underlyingAsset)
 
 #### Defined in
 
-[src/UnlockdApi.ts:213](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L213)
+[UnlockdApi.ts:244](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L244)
 
 ___
 
 ### repaySignature
 
-▸ **repaySignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\>
+▸ **repaySignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\<[`Action`](../modules.md#action)\>\>
 
 Use this method to retrieve the signature to do the repay.
 
@@ -193,7 +231,7 @@ Use this method to retrieve the signature to do the repay.
 
 #### Returns
 
-`Promise`\<[`Signature`](../modules.md#signature)\>
+`Promise`\<[`Signature`](../modules.md#signature)\<[`Action`](../modules.md#action)\>\>
 
 The signature to create a repay.
 
@@ -213,13 +251,13 @@ const params: ActionRequest = {
 
 #### Defined in
 
-[src/UnlockdApi.ts:140](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L140)
+[UnlockdApi.ts:140](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L140)
 
 ___
 
 ### sellNowSignature
 
-▸ **sellNowSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\>
+▸ **sellNowSignature**(`tokenAuth`, `params`): `Promise`\<[`Signature`](../modules.md#signature)\<[`SellNow`](../modules.md#sellnow)\>\>
 
 Use this method to retrieve the signature to do the sell now.
 
@@ -232,7 +270,7 @@ Use this method to retrieve the signature to do the sell now.
 
 #### Returns
 
-`Promise`\<[`Signature`](../modules.md#signature)\>
+`Promise`\<[`Signature`](../modules.md#signature)\<[`SellNow`](../modules.md#sellnow)\>\>
 
 The signature to create a sell now.
 
@@ -252,7 +290,7 @@ const authToken = await api.sellNowSignature(authToken, params)
 
 #### Defined in
 
-[src/UnlockdApi.ts:165](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L165)
+[UnlockdApi.ts:167](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L167)
 
 ___
 
@@ -287,7 +325,7 @@ const result = await api.signatureMessage(address)
 
 #### Defined in
 
-[src/UnlockdApi.ts:68](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L68)
+[UnlockdApi.ts:68](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L68)
 
 ___
 
@@ -324,4 +362,4 @@ const result = await api.validateMessage(address, signature)
 
 #### Defined in
 
-[src/UnlockdApi.ts:90](https://github.com/UnlockdFinance/unlockd-ts/blob/ff512be/src/UnlockdApi.ts#L90)
+[UnlockdApi.ts:89](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L89)
