@@ -1,6 +1,7 @@
 import nock from 'nock'
 import {
-  ActionRequest, Chains,
+  ActionRequest,
+  Chains,
   MarketRequest,
   SellNowRequest,
   SignatureMessageResponse,

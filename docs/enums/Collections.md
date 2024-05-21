@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / Collections
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / Collections
 
 # Enumeration: Collections
 
@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[addresses.ts:19](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L19)
+[addresses.ts:19](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L19)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[addresses.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L20)
+[addresses.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L20)

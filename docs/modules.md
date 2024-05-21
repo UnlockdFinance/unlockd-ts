@@ -1,6 +1,6 @@
-[@unlockdfinance/unlockd-ts](README.md) / Exports
+[@verislabs/unlockd-sdk](README.md) / Exports
 
-# @unlockdfinance/unlockd-ts
+# @verislabs/unlockd-sdk
 
 ## Table of contents
 
@@ -56,6 +56,7 @@
 - [LIQUIDATION\_THRESHOLD](modules.md#liquidation_threshold)
 - [MAX\_LTV](modules.md#max_ltv)
 - [MIN\_LTV](modules.md#min_ltv)
+- [contractsAddresses](modules.md#contractsaddresses)
 
 ### Functions
 
@@ -100,7 +101,7 @@
 
 #### Defined in
 
-[types/responses.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L26)
+[types/responses.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L26)
 
 ___
 
@@ -118,7 +119,7 @@ ___
 
 #### Defined in
 
-[types/requests.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/requests.ts#L5)
+[types/requests.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L5)
 
 ___
 
@@ -128,7 +129,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:28](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L28)
+[addresses.ts:28](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L28)
 
 ___
 
@@ -138,7 +139,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L16)
+[addresses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L16)
 
 ___
 
@@ -160,7 +161,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:34](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L34)
+[types/responses.ts:34](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L34)
 
 ___
 
@@ -179,7 +180,7 @@ ___
 
 #### Defined in
 
-[types/subgraph.ts:22](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L22)
+[types/subgraph.ts:22](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L22)
 
 ___
 
@@ -197,7 +198,7 @@ ___
 
 #### Defined in
 
-[availableToBorrow.ts:6](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/availableToBorrow.ts#L6)
+[availableToBorrow.ts:6](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L6)
 
 ___
 
@@ -231,7 +232,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:71](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L71)
+[types/responses.ts:71](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L71)
 
 ___
 
@@ -248,17 +249,17 @@ ___
 
 #### Defined in
 
-[types/requests.ts:15](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/requests.ts#L15)
+[types/requests.ts:15](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L15)
 
 ___
 
 ### Chain
 
-Ƭ **Chain**: ``"mainnet"`` \| ``"sepolia"`` \| ``"localhost"``
+Ƭ **Chain**: ``"mainnet"`` \| ``"sepolia"`` \| ``"amoy"`` \| ``"localhost"``
 
 #### Defined in
 
-[types/networks.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/networks.ts#L4)
+[types/networks.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L4)
 
 ___
 
@@ -274,7 +275,7 @@ ___
 
 #### Defined in
 
-[types/networks.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/networks.ts#L1)
+[types/networks.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L1)
 
 ___
 
@@ -294,7 +295,7 @@ ___
 
 #### Defined in
 
-[contractCalls/market.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L8)
+[contractCalls/market.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L8)
 
 ___
 
@@ -313,7 +314,7 @@ ___
 
 #### Defined in
 
-[healthFactor.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/healthFactor.ts#L3)
+[healthFactor.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L3)
 
 ___
 
@@ -330,7 +331,7 @@ ___
 
 #### Defined in
 
-[healthFactor.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/healthFactor.ts#L1)
+[healthFactor.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L1)
 
 ___
 
@@ -347,7 +348,7 @@ ___
 
 #### Defined in
 
-[liquidationPrice.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/liquidationPrice.ts#L1)
+[liquidationPrice.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/liquidationPrice.ts#L1)
 
 ___
 
@@ -370,7 +371,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:43](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L43)
+[types/responses.ts:43](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L43)
 
 ___
 
@@ -380,7 +381,7 @@ ___
 
 #### Defined in
 
-[types/requests.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/requests.ts#L20)
+[types/requests.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L20)
 
 ___
 
@@ -400,7 +401,7 @@ ___
 
 #### Defined in
 
-[minimumToRepay.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/minimumToRepay.ts#L8)
+[minimumToRepay.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L8)
 
 ___
 
@@ -417,7 +418,7 @@ ___
 
 #### Defined in
 
-[availableToBorrow.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/availableToBorrow.ts#L1)
+[availableToBorrow.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L1)
 
 ___
 
@@ -434,7 +435,7 @@ ___
 
 #### Defined in
 
-[minimumToRepay.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/minimumToRepay.ts#L3)
+[minimumToRepay.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L3)
 
 ___
 
@@ -451,7 +452,7 @@ ___
 
 #### Defined in
 
-[types/requests.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/requests.ts#L1)
+[types/requests.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L1)
 
 ___
 
@@ -477,7 +478,7 @@ ___
 
 #### Defined in
 
-[types/subgraph.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L7)
+[types/subgraph.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L7)
 
 ___
 
@@ -497,7 +498,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L8)
+[types/responses.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L8)
 
 ___
 
@@ -524,7 +525,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:53](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L53)
+[types/responses.ts:53](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L53)
 
 ___
 
@@ -541,7 +542,7 @@ ___
 
 #### Defined in
 
-[types/requests.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/requests.ts#L11)
+[types/requests.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L11)
 
 ___
 
@@ -568,7 +569,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:96](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L96)
+[types/responses.ts:96](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L96)
 
 ___
 
@@ -590,7 +591,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L16)
+[types/responses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L16)
 
 ___
 
@@ -606,7 +607,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L1)
+[types/responses.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L1)
 
 ___
 
@@ -622,7 +623,7 @@ ___
 
 #### Defined in
 
-[types/responses.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/responses.ts#L4)
+[types/responses.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L4)
 
 ## Variables
 
@@ -632,7 +633,7 @@ ___
 
 #### Defined in
 
-[minimumToRepay.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/minimumToRepay.ts#L1)
+[minimumToRepay.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L1)
 
 ___
 
@@ -642,7 +643,7 @@ ___
 
 #### Defined in
 
-[availableToBorrow.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/availableToBorrow.ts#L13)
+[availableToBorrow.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L13)
 
 ___
 
@@ -652,7 +653,40 @@ ___
 
 #### Defined in
 
-[availableToBorrow.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/availableToBorrow.ts#L12)
+[availableToBorrow.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L12)
+
+___
+
+### contractsAddresses
+
+• `Const` **contractsAddresses**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `amoy` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
+| `amoy.action` | \`0x$\{string}\` |
+| `amoy.auction` | \`0x$\{string}\` |
+| `amoy.buyNow` | \`0x$\{string}\` |
+| `amoy.market` | \`0x$\{string}\` |
+| `amoy.sellNow` | \`0x$\{string}\` |
+| `mainnet` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
+| `mainnet.action` | \`0x$\{string}\` |
+| `mainnet.auction` | \`0x$\{string}\` |
+| `mainnet.buyNow` | \`0x$\{string}\` |
+| `mainnet.market` | \`0x$\{string}\` |
+| `mainnet.sellNow` | \`0x$\{string}\` |
+| `sepolia` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
+| `sepolia.action` | \`0x$\{string}\` |
+| `sepolia.auction` | \`0x$\{string}\` |
+| `sepolia.buyNow` | \`0x$\{string}\` |
+| `sepolia.market` | \`0x$\{string}\` |
+| `sepolia.sellNow` | \`0x$\{string}\` |
+
+#### Defined in
+
+[contractsAddresses/index.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractsAddresses/index.ts#L7)
 
 ## Functions
 
@@ -672,7 +706,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:92](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L92)
+[addresses.ts:92](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L92)
 
 ___
 
@@ -715,7 +749,7 @@ The total valuation, ltv, and available to borrow for a given array of NFTs.
 
 #### Defined in
 
-[availableToBorrow.ts:35](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/availableToBorrow.ts#L35)
+[availableToBorrow.ts:35](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L35)
 
 ___
 
@@ -751,7 +785,7 @@ const result = await bid(1, 1, signature)
 
 #### Defined in
 
-[contractCalls/auction.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/auction.ts#L21)
+[contractCalls/auction.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L21)
 
 ___
 
@@ -789,7 +823,7 @@ const result = await borrow(1, nfts, signature, options)
 
 #### Defined in
 
-[contractCalls/action.ts:23](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/action.ts#L23)
+[contractCalls/action.ts:23](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/action.ts#L23)
 
 ___
 
@@ -820,7 +854,7 @@ The transaction hash of the claim market item.
 
 #### Defined in
 
-[contractCalls/market.ts:157](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L157)
+[contractCalls/market.ts:157](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L157)
 
 ___
 
@@ -847,7 +881,7 @@ The transaction hash of the cancel market item.
 
 #### Defined in
 
-[contractCalls/market.ts:52](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L52)
+[contractCalls/market.ts:52](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L52)
 
 ___
 
@@ -875,7 +909,7 @@ The transaction hash of the cancel claim market item.
 
 #### Defined in
 
-[contractCalls/market.ts:132](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L132)
+[contractCalls/market.ts:132](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L132)
 
 ___
 
@@ -904,7 +938,7 @@ The transaction hash of the claim market item.
 
 #### Defined in
 
-[contractCalls/market.ts:105](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L105)
+[contractCalls/market.ts:105](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L105)
 
 ___
 
@@ -924,7 +958,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:72](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L72)
+[addresses.ts:72](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L72)
 
 ___
 
@@ -954,7 +988,7 @@ The transaction hash of the create market item.
 
 #### Defined in
 
-[contractCalls/market.ts:25](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L25)
+[contractCalls/market.ts:25](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L25)
 
 ___
 
@@ -982,7 +1016,7 @@ Create the Unlockd abstract wallet
 
 #### Defined in
 
-[contractCalls/wallet.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/wallet.ts#L11)
+[contractCalls/wallet.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/wallet.ts#L11)
 
 ___
 
@@ -1018,7 +1052,7 @@ const result = await finalize(claimOnUWallet, orderId, signature)
 
 #### Defined in
 
-[contractCalls/auction.ts:77](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/auction.ts#L77)
+[contractCalls/auction.ts:77](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L77)
 
 ___
 
@@ -1040,7 +1074,7 @@ The wallet address of the user
 
 #### Defined in
 
-[contractCalls/wallet.ts:31](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/wallet.ts#L31)
+[contractCalls/wallet.ts:31](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/wallet.ts#L31)
 
 ___
 
@@ -1079,7 +1113,7 @@ const result = healthFactor(params)
 
 #### Defined in
 
-[healthFactor.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/healthFactor.ts#L26)
+[healthFactor.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L26)
 
 ___
 
@@ -1117,7 +1151,7 @@ const result = liquidationPrice(params)
 
 #### Defined in
 
-[liquidationPrice.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/liquidationPrice.ts#L21)
+[liquidationPrice.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/liquidationPrice.ts#L21)
 
 ___
 
@@ -1147,7 +1181,7 @@ The transaction hash of the bid market item.
 
 #### Defined in
 
-[contractCalls/market.ts:76](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/market.ts#L76)
+[contractCalls/market.ts:76](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L76)
 
 ___
 
@@ -1194,7 +1228,7 @@ Returns 40 eth:
 
 #### Defined in
 
-[minimumToRepay.ts:41](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/minimumToRepay.ts#L41)
+[minimumToRepay.ts:41](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L41)
 
 ___
 
@@ -1228,7 +1262,7 @@ const result = await redeem(signature)
 
 #### Defined in
 
-[contractCalls/auction.ts:51](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/auction.ts#L51)
+[contractCalls/auction.ts:51](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L51)
 
 ___
 
@@ -1264,7 +1298,7 @@ const result = await reapy(1, signature, options)
 
 #### Defined in
 
-[contractCalls/action.ts:55](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/action.ts#L55)
+[contractCalls/action.ts:55](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/action.ts#L55)
 
 ___
 
@@ -1292,7 +1326,7 @@ The transaction hash of the sell operation.
 
 #### Defined in
 
-[contractCalls/sellNow.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/sellNow.ts#L16)
+[contractCalls/sellNow.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/sellNow.ts#L16)
 
 ___
 
@@ -1321,7 +1355,7 @@ Send NFTs to the unlockd user wallet
 
 #### Defined in
 
-[contractCalls/nftBatchTransfer.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/contractCalls/nftBatchTransfer.ts#L12)
+[contractCalls/nftBatchTransfer.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/nftBatchTransfer.ts#L12)
 
 ___
 
@@ -1341,4 +1375,4 @@ ___
 
 #### Defined in
 
-[addresses.ts:82](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L82)
+[addresses.ts:82](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L82)

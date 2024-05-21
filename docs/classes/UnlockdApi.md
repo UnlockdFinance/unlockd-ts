@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / UnlockdApi
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / UnlockdApi
 
 # Class: UnlockdApi
 
@@ -49,7 +49,7 @@ const api = new UnlockdApi(Chain.Mainnet)
 
 #### Defined in
 
-[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L40)
+[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L40)
 
 ## Properties
 
@@ -61,7 +61,7 @@ Environment to use in the SDK
 
 #### Defined in
 
-[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L40)
+[UnlockdApi.ts:40](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L40)
 
 ## Methods
 
@@ -100,7 +100,7 @@ const authToken = await api.borrowSignature(authToken, params)
 
 #### Defined in
 
-[UnlockdApi.ts:113](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L113)
+[UnlockdApi.ts:113](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L113)
 
 ___
 
@@ -139,7 +139,7 @@ const authToken = await api.sellNowSignature(authToken, params)
 
 #### Defined in
 
-[UnlockdApi.ts:194](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L194)
+[UnlockdApi.ts:194](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L194)
 
 ___
 
@@ -175,7 +175,7 @@ const authToken = await api.marketSignature(authToken, params)
 
 #### Defined in
 
-[UnlockdApi.ts:218](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L218)
+[UnlockdApi.ts:218](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L218)
 
 ___
 
@@ -212,7 +212,7 @@ const result = await api.prices(nfts)
 
 #### Defined in
 
-[UnlockdApi.ts:244](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L244)
+[UnlockdApi.ts:244](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L244)
 
 ___
 
@@ -251,7 +251,7 @@ const params: ActionRequest = {
 
 #### Defined in
 
-[UnlockdApi.ts:140](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L140)
+[UnlockdApi.ts:140](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L140)
 
 ___
 
@@ -290,7 +290,7 @@ const authToken = await api.sellNowSignature(authToken, params)
 
 #### Defined in
 
-[UnlockdApi.ts:167](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L167)
+[UnlockdApi.ts:167](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L167)
 
 ___
 
@@ -325,7 +325,7 @@ const result = await api.signatureMessage(address)
 
 #### Defined in
 
-[UnlockdApi.ts:68](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L68)
+[UnlockdApi.ts:68](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L68)
 
 ___
 
@@ -362,4 +362,4 @@ const result = await api.validateMessage(address, signature)
 
 #### Defined in
 
-[UnlockdApi.ts:89](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/UnlockdApi.ts#L89)
+[UnlockdApi.ts:89](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/UnlockdApi.ts#L89)

@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / ProtocolAddresses
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / ProtocolAddresses
 
 # Enumeration: ProtocolAddresses
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[addresses.ts:14](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L14)
+[addresses.ts:14](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L14)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L13)
+[addresses.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L13)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[addresses.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L12)
+[addresses.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L12)

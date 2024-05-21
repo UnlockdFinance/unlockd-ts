@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / ModuleId
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / ModuleId
 
 # Enumeration: ModuleId
 
@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[addresses.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L5)
+[addresses.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L5)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:6](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L6)
+[addresses.ts:6](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L6)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L8)
+[addresses.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L8)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[addresses.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L7)
+[addresses.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L7)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[addresses.ts:9](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L9)
+[addresses.ts:9](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L9)

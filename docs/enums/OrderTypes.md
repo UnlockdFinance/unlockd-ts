@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / OrderTypes
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / OrderTypes
 
 # Enumeration: OrderTypes
 
@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[types/subgraph.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L3)
+[types/subgraph.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L3)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[types/subgraph.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L4)
+[types/subgraph.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L4)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[types/subgraph.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/types/subgraph.ts#L5)
+[types/subgraph.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L5)

@@ -1,4 +1,4 @@
-import {  addresses } from '../addresses'
+import { addresses } from '../addresses'
 import { client } from '../client'
 import { abis } from '../abis'
 import { getWallet } from './wallet'

@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / UnderlyingsAsset
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / UnderlyingsAsset
 
 # Enumeration: UnderlyingsAsset
 
@@ -17,7 +17,7 @@
 
 #### Defined in
 
-[addresses.ts:24](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L24)
+[addresses.ts:24](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L24)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-[addresses.ts:25](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/addresses.ts#L25)
+[addresses.ts:25](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L25)

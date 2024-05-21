@@ -1,4 +1,4 @@
-[@unlockdfinance/unlockd-ts](../README.md) / [Exports](../modules.md) / Subgraph
+[@verislabs/unlockd-sdk](../README.md) / [Exports](../modules.md) / Subgraph
 
 # Class: Subgraph
 
@@ -43,7 +43,7 @@ const api = new Subgraph(Chain.Mainnet)
 
 #### Defined in
 
-[Subgraph.ts:17](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L17)
+[Subgraph.ts:17](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L17)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Environment to use in the SDK
 
 #### Defined in
 
-[Subgraph.ts:17](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L17)
+[Subgraph.ts:17](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L17)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[Subgraph.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L8)
+[Subgraph.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L8)
 
 ## Methods
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[Subgraph.ts:42](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L42)
+[Subgraph.ts:42](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L42)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[Subgraph.ts:91](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L91)
+[Subgraph.ts:91](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L91)
 
 ___
 
@@ -132,4 +132,4 @@ ___
 
 #### Defined in
 
-[Subgraph.ts:146](https://github.com/UnlockdFinance/unlockd-ts/blob/d0ac72d/src/Subgraph.ts#L146)
+[Subgraph.ts:146](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/Subgraph.ts#L146)

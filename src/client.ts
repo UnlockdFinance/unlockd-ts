@@ -1,5 +1,5 @@
 import { createPublicClient, createTestClient, createWalletClient, custom, http } from 'viem'
-import {  mainnet, sepolia } from 'viem/chains'
+import { mainnet, sepolia } from 'viem/chains'
 import { Chain } from './types/networks'
 
 // @ts-ignore

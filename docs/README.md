@@ -1,4 +1,4 @@
-@unlockdfinance/unlockd-ts / [Exports](modules.md)
+@verislabs/unlockd-sdk / [Exports](modules.md)
 
 #
 
@@ -64,32 +64,32 @@ Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
 Using npm:
 
 ```bash
-$ npm install @unlockdfinance/unlockd-ts
+$ npm install @verislabs/unlockd-sdk
 ```
 
 Using bower:
 
 ```bash
-$ bower install @unlockdfinance/unlockd-ts
+$ bower install @verislabs/unlockd-sdk
 ```
 
 Using yarn:
 
 ```bash
-$ yarn add @unlockdfinance/unlockd-ts
+$ yarn add @verislabs/unlockd-sdk
 ```
 
 Using pnpm:
 
 ```bash
-$ pnpm add @unlockdfinance/unlockd-ts
+$ pnpm add @verislabs/unlockd-sdk
 
 ```
 
 ## Example
 ### Fetch prices 
 ```javascript
-import { UnlockdApi} from "@unlockdfinance/unlockd-ts";
+import { UnlockdApi} from "@verislabs/unlockd-sdk";
 
 const api= new UnlockdApi()
  const params = {
@@ -107,7 +107,7 @@ const response = await api.prices(params.nfts, params.underlyingAsset)
 
 ### Login
 ```javascript
-import { UnlockdApi} from "@unlockdfinance/unlockd-ts";
+import { UnlockdApi} from "@verislabs/unlockd-sdk";
 
 const api= new UnlockdApi()
 const address='0x0000000000000000000000000000000000000000'
@@ -121,7 +121,7 @@ const authToken = await api.validateMessage(signedMessage)
 ### Borrow signature 
 ```javascript
 //At lease 1 of the props
-import {ActionRequest, UnlockdApi} from "@unlockdfinance/unlockd-ts";
+import {ActionRequest, UnlockdApi} from "@verislabs/unlockd-sdk";
 const api= new UnlockdApi()
 
 const params: ActionRequest = {
@@ -132,7 +132,7 @@ const authToken = await api.borrowSignature(authToken, params)
 ```
 ### Minimum Repay
 ```javascript
-import {minimumToRepay} from "@unlockdfinance/unlockd-ts";
+import {minimumToRepay} from "@verislabs/unlockd-sdk";
 
 const params = {
     initialLoans: [
@@ -153,7 +153,7 @@ const result = minimumToRepay(params)
 
 ### Liquidation price
 ```javascript
-import {liquidationPrice} from "@unlockdfinance/unlockd-ts";
+import {liquidationPrice} from "@verislabs/unlockd-sdk";
 const oneEth = BigInt(1e18)
 
 const params = {
@@ -165,7 +165,7 @@ const result = liquidationPrice(params)
 
 ### Health Factor
 ```javascript
-import {healthFactor} from "@unlockdfinance/unlockd-ts";
+import {healthFactor} from "@verislabs/unlockd-sdk";
 const oneEth = BigInt(1e18)
 
 const params = {
@@ -178,7 +178,7 @@ const result = healthFactor(params)
 
 ### Available to action
 ```javascript
-import {availableToBorrow} from "@unlockdfinance/unlockd-ts";
+import {availableToBorrow} from "@verislabs/unlockd-sdk";
 
 const nfts = [
   {

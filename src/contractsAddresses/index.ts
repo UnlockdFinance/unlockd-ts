@@ -27,4 +27,3 @@ export const contractsAddresses = {
     sellNow: sepolia.sellNow as Address
   }
 }
-
