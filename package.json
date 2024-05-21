@@ -1,6 +1,6 @@
 {
-  "name": "@unlockdfinance/unlockd-ts",
-  "version": "0.0.4",
+  "name": "@verislabs/unlockd-sdk",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -32,6 +32,13 @@
   },
   "homepage": "https://github.com/UnlockdFinance/unlockd-ts#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-typescript": "^11.1.4",
+    "rollup": "^3.29.4",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-import-assert": "^3.0.1",
     "@types/jest": "^29.5.5",
     "acorn-import-assertions": "^1.9.0",
     "auto-changelog": "^2.4.0",
