@@ -44,9 +44,10 @@
 - [Example](#example)
 - [Keywords](#keywords)
 
-## About
 
-    Unlockd is a permissionless RWA liquidity protocol powered by advanced AI, enabling users to participate as depositors or borrowers. It provides a secure and cost-effective way to borrow against tokenized Real-World Assets and financial assets with instant loans and auto-compounding yield for lenders. Built on Ethereum and Polygon with plans for expansion to multiple Layer 2 networks, Unlockd offers a Peer-to-Pool model that ensures efficient and fair lending and borrowing.
+## About
+    
+Unlockd is a permissionless RWA liquidity protocol powered by advanced AI, enabling users to participate as depositors or borrowers. It provides a secure and cost-effective way to borrow against tokenized Real-World Assets and financial assets with instant loans and auto-compounding yield for lenders. Built on Ethereum and Polygon with plans for expansion to multiple Layer 2 networks, Unlockd offers a Peer-to-Pool model that ensures efficient and fair lending and borrowing.
 
 The Unlockd SDK allows developers to integrate these RWA-backed borrowing functionalities into their applications. It is particularly useful for Unlockd partners with supported and whitelisted assets, enabling them to offer borrowing against assets or portfolios directly within their interfaces and provide financing options at the point of purchase.
 
@@ -72,6 +73,7 @@ The Unlockd SDK allows developers to integrate these RWA-backed borrowing functi
 ![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/main/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/main/src/firefox/firefox_48x48.png) | ![Safari](https://raw.githubusercontent.com/alrra/browser-logos/main/src/safari/safari_48x48.png) | ![Opera](https://raw.githubusercontent.com/alrra/browser-logos/main/src/opera/opera_48x48.png) | ![Edge](https://raw.githubusercontent.com/alrra/browser-logos/main/src/edge/edge_48x48.png) | ![IE](https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 --- | --- | --- | --- | --- | --- |
 Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
+
 
 ## Installing
 
@@ -102,7 +104,9 @@ $ pnpm add @verislabs/unlockd-sdk
 
 ```
 
+
 ## Example
+
 ### Fetch prices 
 ```javascript
 import { UnlockdApi} from "@verislabs/unlockd-sdk";
@@ -146,6 +150,7 @@ const params: ActionRequest = {
 }
 const authToken = await api.borrowSignature(authToken, params)
 ```
+
 ### Minimum Repay
 ```javascript
 import {minimumToRepay} from "@verislabs/unlockd-sdk";
