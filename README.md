@@ -2,7 +2,7 @@
 
 <p align="center" style="margin-bottom:32px">
   <a href="https://unlockd.finance">
-    <img alt="Unlockd logo" src="https://miro.medium.com/max/660/1*YEp9mC_4sVUuFpBzatz3dQ.png" width="auto" height="92px" />
+    <img alt="Unlockd logo" src="https://miro.medium.com/v2/resize:fit:478/1*XczVr9Gw1fm5duTt1IvvYA.png" width="auto" height="92px" />
   </a>
 </p>
 
