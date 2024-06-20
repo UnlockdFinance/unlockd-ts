@@ -19,7 +19,7 @@
     <a href="https://sdk.unlockd.finance"><b>SDK Docs</b></a>•
     <a href="https://docs.unlockd.finance"><b>Protocol Docs</b></a> •
     <a href="https://devs.unlockd.finance/"><b>Dev Docs</b></a> •
-    <a href="https://risk.unlockd.finance"><b>Risc Docs</b></a> •
+    <a href="https://risk.unlockd.finance"><b>Risk Docs</b></a> •
     <a href="https://linktr.ee/unlockd"><b>Socials</b></a> •
     <a href="/docs"><b>Docs</b></a>
 </p>
