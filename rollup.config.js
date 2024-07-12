@@ -1,5 +1,3 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import json from '@rollup/plugin-json';
 import { importAssertionsPlugin } from 'rollup-plugin-import-assert';
@@ -17,25 +15,25 @@ export default [
             file: pkg.browser,
             format: "umd",
         },
-        acornInjectPlugins: [ importAssertions ],
+        acornInjectPlugins: [importAssertions],
 
         plugins: [
             importAssertionsPlugin(),
-            typescript({tsconfig: "./tsconfig.json"}),
+            typescript({ tsconfig: "./tsconfig.json" }),
             json(),
         ],
     },
     {
         input: "src/index.ts",
         output: [
-            {file: pkg.main, format: "cjs"},
-            {file: pkg.module, format: "es"},
+            { file: pkg.main, format: "cjs" },
+            { file: pkg.module, format: "es" },
         ],
-        acornInjectPlugins: [ importAssertions ],
+        acornInjectPlugins: [importAssertions],
 
         plugins: [
             importAssertionsPlugin(),
-            typescript({tsconfig: "./tsconfig.json"}),
+            typescript({ tsconfig: "./tsconfig.json" }),
             json(),
         ],
     },
