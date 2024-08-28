@@ -5,7 +5,6 @@ import market from './Market.json'
 import buyNow from './BuyNow.json'
 import sellNow from './SellNow.json'
 import walletRegistry from './WalletRegistry.json'
-import walletFactory from './WalletFactory.json'
 import nftBatchTransfer from './NftBatchTransfer.json'
 
 export const abis = {
@@ -16,6 +15,5 @@ export const abis = {
   buyNow,
   sellNow,
   walletRegistry,
-  walletFactory,
   nftBatchTransfer
 }

@@ -1,26 +1,47 @@
 import { addresses } from '../addresses'
 import { client, publicClient } from '../client'
 import { abis } from '../abis'
+import { WalletFactoryABI } from '../abis/WalletFactory'
 import { ClientOptions } from '../types/networks'
+import { WriteContractReturnType, BaseError, ContractFunctionRevertedError } from 'viem'
 
 /**
  * @description Create the Unlockd abstract wallet
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const createWallet = async (options?: ClientOptions): Promise<void> => {
+export const createWallet = async (
+  provider: unknown,
+  options?: ClientOptions
+): Promise<WriteContractReturnType | undefined> => {
   const delegationController = '0x0000000000000000000000000000000000000000'
   const contractAddress = addresses(options).walletFactory
-  const walletCli = client(options?.network)
+
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  await walletCli.writeContract({
-    address: contractAddress,
-    abi: abis.walletFactory,
-    functionName: 'deploy',
-    args: [delegationController],
-    account
-  })
+  try {
+    const { request } = await pubCli.simulateContract({
+      address: contractAddress,
+      abi: WalletFactoryABI,
+      functionName: 'deploy',
+      args: [delegationController],
+      account
+    })
+    return walletCli.writeContract(request)
+  } catch (err) {
+    if (err instanceof BaseError) {
+      const revertError = err.walk(err => err instanceof ContractFunctionRevertedError)
+      if (revertError instanceof ContractFunctionRevertedError) {
+        const errorName = revertError.data?.errorName ?? ''
+
+        if (errorName === '...') throw new Error('...')
+      }
+    }
+  }
 }
 
 /**
@@ -28,10 +49,14 @@ export const createWallet = async (options?: ClientOptions): Promise<void> => {
  *
  * @param options
  */
-export const getWallet = async (options?: ClientOptions): Promise<any> => {
+export const getWallet = async (provider: unknown, options?: ClientOptions): Promise<any> => {
   const contractAddress = addresses(options).walletRegistry
-  const walletCli = client(options?.network)
-  const pubCli = publicClient(options?.network)
+
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
+
   const [account] = await walletCli.requestAddresses()
 
   try {
