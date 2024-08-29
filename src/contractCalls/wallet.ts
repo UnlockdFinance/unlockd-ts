@@ -1,7 +1,6 @@
 import { addresses } from '../addresses'
 import { client, publicClient } from '../client'
 import { abis } from '../abis'
-import { WalletFactoryABI } from '../abis/WalletFactory'
 import { ClientOptions } from '../types/networks'
 import { WriteContractReturnType, BaseError, ContractFunctionRevertedError } from 'viem'
 
@@ -26,7 +25,7 @@ export const createWallet = async (
   try {
     const { request } = await pubCli.simulateContract({
       address: contractAddress,
-      abi: WalletFactoryABI,
+      abi: abis.walletFactory,
       functionName: 'deploy',
       args: [delegationController],
       account
