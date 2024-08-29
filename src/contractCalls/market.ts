@@ -3,7 +3,7 @@ import { Market, Signature } from '../types/responses'
 import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { OrderType } from '../types/subgraph'
-import { ClientOptions } from '../types/networks'
+import { chains, type ClientOptions } from '../types/networks'
 
 export type CreateOrderInput = {
   startAmount: BigInt
@@ -30,11 +30,9 @@ export const create = async (
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -55,11 +53,9 @@ export const create = async (
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const cancel = async (provider: unknown, orderId: string, options?: ClientOptions) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -90,11 +86,9 @@ export const marketBid = async (
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -123,11 +117,9 @@ export const claim = async (
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -154,11 +146,9 @@ export const cancelClaim = async (
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -191,11 +181,9 @@ export const buyNow = async (
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Market]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Market]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({

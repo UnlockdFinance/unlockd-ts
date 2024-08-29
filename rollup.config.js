@@ -4,7 +4,7 @@ import { importAssertionsPlugin } from 'rollup-plugin-import-assert'
 import { importAssertions } from 'acorn-import-assertions'
 import { dts } from 'rollup-plugin-dts'
 
-import pkg from './package.json'
+import pkg from './package.json' assert { type: 'json' }
 
 export default [
   // browser-friendly UMD build
