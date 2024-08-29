@@ -1,5 +1,5 @@
 import { Action, Signature } from '../types/responses'
-import { client } from '../client'
+import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
 import { Nft } from '../types/requests'
@@ -21,22 +21,27 @@ import { ClientOptions } from '../types/networks'
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const borrow = async (
+  provider: unknown,
   amount: BigInt,
   assets: Array<Nft>,
   signature: Signature<Action>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Action]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.action,
     functionName: 'borrow',
     args: [amount, assets, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -52,16 +57,25 @@ export const borrow = async (
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const repay = async (amount: BigInt, signature: Signature<Action>, options?: ClientOptions) => {
+export const repay = async (
+  provider: unknown,
+  amount: BigInt,
+  signature: Signature<Action>,
+  options?: ClientOptions
+) => {
   const contractAddress = addresses(options)[ModuleId.Action]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.action,
     functionName: 'repay',
     args: [amount, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }

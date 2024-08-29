@@ -1,6 +1,6 @@
 import { addresses, ModuleId } from '../addresses'
 import { BuyNow, Signature } from '../types/responses'
-import { client } from '../client'
+import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { ClientOptions } from '../types/networks'
 
@@ -12,16 +12,21 @@ import { ClientOptions } from '../types/networks'
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const buy = async (amount: string, signature: Signature<BuyNow>, options?: ClientOptions) => {
+export const buy = async (provider: unknown, amount: string, signature: Signature<BuyNow>, options?: ClientOptions) => {
   const contractAddress = addresses(options)[ModuleId.BuyNow]
-  const walletCli = client(options?.network)
+
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.buyNow,
     functionName: 'buy',
     args: [amount, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }

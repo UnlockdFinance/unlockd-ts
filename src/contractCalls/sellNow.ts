@@ -1,6 +1,6 @@
 import { addresses, ModuleId } from '../addresses'
 import { SellNow, Signature } from '../types/responses'
-import { client } from '../client'
+import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { Nft } from '../types/requests'
 import { ClientOptions } from '../types/networks'
@@ -13,16 +13,21 @@ import { ClientOptions } from '../types/networks'
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const sell = async (asset: Nft, signature: Signature<SellNow>, options?: ClientOptions) => {
+export const sell = async (provider: unknown, asset: Nft, signature: Signature<SellNow>, options?: ClientOptions) => {
   const contractAddress = addresses(options)[ModuleId.SellNow]
-  const walletCli = client(options?.network)
+
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.sellNow,
     functionName: 'sell',
     args: [asset, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }

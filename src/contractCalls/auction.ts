@@ -1,5 +1,5 @@
 import { Signature } from '../types/responses'
-import { client } from '../client'
+import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
 import { Auction } from '../types/responses'
@@ -19,22 +19,27 @@ import { ClientOptions } from '../types/networks'
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const bid = async (
+  provider: unknown,
   amountToPay: BigInt,
   amountOfDebt: BigInt,
   signature: Signature<Auction>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Auction]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.auction,
     functionName: 'bid',
     args: [amountToPay, amountOfDebt, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -48,18 +53,26 @@ export const bid = async (
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const redeem = async (signature: Signature<Auction>, options?: ClientOptions): Promise<any> => {
+export const redeem = async (
+  provider: unknown,
+  signature: Signature<Auction>,
+  options?: ClientOptions
+): Promise<any> => {
   const contractAddress = addresses(options)[ModuleId.Auction]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.auction,
     functionName: 'redeem',
     args: [signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 /**
  * @returns The transaction hash of the redeem.
@@ -75,20 +88,25 @@ export const redeem = async (signature: Signature<Auction>, options?: ClientOpti
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const finalize = async (
+  provider: unknown,
   claimOnUWallet: boolean,
   orderId: string,
   signature: Signature<Auction>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Auction]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.auction,
     functionName: 'finalize',
     args: [claimOnUWallet, orderId, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }

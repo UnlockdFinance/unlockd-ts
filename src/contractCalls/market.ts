@@ -1,6 +1,6 @@
 import { Address, addresses, ModuleId } from '../addresses'
 import { Market, Signature } from '../types/responses'
-import { client } from '../client'
+import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { OrderType } from '../types/subgraph'
 import { ClientOptions } from '../types/networks'
@@ -23,6 +23,7 @@ export type CreateOrderInput = {
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const create = async (
+  provider: unknown,
   underlyingAsset: Address,
   orderType: OrderType,
   config: CreateOrderInput,
@@ -30,16 +31,20 @@ export const create = async (
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'create',
     args: [underlyingAsset, orderType, config, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -49,18 +54,22 @@ export const create = async (
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const cancel = async (orderId: string, options?: ClientOptions) => {
+export const cancel = async (provider: unknown, orderId: string, options?: ClientOptions) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'cancel',
     args: [orderId],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -74,6 +83,7 @@ export const cancel = async (orderId: string, options?: ClientOptions) => {
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const marketBid = async (
+  provider: unknown,
   orderId: string,
   amountToPay: BigInt,
   amountOfDebt: BigInt,
@@ -81,16 +91,20 @@ export const marketBid = async (
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'bid',
     args: [orderId, amountToPay, amountOfDebt, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -103,22 +117,27 @@ export const marketBid = async (
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const claim = async (
+  provider: unknown,
   claimOnUWallet: boolean,
   orderId: string,
   signature: Signature<Market>,
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'claim',
     args: [claimOnUWallet, orderId, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -129,18 +148,27 @@ export const claim = async (
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const cancelClaim = async (orderId: string, signature: Signature<Market>, options?: ClientOptions) => {
+export const cancelClaim = async (
+  provider: unknown,
+  orderId: string,
+  signature: Signature<Market>,
+  options?: ClientOptions
+) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'cancelClaim',
     args: [orderId, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }
 
 /**
@@ -155,6 +183,7 @@ export const cancelClaim = async (orderId: string, signature: Signature<Market>,
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export const buyNow = async (
+  provider: unknown,
   claimOnUWallet: boolean,
   orderId: string,
   amountToPay: BigInt,
@@ -163,14 +192,18 @@ export const buyNow = async (
   options?: ClientOptions
 ) => {
   const contractAddress = addresses(options)[ModuleId.Market]
-  const walletCli = client(options?.network)
+  const [pubCli, walletCli] = await Promise.all([
+    publicClient({ provider, network: options?.network }),
+    client({ provider, network: options?.network })
+  ])
   const [account] = await walletCli.requestAddresses()
 
-  return await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.market,
     functionName: 'buyNow',
     args: [claimOnUWallet, orderId, amountToPay, amountOfDebt, signature.data, signature.signature],
     account
   })
+  return walletCli.writeContract(request)
 }

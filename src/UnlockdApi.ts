@@ -49,8 +49,7 @@ export class UnlockdApi {
         this.url = 'https://api-sdk.unlockd.finance'
         break
       default:
-        this.url = 'https://api-sepolia-sdk.unlockd.finance'
-        break
+        throw new Error(`Unsupported chain: ${this.env}`)
     }
   }
 
