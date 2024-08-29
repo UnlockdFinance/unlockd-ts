@@ -5,8 +5,9 @@ import market from './Market.json'
 import buyNow from './BuyNow.json'
 import sellNow from './SellNow.json'
 import walletRegistry from './WalletRegistry.json'
-import walletFactory from './WalletFactory.json'
+import walletFactoryInterface from './WalletFactory'
 import nftBatchTransfer from './NftBatchTransfer.json'
+import { parseAbi } from 'viem'
 
 export const abis = {
   unlockd,
@@ -16,6 +17,6 @@ export const abis = {
   buyNow,
   sellNow,
   walletRegistry,
-  walletFactory,
+  walletFactory: parseAbi(walletFactoryInterface),
   nftBatchTransfer
 }
