@@ -1,11 +1,12 @@
 import fs from 'fs'
+import path from 'path'
 import axios from 'axios'
-import { Contract, ethers, JsonRpcProvider } from 'ethers'
-import unlockdInterface from '../src/abis/Unlockd'
+import { Contract, JsonRpcProvider } from 'ethers'
+import unlockdInterface from '../src/abis/Unlockd.ts'
 import { addresses, ModuleId } from '../src/addresses'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
-import { formatAbiItem } from 'viem/utils'
+import { formatAbi } from 'abitype'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -13,7 +14,7 @@ const __dirname = dirname(__filename)
 const alquemyKey = process.argv[2]
 const etherscanKey = process.argv[3]
 const network = process.argv[4]
-const path = process.argv[5]
+const pathToAbis = process.argv[5]
 
 const provider = new JsonRpcProvider(`https://eth-${network}.g.alchemy.com/v2/${alquemyKey}`)
 
@@ -38,7 +39,7 @@ async function abi(address: string) {
     `${domain}/api?module=contract&action=getabi&address=${address}&apikey=${etherscanKey}`
   )
   if (isJson(response.data.result) === false) return ''
-  return response.data.result
+  return JSON.parse(response.data.result)
 }
 
 function isJson(str: string) {
@@ -52,11 +53,11 @@ function isJson(str: string) {
 
 async function handle() {
   try {
-    //await storeUnlockd()
-    //await storeWalletRegistry()
-    //await storeWalletFactory()
-    //await storeNftBatchTransfer()
-    //await storeModulesAbi()
+    // await storeUnlockd()
+    // await storeWalletRegistry()
+    // await storeWalletFactory()
+    // await storeNftBatchTransfer()
+    // await storeModulesAbi()
   } catch (e) {
     console.log(e)
   }
@@ -102,14 +103,41 @@ async function storeModulesAbi() {
   ).catch((e: any) => console.log(e))
 }
 
-function storeAbi(name: string | ModuleId, abi: Array<any>) {
+function storeAbi(name: string | ModuleId, abi: Array<string>) {
   console.log(`Writing ${name}`)
 
-  const filePath = __dirname + `${path}/${name}.json`
+  const interfaceFromAbi = formatAbi(abi)
+
+  const formattedAbi = formatAndSortAbi([...interfaceFromAbi])
+
+  const formattedName = `${String(name).charAt(0).toLowerCase()}${String(name).slice(1)}`
+
+  const interfaceString = `const ${formattedName}Interface: string[] = [
+    ${formattedAbi.map(item => `  '${item}'`).join(',\n')}
+    ] as const;
+    
+    export default ${formattedName}Interface;
+    `
+
+  const filePath = path.join(__dirname, `${pathToAbis}/${name}.ts`)
+
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath)
   }
-  fs.writeFileSync(filePath, abi.toString())
+
+  fs.writeFileSync(filePath, interfaceString)
+}
+
+function formatAndSortAbi(abi: Array<string>): Array<string> {
+  const functions = abi.filter(item => item.startsWith('function'))
+  const events = abi.filter(item => item.startsWith('event'))
+  const errors = abi.filter(item => item.startsWith('error'))
+
+  functions.sort()
+  events.sort()
+  errors.sort()
+
+  return [...functions, ...events, ...errors]
 }
 
 async function moduleAbi(moduleId: number) {

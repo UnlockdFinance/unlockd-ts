@@ -7,9 +7,8 @@ const walletRegistryInterface: string[] = [
   'function renounceOwnership()',
   'function setFactory(address _delegationWalletFactory)',
   'function setWallet(address _wallet, address _owner, address _guard, address _guardOwner, address _delegationOwner, address _protocolOwner)',
-  // events
+  'function transferOwnership(address newOwner)',
   'event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)',
-  // errors
   'error DelegationWalletRegistry__onlyFactoryOrOwner()',
   'error DelegationWalletRegistry__setFactory_invalidAddress()',
   'error DelegationWalletRegistry__setWallet_invalidDelegationOwnerAddress()',

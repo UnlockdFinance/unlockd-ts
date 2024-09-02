@@ -7,7 +7,8 @@ const walletFactoryInterface: string[] = [
   'function guardBeacon() view returns (address)',
   'function guardOwnerBeacon() view returns (address)',
   'function protocolOwnerBeacon() view returns (address)',
-  // events
+  'function registry() view returns (address)',
+  'function singleton() view returns (address)',
   'event WalletDeployed(address indexed safe, address indexed owner, address indexed guard, address delegationOwner, address protocolOwner, address sender)'
 ] as const
 
