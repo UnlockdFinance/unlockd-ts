@@ -7,12 +7,12 @@ import { dts } from 'rollup-plugin-dts'
 import pkg from './package.json' assert { type: 'json' }
 
 export default [
-  // browser-friendly UMD build
+  // <script src="unlockd-sdk.umd.js"></script>
   {
     input: 'src/index.ts',
     external: ['axios', 'joi', 'viem', 'viem/chains'],
     output: {
-      name: 'unlockTs',
+      name: 'unlockd-sdk',
       file: pkg.browser,
       format: 'umd',
       globals: {
@@ -26,6 +26,9 @@ export default [
 
     plugins: [importAssertionsPlugin(), typescript({ tsconfig: './tsconfig.json' }), json()]
   },
+  // import * as unlockdSdk from '@verislabs/unlockd-sdk';
+  // or
+  // const unlockdSdk = require('@verislabs/unlockd-sdk');
   {
     input: 'src/index.ts',
     external: ['axios', 'joi', 'viem', 'viem/chains'],
@@ -37,12 +40,20 @@ export default [
 
     plugins: [importAssertionsPlugin(), typescript({ tsconfig: './tsconfig.json' }), json()]
   },
+  // types for unlockd-sdk
   {
     input: './src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
     plugins: [dts()]
   },
-  // unlockd-sdk/abis
+
+  /**
+   * ABIs
+   */
+
+  // import * as unlockdAbis from '@verislabs/unlockd-sdk/abis';
+  // or
+  // const unlockdAbis = require('@verislabs/unlockd-sdk/abis');
   {
     input: 'src/abis/index.ts',
     external: ['viem'],
@@ -50,8 +61,11 @@ export default [
       { file: 'dist/abis/index.js', format: 'cjs' },
       { file: 'dist/abis/index.mjs', format: 'es' }
     ],
-    plugins: [typescript({ tsconfig: './tsconfig.json' }), json()]
+    acornInjectPlugins: [importAssertions],
+
+    plugins: [importAssertionsPlugin(), typescript({ tsconfig: './tsconfig.json' }), json()]
   },
+  // types for unlockd-sdk/abis
   {
     input: 'src/abis/index.ts',
     output: [{ file: 'dist/abis/index.d.ts', format: 'es' }],

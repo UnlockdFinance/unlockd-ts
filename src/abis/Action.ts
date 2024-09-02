@@ -1,18 +1,24 @@
 const actionInterface: string[] = [
+  'function DOMAIN_SEPARATOR() view returns (bytes32)',
   'function borrow(uint256 amount, (address collection, uint256 tokenId)[] assets, ((bytes32 loanId, uint256 aggLoanPrice, uint256 aggLtv, uint256 aggLiquidationThreshold, uint88 totalAssets, uint256 nonce, uint256 deadline) loan, bytes32[] assets, address underlyingAsset, uint256 nonce, uint256 deadline) signAction, (uint8 v, bytes32 r, bytes32 s, uint256 deadline) sig)',
   'function calculateDigest(uint256 nonce, ((bytes32 loanId, uint256 aggLoanPrice, uint256 aggLtv, uint256 aggLiquidationThreshold, uint88 totalAssets, uint256 nonce, uint256 deadline) loan, bytes32[] assets, address underlyingAsset, uint256 nonce, uint256 deadline) signAction) view returns (bytes32 digest)',
   'function getAmountToRepay(bytes32 loanId) view returns (uint256 amount)',
   'function getLoan(bytes32 loanId) view returns ((bytes32 loanId, uint88 totalAssets, uint8 state, address underlyingAsset, address owner))',
+  'function getNonce(address sender) view returns (uint256)',
+  'function moduleId() view returns (uint256)',
+  'function moduleVersion() view returns (bytes32)',
   'function repay(uint256 amount, ((bytes32 loanId, uint256 aggLoanPrice, uint256 aggLtv, uint256 aggLiquidationThreshold, uint88 totalAssets, uint256 nonce, uint256 deadline) loan, bytes32[] assets, address underlyingAsset, uint256 nonce, uint256 deadline) signAction, (uint8 v, bytes32 r, bytes32 s, uint256 deadline) sig)',
-  // events
   'event AddCollateral(bytes32 indexed loanId, address indexed collection, uint256 indexed tokenId, bytes32 assetId)',
   'event Borrow(address indexed user, bytes32 indexed loanId, uint256 amount, uint256 totalAssets, address token)',
+  'event Genesis()',
+  'event InstallerInstallModule(uint256 indexed moduleId, address indexed moduleImpl, bytes32 moduleVersion)',
   'event LoanCreated(address indexed user, uint256 indexed loanId, uint256 totalAssets, uint256 amount, uint256 borrowIndex)',
+  'event ProxyCreated(address indexed proxy, uint256 moduleId)',
   'event Repay(address indexed user, bytes32 indexed loanId, uint256 amount, bytes32[] assets, uint256 totalAssets)',
-  // errors
   'error AmountExceedsDebt()',
   'error AssetLocked()',
   'error AssetsMismatch()',
+  'error InvalidArrayLength()',
   'error InvalidAssetAmount()',
   'error InvalidCurrentLiquidationThreshold()',
   'error InvalidCurrentLtv()',
@@ -22,10 +28,14 @@ const actionInterface: string[] = [
   'error LoanNotActive()',
   'error LoanNotUpdated()',
   'error NotAssetOwner()',
+  'error NotEqualDeadline()',
+  'error NotEqualSender()',
   'error NotValidReserve()',
   'error OrderActive()',
+  'error SenderZeroAddress()',
   'error UnhealtyLoan()',
-  'error UnlockdWalletNotFound()'
+  'error UnlockdWalletNotFound()',
+  'error WrongNonce()'
 ] as const
 
 export default actionInterface
