@@ -207,6 +207,19 @@ import { abis } from '@verislabs/unlockd-sdk/abis'
 const { unlockd, action, auction, market, buyNow, sellNow, walletRegistry, walletFactory, nftBatchTransfer } = abis
 ```
 
+### Options
+
+- **Chain preference**: [See all chain options](./chain-parameter.md)
+  ```javascript
+  import { Chains } from '@verislabs/unlockd-sdk'
+  await createWallet({
+    provider,
+    options: {
+      chain: Chains.Sepolia
+    }
+  })
+  ```
+
 ## Publish
 
 1. Click on releases
