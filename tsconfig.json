@@ -7,15 +7,11 @@
     "moduleResolution": "node",
     "target": "es2022",
     "lib": ["es2022"],
-    "esModuleInterop": true,
-    "declaration": true, 
-    "declarationDir": "./build", 
-    "outDir": "./build",
-    "emitDeclarationOnly": true
+    "esModuleInterop": true
   },
   "ts-node": {
     "esm": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": ["node_modules", "dist"]
 }

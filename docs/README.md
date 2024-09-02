@@ -199,6 +199,14 @@ const nfts = [
 const result = availableToBorrow(nfts)
 ```
 
+### Unlockd ABIs
+
+```javascript
+import { abis } from '@verislabs/unlockd-sdk/abis'
+
+const { unlockd, action, auction, market, buyNow, sellNow, walletRegistry, walletFactory, nftBatchTransfer } = abis
+```
+
 ## Publish
 
 1. Click on releases
