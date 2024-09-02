@@ -1,10 +1,11 @@
 import fs from 'fs'
 import axios from 'axios'
 import { Contract, ethers, JsonRpcProvider } from 'ethers'
-import { abis } from '../src/abis'
+import unlockdInterface from '../src/abis/Unlockd'
 import { addresses, ModuleId } from '../src/addresses'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+import { formatAbiItem } from 'viem/utils'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -16,7 +17,7 @@ const path = process.argv[5]
 
 const provider = new JsonRpcProvider(`https://eth-${network}.g.alchemy.com/v2/${alquemyKey}`)
 
-const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', abis.unlockd, provider)
+const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', unlockdInterface, provider)
 
 function enumToArray<T extends object>(enumeration: T): any {
   return (
