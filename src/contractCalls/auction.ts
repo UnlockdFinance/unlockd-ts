@@ -3,7 +3,7 @@ import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
 import { Auction } from '../types/responses'
-import { ClientOptions } from '../types/networks'
+import { chains, type ClientOptions } from '../types/networks'
 
 /**
  * @returns The transaction hash of the bid.
@@ -25,11 +25,9 @@ export const bid = async (
   signature: Signature<Auction>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Auction]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Auction]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -58,11 +56,9 @@ export const redeem = async (
   signature: Signature<Auction>,
   options?: ClientOptions
 ): Promise<any> => {
-  const contractAddress = addresses(options)[ModuleId.Auction]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Auction]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
@@ -94,11 +90,9 @@ export const finalize = async (
   signature: Signature<Auction>,
   options?: ClientOptions
 ) => {
-  const contractAddress = addresses(options)[ModuleId.Auction]
-  const [pubCli, walletCli] = await Promise.all([
-    publicClient({ provider, network: options?.network }),
-    client({ provider, network: options?.network })
-  ])
+  const chain = chains(options)
+  const contractAddress = addresses(chain)[ModuleId.Auction]
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
 import { Nft } from './types/requests'
 import { Address } from './addresses'
-import { Chains } from './types/networks'
+import { type Chain, Chains } from './types/networks'
 
 export class Subgraph {
   public readonly httpClient
@@ -14,7 +14,7 @@ export class Subgraph {
    * const api = new Subgraph(Chain.Mainnet)
    * ```
    */
-  constructor(private chain: Chains = Chains.Mainnet) {
+  constructor(private chain: Chain = Chains.Mainnet) {
     switch (this.chain) {
       case Chains.Localhost:
         this.httpClient = axios.create({

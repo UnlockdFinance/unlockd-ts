@@ -1,4 +1,4 @@
-import { Chain, ClientOptions } from './types/networks'
+import { type Chain, Chains } from './types/networks'
 import { contractsAddresses } from './contractsAddresses'
 
 export enum ModuleId {
@@ -69,31 +69,31 @@ const sepoliaUnderlyingsAssets: UnderlyingsAssetMap = {
   [UnderlyingsAsset.WETH]: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
 }
 
-export const collections = (chain?: Chain): CollectionMap => {
+export const collections = (chain: Chain): CollectionMap => {
   switch (chain) {
-    case 'mainnet':
+    case Chains.Mainnet:
       return mainnetCollections
-    case 'sepolia':
+    case Chains.Sepolia:
       return sepoliaCollections
     default:
       return mainnetCollections
   }
 }
-export const underlyingsAssets = (chain?: Chain): UnderlyingsAssetMap => {
+export const underlyingsAssets = (chain: Chain): UnderlyingsAssetMap => {
   switch (chain) {
-    case 'mainnet':
+    case Chains.Mainnet:
       return mainnetUnderlyingsAssets
-    case 'sepolia':
+    case Chains.Sepolia:
       return sepoliaUnderlyingsAssets
     default:
       return mainnetUnderlyingsAssets
   }
 }
-export const addresses = (options?: ClientOptions): AddressMap => {
-  switch (options?.network) {
-    case 'mainnet':
+export const addresses = (chain: Chain): AddressMap => {
+  switch (chain) {
+    case Chains.Mainnet:
       return mainnetAddresses
-    case 'sepolia':
+    case Chains.Sepolia:
       return sepoliaAddresses
     default:
       return mainnetAddresses

@@ -1,54 +1,27 @@
 {
   "name": "@verislabs/unlockd-sdk",
   "version": "0.0.10",
-  "description": "",
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "types": "dist/index.d.ts",
-  "browser": "dist/unlockTs.umd.js",
-  "files": [
-    "dist"
-  ],
-  "engines": {
-    "npm": ">=8.0.0 <=9.5.0",
-    "node": ">=16.0.0"
-  },
-  "scripts": {
-    "dev": "concurrently \"bun run dev:rollup\" \"bun run dev:types\"",
-    "dev:rollup": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js -w",
-    "dev:types": "tsup --watch",
-    "build": "tsup --dts && bun run build:rollup",
-    "build:rollup": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js",
-    "docs": "typedoc --options typedoc.json --plugin typedoc-plugin-markdown --out docs src/index.ts",
-    "deploy": "npm run build && npm publish",
-    "test": "jest",
-    "changelog": "npx auto-changelog --output CHANGELOG.md --template keepachangelog --commit-limit false --package",
-    "format": "prettier --write \"src/**/*.+(js|ts|json|yaml)\" \"tests/**/*.+(js|ts|json|yaml)\""
-  },
+  "author": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/UnlockdFinance/unlockd-ts.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/UnlockdFinance/unlockd-ts/issues"
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "joi": "^17.10.2"
   },
-  "homepage": "https://github.com/UnlockdFinance/unlockd-ts#readme",
+  "peerDependencies": {
+    "viem": "2.x"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-typescript": "^11.1.4",
     "@types/jest": "^29.5.5",
+    "abitype": "^1.0.6",
     "acorn-import-assertions": "^1.9.0",
     "auto-changelog": "^2.4.0",
     "concurrently": "^8.2.2",
@@ -68,11 +41,54 @@
     "tsx": "^4.7.2",
     "typedoc": "^0.25.7",
     "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "viem": "2.x"
   },
-  "dependencies": {
-    "axios": "^1.6.7",
-    "joi": "^17.10.2",
-    "viem": "^2.9.17"
-  }
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./abis": {
+      "types": "./dist/abis/index.d.ts",
+      "import": "./dist/abis/index.mjs",
+      "default": "./dist/abis/index.js"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "abis": [
+        "dist/abis/index.d.ts"
+      ]
+    }
+  },
+  "browser": "dist/unlockd-sdk.umd.js",
+  "bugs": {
+    "url": "https://github.com/UnlockdFinance/unlockd-ts/issues"
+  },
+  "description": "",
+  "engines": {
+    "npm": ">=8.0.0 <=9.5.0",
+    "node": ">=16.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/UnlockdFinance/unlockd-ts#readme",
+  "license": "ISC",
+  "scripts": {
+    "dev": "concurrently \"bun run dev:rollup\" \"bun run dev:types\"",
+    "dev:rollup": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js -w",
+    "dev:types": "tsup --watch",
+    "build": "tsup --dts && bun run build:rollup",
+    "build:rollup": "node --experimental-json-modules ./node_modules/.bin/rollup --config rollup.config.js",
+    "docs": "typedoc --options typedoc.json --plugin typedoc-plugin-markdown --out docs src/index.ts",
+    "deploy": "npm run build && npm publish",
+    "test": "jest",
+    "changelog": "npx auto-changelog --output CHANGELOG.md --template keepachangelog --commit-limit false --package",
+    "format": "prettier --write \"src/**/*.+(js|ts|json|yaml)\" \"tests/**/*.+(js|ts|json|yaml)\""
+  },
+  "type": "module"
 }

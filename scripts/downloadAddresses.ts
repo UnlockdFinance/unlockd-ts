@@ -1,5 +1,5 @@
 import { Contract, JsonRpcProvider } from 'ethers'
-import { abis } from '../src/abis'
+import unlockdInterface from '../src/abis/Unlockd'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -15,11 +15,11 @@ const path = process.argv[4]
 const provider = new JsonRpcProvider(`https://polygon-${network}.g.alchemy.com/v2/${alquemyKey}`)
 
 //Sepolia
-//const unlockd = new Contract('0x167b44409ae1eF6eF15a47a053f6a98879296E49', abis.unlockd, provider)
+//const unlockd = new Contract('0x167b44409ae1eF6eF15a47a053f6a98879296E49', unlockdInterface, provider)
 //Mainnet
-//const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', abis.unlockd, provider)
+//const unlockd = new Contract('0xcd16ad66f4786a9224f53af13987fc2ed6fde0cb', unlockdInterface, provider)
 //Polygon amoy
-const unlockd = new Contract('0x567136ccdFB320076dFEa5deFB65538D6737F7a7', abis.unlockd, provider)
+const unlockd = new Contract('0x567136ccdFB320076dFEa5deFB65538D6737F7a7', unlockdInterface, provider)
 
 function enumToArray<T extends object>(enumeration: T): any {
   // @ts-ignore

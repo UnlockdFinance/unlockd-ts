@@ -6,46 +6,46 @@
 
 ### Enumeration Members
 
-- [Amoy](Chains.md#amoy)
+- [Polygon Amoy](Chains.md#polygon-amoy)
 - [Localhost](Chains.md#localhost)
-- [Mainnet](Chains.md#mainnet)
+- [Mainnet](Chains.md#ethereum-mainnet)
 - [Sepolia](Chains.md#sepolia)
 
 ## Enumeration Members
 
-### Amoy
+### Polygon Amoy
 
-• **Amoy** = ``"amoy"``
+• **Polygon Amoy** = `"polygonAmoy"`
 
 #### Defined in
 
 [types/networks.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L8)
 
-___
+---
 
 ### Localhost
 
-• **Localhost** = ``"localhost"``
+• **Localhost** = `"localhost"`
 
 #### Defined in
 
 [types/networks.ts:10](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L10)
 
-___
+---
 
-### Mainnet
+### Ethereum Mainnet
 
-• **Mainnet** = ``"mainnet"``
+• **Mainnet** = `"mainnet"`
 
 #### Defined in
 
 [types/networks.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L7)
 
-___
+---
 
 ### Sepolia
 
-• **Sepolia** = ``"sepolia"``
+• **Sepolia** = `"sepolia"`
 
 #### Defined in
 

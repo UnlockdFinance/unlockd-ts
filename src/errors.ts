@@ -25,3 +25,20 @@ export const mapAxiosException = (error: AxiosError) => {
       throw new UnexpectedException()
   }
 }
+
+export class BaseError extends Error {
+  override name = 'UnlockdSdkError'
+
+  constructor(shortMessage: string) {
+    super()
+
+    this.message = shortMessage || 'An error occurred.'
+  }
+}
+
+export class InvalidChainOptionError extends BaseError {
+  override name = 'InvalidChainOptionError'
+  constructor() {
+    super('Only one of network, chain, or chainId should be defined.')
+  }
+}

@@ -20,7 +20,7 @@ import {
 import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
-import { Chains } from './types/networks'
+import { type Chain, Chains } from './types/networks'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
@@ -37,7 +37,7 @@ export class UnlockdApi {
    * const api = new UnlockdApi(Chain.Mainnet)
    * ```
    */
-  constructor(private env: Chains = Chains.Mainnet) {
+  constructor(private env: Chain = Chains.Mainnet) {
     switch (this.env) {
       case Chains.Localhost:
         this.url = 'https://api.example.com'

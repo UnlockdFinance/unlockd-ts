@@ -1,21 +1,22 @@
-import unlockd from './Unlockd.json'
-import action from './Action.json'
-import auction from './Auction.json'
-import market from './Market.json'
-import buyNow from './BuyNow.json'
-import sellNow from './SellNow.json'
-import walletRegistry from './WalletRegistry.json'
-import walletFactory from './WalletFactory.json'
-import nftBatchTransfer from './NftBatchTransfer.json'
+import unlockdInterface from './Unlockd'
+import actionInterface from './Action'
+import auctionInterface from './Auction'
+import marketInterface from './Market'
+import buyNowInterface from './BuyNow'
+import sellNowInterface from './SellNow'
+import walletRegistryInterface from './WalletRegistry'
+import walletFactoryInterface from './WalletFactory'
+import nftBatchTransferInterface from './NftBatchTransfer'
+import { parseAbi } from 'viem'
 
 export const abis = {
-  unlockd,
-  action,
-  auction,
-  market,
-  buyNow,
-  sellNow,
-  walletRegistry,
-  walletFactory,
-  nftBatchTransfer
+  unlockd: parseAbi(unlockdInterface),
+  action: parseAbi(actionInterface),
+  auction: parseAbi(auctionInterface),
+  market: parseAbi(marketInterface),
+  buyNow: parseAbi(buyNowInterface),
+  sellNow: parseAbi(sellNowInterface),
+  walletRegistry: parseAbi(walletRegistryInterface),
+  walletFactory: parseAbi(walletFactoryInterface),
+  nftBatchTransfer: parseAbi(nftBatchTransferInterface)
 }
