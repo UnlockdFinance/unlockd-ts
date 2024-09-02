@@ -61,25 +61,25 @@
 Using npm:
 
 ```bash
-$ npm install @verislabs/unlockd-sdk
+$ npm install viem @verislabs/unlockd-sdk
 ```
 
 Using bower:
 
 ```bash
-$ bower install @verislabs/unlockd-sdk
+$ bower install viem @verislabs/unlockd-sdk
 ```
 
 Using yarn:
 
 ```bash
-$ yarn add @verislabs/unlockd-sdk
+$ yarn add viem @verislabs/unlockd-sdk
 ```
 
 Using pnpm:
 
 ```bash
-$ pnpm add @verislabs/unlockd-sdk
+$ pnpm add viem @verislabs/unlockd-sdk
 
 ```
 
@@ -216,7 +216,10 @@ const { unlockd, action, auction, market, buyNow, sellNow, walletRegistry, walle
 
 ## Built With
 
-- Typescript
+- [Typescript](https://www.typescriptlang.org/)
+- [Viem](https://viem.sh/)
+- [axios](https://axios-http.com/)
+- [joi](https://github.com/hapijs/joi)
 - Love
 
 ## Versioning
