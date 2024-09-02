@@ -41,5 +41,20 @@ export default [
     input: './src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
     plugins: [dts()]
+  },
+  // unlockd-sdk/abis
+  {
+    input: 'src/abis/index.ts',
+    external: ['viem'],
+    output: [
+      { file: 'dist/abis/index.js', format: 'cjs' },
+      { file: 'dist/abis/index.mjs', format: 'es' }
+    ],
+    plugins: [typescript({ tsconfig: './tsconfig.json' }), json()]
+  },
+  {
+    input: 'src/abis/index.ts',
+    output: [{ file: 'dist/abis/index.d.ts', format: 'es' }],
+    plugins: [dts()]
   }
 ]

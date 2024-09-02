@@ -7,12 +7,24 @@
   "module": "dist/index.mjs",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/index.js"
+    },
+    "./abis": {
+      "types": "./dist/abis/index.d.ts",
+      "import": "./dist/abis/index.mjs",
+      "default": "./dist/abis/index.js"
     }
   },
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "abis": [
+        "dist/abis/index.d.ts"
+      ]
+    }
+  },
   "browser": "dist/unlockTs.umd.js",
   "files": [
     "dist"
