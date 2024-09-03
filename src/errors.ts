@@ -76,3 +76,20 @@ export class UnsupportedChainError extends BaseError {
     this.isUserFacing = true
   }
 }
+
+export class InvalidInputError extends BaseError {
+  override name = 'InvalidInputError'
+  constructor(message: string, param: string) {
+    super(message)
+    this.faultyParams = [param]
+    this.isCritical = true
+  }
+}
+
+export class InvalidLTVError extends BaseError {
+  override name = 'InvalidLTVError'
+  constructor(message: string) {
+    super(message)
+    this.isUserFacing = true
+  }
+}

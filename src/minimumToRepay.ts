@@ -1,3 +1,5 @@
+import { InvalidInputError } from './errors'
+
 export const LIQUIDATION_THRESHOLD = BigInt(8500)
 
 export type NFTWithValuation = {
@@ -39,27 +41,28 @@ export type MinimumRepayParams = {
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
 export function minimumToRepay(params: MinimumRepayParams): bigint {
-  if (params.initialLoans.length == 0) throw new Error('Must provide at least one loan')
-  if (params.indicesToDelete.length == 0 && !params.auction)
-    throw new Error('Must provide at least one index to delete')
-  if (params.auction && !params.liquidationThreshold) throw new Error('Must provide liquidation threshold for auction')
+  const { initialLoans, indicesToDelete, totalDebt, auction, liquidationThreshold } = params
 
-  const totalDebt = params.totalDebt
+  if (initialLoans.length == 0) throw new InvalidInputError('Must provide at least one loan.', 'initialLoans')
+  if (indicesToDelete.length == 0 && !auction)
+    throw new InvalidInputError('Must provide at least one index to delete', 'indicesToDelete')
+  if (auction && !liquidationThreshold)
+    throw new InvalidInputError('Must provide liquidation threshold for auction', 'liquidationThreshold')
 
   let totalValuation = BigInt(0)
   let initialAvailableToBorrow = BigInt(0)
   let finalAvailableToBorrow = BigInt(0)
 
-  for (const loan of params.initialLoans) {
+  for (const loan of initialLoans) {
     totalValuation += loan.valuation
     initialAvailableToBorrow += loan.valuation * loan.ltv
   }
 
-  if (params.auction) return params.totalDebt - (totalValuation * params.liquidationThreshold!) / BigInt(10000)
+  if (auction) return totalDebt - (totalValuation * liquidationThreshold!) / BigInt(10000)
 
   initialAvailableToBorrow = initialAvailableToBorrow / BigInt(10000)
 
-  const finalArray: NFTWithValuation[] = params.initialLoans.filter((_, i) => !params.indicesToDelete.includes(i))
+  const finalArray: NFTWithValuation[] = initialLoans.filter((_, i) => !indicesToDelete.includes(i))
 
   for (const loan of finalArray) {
     finalAvailableToBorrow += loan.valuation * loan.ltv
@@ -70,5 +73,6 @@ export function minimumToRepay(params: MinimumRepayParams): bigint {
   const minimumRepay = totalDebt - finalAvailableToBorrow
 
   if (minimumRepay < BigInt(0)) return BigInt(0)
+
   return minimumRepay
 }
