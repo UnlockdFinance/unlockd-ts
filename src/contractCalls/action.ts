@@ -4,13 +4,17 @@ import { abis } from '../abis'
 import { addresses, ModuleId } from '../addresses'
 import { Nft } from '../types/requests'
 import { chains, type ClientOptions } from '../types/networks'
+import { WriteContractReturnType } from 'viem'
 
 /**
  * @returns The transaction hash of the borrow action.
- * @param {BigInt} amount - The amount to borrow.
- * @param {Array<Nft>} assets - The assets to borrow.
+ *
+ * @param provider EIP-1193 provider
  * @param {Signature} signature - The signature of the borrow.
- * @param {ClientOptions} options - The client options, default value is browser wallet
+ * @param {bigint} args.amount - The amount to borrow.
+ * @param {Nft[]} args.assets - The assets to borrow [{ collection: Address, tokenId: bigint }]
+ * @param {ClientOptions} options - The client options
+ *
  * @example
  * ```ts
  * const signature = ...
@@ -20,13 +24,21 @@ import { chains, type ClientOptions } from '../types/networks'
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const borrow = async (
-  provider: unknown,
-  amount: BigInt,
-  assets: Array<Nft>,
-  signature: Signature<Action>,
+export const borrow = async ({
+  provider,
+  signature,
+  args,
+  options
+}: {
+  provider: unknown
+  signature: Signature<Action>
+  args: {
+    amount: bigint
+    assets: Nft[]
+  }
   options?: ClientOptions
-) => {
+}): Promise<WriteContractReturnType> => {
+  const { amount, assets } = args
   const chain = chains(options)
   const contractAddress = addresses(chain)[ModuleId.Action]
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
@@ -44,9 +56,12 @@ export const borrow = async (
 
 /**
  * @returns The transaction hash of the repay action.
- * @param {BigInt} amount - The amount to repay.
+ *
+ * @param provider EIP-1193 provider
  * @param {Signature} signature - The signature of the repay.
- * @param {ClientOptions} options - The client options, default value is browser wallet
+ * @param {bigint} args.amount - The amount to repay.
+ * @param {ClientOptions} options - The client options.
+ *
  * @example
  * ```ts
  * const signature = ...
@@ -55,12 +70,20 @@ export const borrow = async (
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const repay = async (
-  provider: unknown,
-  amount: BigInt,
-  signature: Signature<Action>,
+export const repay = async ({
+  provider,
+  signature,
+  args,
+  options
+}: {
+  provider: unknown
+  signature: Signature<Action>
+  args: {
+    amount: bigint
+  }
   options?: ClientOptions
-) => {
+}): Promise<WriteContractReturnType> => {
+  const { amount } = args
   const chain = chains(options)
   const contractAddress = addresses(chain)[ModuleId.Action]
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])

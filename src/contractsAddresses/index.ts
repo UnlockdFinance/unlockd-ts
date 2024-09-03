@@ -1,8 +1,8 @@
 import sepolia from './sepolia.json'
 import mainnet from './mainnet.json'
 import polygonAmoy from './polygonAmoy.json'
-import { Address } from '../addresses'
 import { Chains } from '../types/networks'
+import { Address } from 'viem'
 
 export const contractsAddresses = {
   [Chains.Mainnet.network]: {

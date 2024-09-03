@@ -27,11 +27,11 @@ export type Bid = {
 }
 
 export enum OrderType {
-  TYPE_LIQUIDATION_AUCTION = '0',
+  TYPE_LIQUIDATION_AUCTION = 0,
   //Auction with BIDs
-  TYPE_AUCTION = '1',
+  TYPE_AUCTION = 1,
   // Fixed price only buynow function
-  TYPE_FIXED_PRICE = '2',
+  TYPE_FIXED_PRICE = 2,
   // Fixed price and auction with bids
-  TYPE_FIXED_PRICE_AND_AUCTION = '3'
+  TYPE_FIXED_PRICE_AND_AUCTION = 3
 }

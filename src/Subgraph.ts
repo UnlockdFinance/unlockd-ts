@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
 import { Nft } from './types/requests'
-import { Address } from './addresses'
 import { type Chain, Chains } from './types/networks'
+import { Address } from 'viem'
 
 export class Subgraph {
   public readonly httpClient

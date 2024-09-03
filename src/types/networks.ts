@@ -1,5 +1,5 @@
 import * as viemChains from 'viem/chains'
-import { InvalidChainOptionError } from '../errors'
+import { InvalidChainGenericError, InvalidChainOptionError, UnsupportedChainError } from '../errors'
 
 /**
  * Networks supported by the Unlockd
@@ -42,25 +42,34 @@ for (const [key, chain] of Object.entries(viemChains)) {
 
 const ChainByNetwork = (network: SupportedNetworks): Chain => {
   const chain = allSupportedChains.find(chain => chain.network === network)
-
   if (!chain) {
-    throw new Error(
-      `Unsupported network: ${network}. Available networks: ${allSupportedChains.map(c => c.network).join(', ')}`
+    throw new UnsupportedChainError(
+      `Unsupported network: ${network}. Available networks: ${allSupportedChains.map(c => c.network).join(', ')}`,
+      'network'
     )
   }
-
   return chain
 }
 
 const ChainById = (chainId: Chain['id']): Chain => {
   const chain = allSupportedChains.find(chain => chain.id === chainId)
-
   if (!chain) {
-    throw new Error(
-      `Unsupported chain with chainId: ${chainId}. Available chains: ${allSupportedChains.map(c => c.id).join(', ')}`
+    throw new UnsupportedChainError(
+      `Unsupported chainId: ${chainId}. Available chains: ${allSupportedChains.map(c => c.id).join(', ')}`,
+      'chainId'
     )
   }
+  return chain
+}
 
+const ChainByObj = (chainParam: Omit<Chain, 'network'>): Chain => {
+  const chain = allSupportedChains.find(chain => chain.id === chainParam.id)
+  if (!chain) {
+    throw new UnsupportedChainError(
+      `Unsupported chain: ${chainParam.name}. Available chains: ${allSupportedChains.map(c => c.name).join(', ')}`,
+      'chain'
+    )
+  }
   return chain
 }
 
@@ -68,7 +77,7 @@ const ChainById = (chainId: Chain['id']): Chain => {
  * Returns chain from options
  */
 export const chains = (options?: ClientOptions): Chain => {
-  if (!options) return Chains.Mainnet
+  if (!options?.network && !options?.chain && !options?.chainId) return Chains.Mainnet
 
   const definedOptions = [
     options?.network !== undefined,
@@ -81,10 +90,10 @@ export const chains = (options?: ClientOptions): Chain => {
   }
 
   if (options?.network) return ChainByNetwork(options.network)
-  if (options?.chain) return ChainById(options.chain.id)
+  if (options?.chain) return ChainByObj(options.chain)
   if (options?.chainId) return ChainById(options.chainId)
 
-  throw new Error('Error related to options, chains.')
+  throw new InvalidChainGenericError()
 }
 
 /**

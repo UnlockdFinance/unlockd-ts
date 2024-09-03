@@ -1,11 +1,13 @@
+import { Address } from 'viem'
+
 export type Nft = {
-  collection: string
-  tokenId: string
+  collection: Address
+  tokenId: bigint
 }
 export type ActionRequest = {
   loanId?: string
   nfts: Array<Nft>
-  underlyingAsset?: string
+  underlyingAsset?: Address
 }
 
 export type SellNowRequest = {
@@ -13,7 +15,7 @@ export type SellNowRequest = {
   nft: Nft
 }
 export type BuyNowRequest = {
-  underlyingAsset: string
+  underlyingAsset: Address
   nft: Nft
 }
 

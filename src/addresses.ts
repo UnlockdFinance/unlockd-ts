@@ -1,5 +1,6 @@
 import { type Chain, Chains } from './types/networks'
 import { contractsAddresses } from './contractsAddresses'
+import { Address } from 'viem'
 
 export enum ModuleId {
   Action = 3,
@@ -25,7 +26,6 @@ export enum UnderlyingsAsset {
   WETH = 'weth'
 }
 
-export type Address = `0x${string}`
 type AddressMap = { [key in Addresses]: Address }
 type CollectionMap = { [key in Collections]: Address }
 type UnderlyingsAssetMap = { [key in UnderlyingsAsset]: Address }

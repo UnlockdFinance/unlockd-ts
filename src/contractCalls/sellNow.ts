@@ -4,16 +4,30 @@ import { client, publicClient } from '../client'
 import { abis } from '../abis'
 import { Nft } from '../types/requests'
 import { chains, type ClientOptions } from '../types/networks'
+import { WriteContractReturnType } from 'viem'
 
 /**
  * @returns The transaction hash of the sell operation.
- * @param {Nft} asset - The asset to sell.
+ *
+ * @param provider EIP-1193 provider
  * @param {Signature<SellNow>} signature - The signature of the sell operation.
- * @param {ClientOptions} options - The client options, default value is browser wallet
+ * @param args { asset: Nft } - The asset to sell.
+ * @param {ClientOptions} options - The client options
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const sell = async (provider: unknown, asset: Nft, signature: Signature<SellNow>, options?: ClientOptions) => {
+export const sell = async ({
+  provider,
+  signature,
+  args,
+  options
+}: {
+  provider: unknown
+  signature: Signature<SellNow>
+  args: { asset: Nft }
+  options?: ClientOptions
+}): Promise<WriteContractReturnType> => {
+  const { asset } = args
   const chain = chains(options)
   const contractAddress = addresses(chain)[ModuleId.SellNow]
 
@@ -27,5 +41,5 @@ export const sell = async (provider: unknown, asset: Nft, signature: Signature<S
     args: [asset, signature.data, signature.signature],
     account
   })
-  return walletCli.writeContract(request)
+  return await walletCli.writeContract(request)
 }
