@@ -89,7 +89,7 @@ export const underlyingsAssets = (chain: Chain): UnderlyingsAssetMap => {
       return mainnetUnderlyingsAssets
   }
 }
-export const addresses = (chain: Chain): AddressMap => {
+export const addresses = (chain?: Chain): AddressMap => {
   switch (chain) {
     case Chains.Mainnet:
       return mainnetAddresses

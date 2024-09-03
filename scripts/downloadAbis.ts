@@ -6,7 +6,6 @@ import unlockdInterface from '../src/abis/Unlockd.ts'
 import { addresses, ModuleId } from '../src/addresses'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
-import { formatAbi } from 'abitype'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -58,6 +57,7 @@ async function handle() {
     // await storeWalletFactory()
     // await storeNftBatchTransfer()
     // await storeModulesAbi()
+    // --- Remember to run `bun format` after updating the abis! ---
   } catch (e) {
     console.log(e)
   }
@@ -103,21 +103,17 @@ async function storeModulesAbi() {
   ).catch((e: any) => console.log(e))
 }
 
-function storeAbi(name: string | ModuleId, abi: Array<string>) {
+function storeAbi(name: string | ModuleId, abi: string[]) {
   console.log(`Writing ${name}`)
 
-  const interfaceFromAbi = formatAbi(abi)
-
-  const formattedAbi = formatAndSortAbi([...interfaceFromAbi])
+  const abiString = JSON.stringify(abi, null, 2)
 
   const formattedName = `${String(name).charAt(0).toLowerCase()}${String(name).slice(1)}`
 
-  const interfaceString = `const ${formattedName}Interface: string[] = [
-    ${formattedAbi.map(item => `  '${item}'`).join(',\n')}
-    ] as const;
-    
-    export default ${formattedName}Interface;
-    `
+  const fileTemplate = `const ${formattedName}Abi = ${abiString} as const;
+
+  export default ${formattedName}Abi;
+  `
 
   const filePath = path.join(__dirname, `${pathToAbis}/${name}.ts`)
 
@@ -125,19 +121,7 @@ function storeAbi(name: string | ModuleId, abi: Array<string>) {
     fs.unlinkSync(filePath)
   }
 
-  fs.writeFileSync(filePath, interfaceString)
-}
-
-function formatAndSortAbi(abi: Array<string>): Array<string> {
-  const functions = abi.filter(item => item.startsWith('function'))
-  const events = abi.filter(item => item.startsWith('event'))
-  const errors = abi.filter(item => item.startsWith('error'))
-
-  functions.sort()
-  events.sort()
-  errors.sort()
-
-  return [...functions, ...events, ...errors]
+  fs.writeFileSync(filePath, fileTemplate)
 }
 
 async function moduleAbi(moduleId: number) {
