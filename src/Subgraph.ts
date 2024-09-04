@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
-import { Nft } from './types/requests'
 import { type Chain, Chains } from './types/networks'
 import { Address } from 'viem'
+import { validateOrder } from './validations'
+import { SubgraphCriticalError } from './errors'
+import { ValidationError as JoiValidationError } from 'joi'
 
 export class Subgraph {
   public readonly httpClient
@@ -39,8 +41,8 @@ export class Subgraph {
     }
   }
 
-  async allOrders(limit = 100, offset = 0, order = OrderTypes.DESC, ended = false): Promise<Array<Order>> {
-    const results = []
+  async allOrders(limit = 100, offset = 0, order = OrderTypes.DESC, ended = false): Promise<Order[]> {
+    const results: Order[] = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`
     if (ended) {
@@ -83,19 +85,30 @@ export class Subgraph {
       variables: {}
     })
     const response = await this.httpClient.post('', data)
-    results.push(...(response.data.data?.orders.map((order: any) => this.toOrder(order)) ?? []))
+
+    response.data.data?.orders.forEach((order: any) => {
+      try {
+        const validatedOrder = validateOrder(order)
+        results.push(validatedOrder)
+      } catch (err) {
+        if (err instanceof JoiValidationError) {
+          throw new SubgraphCriticalError(err.message)
+        }
+        console.error(err)
+      }
+    })
 
     return results
   }
 
-  async ordersByCollection(
+  async ordersByCollections(
     limit = 100,
     offset = 0,
     order = OrderTypes.DESC,
-    collections: Array<Address> = [],
+    collections: Address[] = [],
     ended = false
-  ): Promise<Array<Order>> {
-    const results = []
+  ): Promise<Order[]> {
+    const results: Order[] = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`
     if (ended) {
@@ -138,35 +151,19 @@ export class Subgraph {
       variables: { collections: collections.map(_ => _.toLowerCase()) }
     })
     const response = await this.httpClient.post('', data)
-    results.push(...(response.data.data?.orders.map((order: any) => this.toOrder(order)) ?? []))
+
+    response.data.data?.orders.forEach((order: any) => {
+      try {
+        const validatedOrder = validateOrder(order)
+        results.push(validatedOrder)
+      } catch (err) {
+        if (err instanceof JoiValidationError) {
+          throw new SubgraphCriticalError(err.message)
+        }
+        console.error(err)
+      }
+    })
 
     return results
-  }
-
-  private toOrder(order: any): Order {
-    return {
-      id: order.id,
-      type: order.orderType,
-      assetId: order.assetId,
-      owner: order.seller,
-      endTime: order.endTime,
-      bids: order.bids,
-      nft: {
-        collection: order.collection,
-        tokenId: order.tokenId
-      },
-      loan: {
-        underlyingAsset: order.loan.underlyingAsset,
-        id: order.loan.id,
-        owner: order.loan.user.user,
-        nfts: order.loan.assets.map((asset: any) => {
-          return {
-            collection: asset.collection,
-            tokenId: asset.tokenId,
-            isOnAuction: asset.isOnAuction
-          } as Nft & { isOnAuction: boolean }
-        })
-      }
-    } as Order
   }
 }

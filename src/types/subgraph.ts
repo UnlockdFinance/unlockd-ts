@@ -1,9 +1,11 @@
 import { Nft } from './requests'
+
 export enum OrderTypes {
   ASC = 'ASC',
   DESC = 'DESC',
   NONE = 'none'
 }
+
 export type Order = {
   id: string
   type: OrderType

@@ -93,3 +93,11 @@ export class InvalidLTVError extends BaseError {
     this.isUserFacing = true
   }
 }
+
+export class SubgraphCriticalError extends BaseError {
+  override name = 'SubgraphCriticalError'
+  constructor(message: string) {
+    super(`Subgraph returned invalid data: ${message}. Please contact the Unlockd team if the problem persists.`)
+    this.isCritical = true
+  }
+}
