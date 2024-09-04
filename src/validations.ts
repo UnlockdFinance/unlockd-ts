@@ -1,10 +1,4 @@
-import {
-  InvalidActionRequestParams,
-  InvalidAddressFormat,
-  InvalidMarketRequestParams,
-  InvalidPricesRequestParams,
-  InvalidSellNowRequestParams
-} from './errors'
+import { InvalidAddressFormat, InvalidRequestParams } from './errors'
 import Joi from 'joi'
 import { ActionRequest, MarketRequest, SellNowRequest } from './types/requests'
 import { Order, OrderType } from './types/subgraph'
@@ -48,9 +42,9 @@ export const validateBorrow = (body: ActionRequest) => {
       otherwise: Joi.object({ underlyingAsset: Joi.forbidden() })
     })
 
-  const validate = schema.validate(body)
-  if (validate.error) {
-    throw new InvalidActionRequestParams(validate.error.message)
+  const { error } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 export const validateRepay = (body: ActionRequest) => {
@@ -59,9 +53,9 @@ export const validateRepay = (body: ActionRequest) => {
     nfts: Joi.array().items(nftSchema)
   })
 
-  const validate = schema.validate(body)
-  if (validate.error) {
-    throw new InvalidActionRequestParams(validate.error.message)
+  const { error } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 export const validateSellNow = (body: SellNowRequest) => {
@@ -70,9 +64,9 @@ export const validateSellNow = (body: SellNowRequest) => {
     nft: nftSchema
   }).required()
 
-  const validate = schema.validate(body)
-  if (validate.error) {
-    throw new InvalidSellNowRequestParams(validate.error.message)
+  const { error } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 export const validateBuyNow = (body: SellNowRequest) => {
@@ -81,15 +75,15 @@ export const validateBuyNow = (body: SellNowRequest) => {
     nft: nftSchema
   }).required()
 
-  const validate = schema.validate(body)
-  if (validate.error) {
-    throw new InvalidSellNowRequestParams(validate.error.message)
+  const { error } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 export const validateMarket = (body: MarketRequest) => {
-  const validate = nftSchema.validate(body)
-  if (validate.error) {
-    throw new InvalidMarketRequestParams(validate.error.message)
+  const { error } = nftSchema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 
@@ -98,9 +92,9 @@ export const validatePrices = (body: { nfts: { collection: string; tokenId: stri
     nfts: Joi.array().items(nftSchema).max(100).required()
   }).required()
 
-  const validate = schema.validate(body)
-  if (validate.error) {
-    throw new InvalidPricesRequestParams(validate.error.message)
+  const { error } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
   }
 }
 

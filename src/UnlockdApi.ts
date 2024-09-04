@@ -67,7 +67,7 @@ export class UnlockdApi {
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
     validateAddress(address)
     const response = await axios.get(`${this.url}/auth/${address}/message`).catch(error => {
-      throw new UnexpectedException()
+      throw new UnexpectedException('Failed to retrieve the signature message.')
     })
     return response.data
   }

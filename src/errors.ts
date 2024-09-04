@@ -1,31 +1,5 @@
 import { AxiosError, HttpStatusCode } from 'axios'
 
-export class InvalidAddressFormat extends Error {}
-
-export class InvalidActionRequestParams extends Error {}
-
-export class InvalidSellNowRequestParams extends Error {}
-
-export class InvalidMarketRequestParams extends Error {}
-
-export class InvalidPricesRequestParams extends Error {}
-export class InvalidSignatureException extends Error {}
-
-export class UnexpectedException extends Error {}
-
-export class UnauthorizedException extends Error {}
-
-export const mapAxiosException = (error: AxiosError) => {
-  switch (error.response!.status) {
-    case HttpStatusCode.Unauthorized:
-      throw new UnauthorizedException()
-    case HttpStatusCode.InternalServerError:
-      throw new UnexpectedException(error.message)
-    default:
-      throw new UnexpectedException()
-  }
-}
-
 export class BaseError extends Error {
   isCritical: boolean
   isUserFacing: boolean
@@ -40,6 +14,66 @@ export class BaseError extends Error {
   }
 }
 
+// Generic error
+export class UnexpectedException extends BaseError {
+  override name = 'UnexpectedException'
+  constructor(message: string) {
+    super(message)
+    this.isUserFacing = true
+  }
+}
+
+// Validation errors
+export class InvalidAddressFormat extends BaseError {
+  override name = 'InvalidAddressFormat'
+  constructor(address: string) {
+    super(`Invalid address format: ${address}`)
+    this.faultyParams = ['address']
+    this.isUserFacing = true
+  }
+}
+
+export class InvalidRequestParams extends BaseError {
+  override name = 'InvalidRequestParams'
+  constructor(message: string) {
+    super(`Invalid request parameters: ${message}`)
+    this.faultyParams = ['params']
+    this.isUserFacing = true
+  }
+}
+
+// Authorization errors
+export class InvalidSignatureException extends BaseError {
+  override name = 'InvalidSignatureException'
+  constructor() {
+    super('Invalid signature. Please check the format and ensure it meets the required standards.')
+    this.faultyParams = ['signature']
+    this.isUserFacing = true
+  }
+}
+
+export class UnauthorizedException extends BaseError {
+  override name = 'UnauthorizedException'
+  constructor() {
+    super('Unauthorized access: Invalid or missing authentication token.')
+    this.faultyParams = ['tokenAuth']
+    this.isUserFacing = true
+  }
+}
+
+// Request errors
+export const mapAxiosException = (error: AxiosError) => {
+  switch (error.response?.status) {
+    case HttpStatusCode.Unauthorized:
+      throw new UnauthorizedException()
+    case HttpStatusCode.InternalServerError:
+      throw new UnexpectedException(error.message)
+    default:
+      throw new UnexpectedException('Unexpected error')
+  }
+}
+
+// Contract errors
 export class InvalidProviderError extends BaseError {
   override name = 'InvalidProviderError'
   constructor() {
@@ -77,6 +111,7 @@ export class UnsupportedChainError extends BaseError {
   }
 }
 
+// Calculations errors
 export class InvalidInputError extends BaseError {
   override name = 'InvalidInputError'
   constructor(message: string, param: string) {
@@ -94,6 +129,7 @@ export class InvalidLTVError extends BaseError {
   }
 }
 
+// Subgraph error
 export class SubgraphCriticalError extends BaseError {
   override name = 'SubgraphCriticalError'
   constructor(message: string) {

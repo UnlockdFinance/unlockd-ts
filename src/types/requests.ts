@@ -6,7 +6,7 @@ export type Nft = {
 }
 export type ActionRequest = {
   loanId?: string
-  nfts: Array<Nft>
+  nfts: Nft[]
   underlyingAsset?: Address
 }
 
