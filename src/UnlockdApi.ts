@@ -17,7 +17,7 @@ import {
   SignatureMessageResponse,
   ValidateMessageResponse
 } from './types/responses'
-import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
+import { ActionRequest, BuyNowRequest, MarketRequest, PricesRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
 import { type Chain, Chains } from './types/networks'
@@ -86,8 +86,8 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async validateMessage(address: string, signature: string): Promise<ValidateMessageResponse> {
-    validateAddress(address)
-    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }).catch(error => {
+    const safeAddress = validateAddress(address)
+    const response = await axios.post(`${this.url}/auth/${safeAddress}/validate`, { signature }).catch(error => {
       throw new InvalidSignatureException()
     })
     return response.data
@@ -110,9 +110,9 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async borrowSignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
-    validateBorrow(params)
+    const safeParams = validateBorrow(params)
     const response = await axios
-      .post(`${this.url}/signature/loan/borrow`, params, {
+      .post(`${this.url}/signature/loan/borrow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -137,9 +137,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async repaySignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
-    validateRepay(params)
+    const safeParams = validateRepay(params)
     const response = await axios
-      .post(`${this.url}/signature/loan/repay`, params, {
+      .post(`${this.url}/signature/loan/repay`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -164,9 +164,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async sellNowSignature(tokenAuth: string, params: SellNowRequest): Promise<Signature<SellNow>> {
-    validateSellNow(params)
+    const safeParams = validateSellNow(params)
     const response = await axios
-      .post(`${this.url}/signature/sellnow`, params, {
+      .post(`${this.url}/signature/sellnow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -191,9 +191,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature<BuyNow>> {
-    validateBuyNow(params)
+    const safeParams = validateBuyNow(params)
     const response = await axios
-      .post(`${this.url}/signature/buynow`, params, {
+      .post(`${this.url}/signature/buynow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -215,10 +215,9 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async marketSignature(tokenAuth: string, params: MarketRequest): Promise<Signature<Market>> {
-    validateMarket(params)
-
+    const safeParams = validateMarket(params)
     const response = await axios
-      .post(`${this.url}/signature/market`, params, {
+      .post(`${this.url}/signature/market`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -240,10 +239,10 @@ export class UnlockdApi {
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async prices(nfts: { collection: string; tokenId: string; underlyingAsset: string }[]): Promise<PricesResponse[]> {
-    validatePrices({ nfts })
+  async prices(request: PricesRequest): Promise<PricesResponse[]> {
+    const safeRequest = validatePrices(request)
     const response = await axios
-      .post(`${this.url}/prices`, { nfts })
+      .post(`${this.url}/prices`, safeRequest.nfts)
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }

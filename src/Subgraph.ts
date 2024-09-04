@@ -88,8 +88,8 @@ export class Subgraph {
 
     response.data.data?.orders.forEach((order: any) => {
       try {
-        const validatedOrder = validateOrder(order)
-        results.push(validatedOrder)
+        const safeOrder = validateOrder(order)
+        results.push(safeOrder)
       } catch (err) {
         if (err instanceof JoiValidationError) {
           throw new SubgraphCriticalError(err.message)
@@ -154,8 +154,8 @@ export class Subgraph {
 
     response.data.data?.orders.forEach((order: any) => {
       try {
-        const validatedOrder = validateOrder(order)
-        results.push(validatedOrder)
+        const safeOrder = validateOrder(order)
+        results.push(safeOrder)
       } catch (err) {
         if (err instanceof JoiValidationError) {
           throw new SubgraphCriticalError(err.message)
