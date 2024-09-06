@@ -22,7 +22,7 @@ export type BuyNowRequest = {
 }
 
 export type PricesRequest = {
-  nfts: Nft[]
+  nfts: Array<Nft & { underlyingAsset: Address }>
 }
 
 export type MarketRequest = Nft

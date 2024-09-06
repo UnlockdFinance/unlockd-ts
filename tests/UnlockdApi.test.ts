@@ -4,7 +4,6 @@ import {
   Chains,
   MarketRequest,
   Nft,
-  PricesRequest,
   SellNowRequest,
   SignatureMessageResponse,
   UnlockdApi,
@@ -129,15 +128,13 @@ describe('UnlockdApi', () => {
   })
 
   it('should fetch a prices', async () => {
-    const params = {
-      nfts: [
-        {
-          collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address,
-          tokenId: 10n,
-          underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9' as Address
-        }
-      ]
-    }
+    const params = [
+      {
+        collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address,
+        tokenId: 10n,
+        underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9' as Address
+      }
+    ]
     const expectedResponse = {
       result: [
         {
@@ -150,8 +147,8 @@ describe('UnlockdApi', () => {
       ]
     }
 
-    const safeParams = validatePrices(params) as { nfts: Array<Nft & { tokenId: string }> }
-    nock(api.url).post('/prices', safeParams.nfts).reply(200, expectedResponse)
+    const safeParams = validatePrices(params) as Array<Nft & { tokenId: string }>
+    nock(api.url).post('/prices', safeParams).reply(200, expectedResponse)
 
     const response = await api.prices(params)
     expect(response).toEqual(expectedResponse.result)

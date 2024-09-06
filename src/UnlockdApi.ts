@@ -48,6 +48,9 @@ export class UnlockdApi {
       case Chains.Mainnet:
         this.url = 'https://api-sdk.unlockd.finance'
         break
+      case Chains.PolygonAmoy:
+        this.url = 'https://polygon-amoy.staging.unlockd.finance'
+        break
       default:
         throw new Error(`Unsupported chain: ${this.env}`)
     }
@@ -65,8 +68,8 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
-    validateAddress(address)
-    const response = await axios.get(`${this.url}/auth/${address}/message`).catch(error => {
+    const safeAddress = validateAddress(address)
+    const response = await axios.get(`${this.url}/auth/${safeAddress}/message`).catch(error => {
       throw new UnexpectedException('Failed to retrieve the signature message.')
     })
     return response.data
@@ -241,8 +244,9 @@ export class UnlockdApi {
    */
   async prices(request: PricesRequest): Promise<PricesResponse[]> {
     const safeRequest = validatePrices(request)
+
     const response = await axios
-      .post(`${this.url}/prices`, safeRequest.nfts)
+      .post(`${this.url}/prices`, safeRequest)
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }

@@ -4,7 +4,7 @@ import { type Chain, Chains } from './types/networks'
 import { Address } from 'viem'
 import { validateOrder } from './validations'
 import { SubgraphCriticalError } from './errors'
-import { ValidationError as JoiValidationError } from 'joi'
+import Joi from 'joi'
 
 export class Subgraph {
   public readonly httpClient
@@ -31,6 +31,11 @@ export class Subgraph {
       case Chains.Mainnet:
         this.httpClient = axios.create({
           baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-mainnet-sub/api'
+        })
+        break
+      case Chains.PolygonAmoy:
+        this.httpClient = axios.create({
+          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-polygon-amoy/api'
         })
         break
       default:
@@ -91,7 +96,7 @@ export class Subgraph {
         const safeOrder = validateOrder(order)
         results.push(safeOrder)
       } catch (err) {
-        if (err instanceof JoiValidationError) {
+        if (err instanceof Joi.ValidationError) {
           throw new SubgraphCriticalError(err.message)
         }
         console.error(err)
@@ -157,7 +162,7 @@ export class Subgraph {
         const safeOrder = validateOrder(order)
         results.push(safeOrder)
       } catch (err) {
-        if (err instanceof JoiValidationError) {
+        if (err instanceof Joi.ValidationError) {
           throw new SubgraphCriticalError(err.message)
         }
         console.error(err)
