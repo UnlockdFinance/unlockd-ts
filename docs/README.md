@@ -100,7 +100,7 @@ const params = {
   ],
   underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
 }
-const response = await api.prices(params.nfts, params.underlyingAsset)
+const response = await api.prices(params)
 ```
 
 ### Login
@@ -120,13 +120,13 @@ const authToken = await api.validateMessage(signedMessage)
 ### Borrow signature
 
 ```javascript
-//At lease 1 of the props
+//At least 1 of the props
 import {ActionRequest, UnlockdApi} from "@verislabs/unlockd-sdk";
 const api= new UnlockdApi()
 
 const params: ActionRequest = {
   loanId: '0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0',//Optional
-  nfts: [{collection: '0x1234567890abcdefABCDEF1234567890abcdefAB', tokenId: 'testTokenId'}]//Optional
+  nfts: [{collection: '0x1234567890abcdefABCDEF1234567890abcdefAB', tokenId: 123n}]//Optional
 }
 const authToken = await api.borrowSignature(authToken, params)
 ```

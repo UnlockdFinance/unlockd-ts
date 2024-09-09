@@ -66,11 +66,11 @@ describe('UnlockdApi', () => {
   it('should fetch a borrow signature', async () => {
     const params: ActionRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nfts: [{ collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }]
+      nfts: [{ collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }]
     }
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
-    const safeParams = validateBorrow(params) as ActionRequest & { nfts: Array<Nft & { tokenId: string }> }
+    const safeParams = validateBorrow(params)
     nock(api.url)
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -83,11 +83,11 @@ describe('UnlockdApi', () => {
   it('should fetch a sellNow signature', async () => {
     const params: SellNowRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nft: { collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }
+      nft: { collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }
     }
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
-    const safeParams = validateSellNow(params) as SellNowRequest & { nft: Nft & { tokenId: string } }
+    const safeParams = validateSellNow(params)
     nock(api.url)
       .post('/signature/sellnow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -97,10 +97,10 @@ describe('UnlockdApi', () => {
     expect(response).toEqual(expectedResponse)
   })
   it('should fetch a market signature', async () => {
-    const params: MarketRequest = { collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }
+    const params: MarketRequest = { collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
-    const safeParams = validateMarket(params) as MarketRequest & { tokenId: string }
+    const safeParams = validateMarket(params)
     nock(api.url)
       .post('/signature/market', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -113,11 +113,11 @@ describe('UnlockdApi', () => {
   it('should fetch a repay signature', async () => {
     const params: ActionRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nfts: [{ collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }]
+      nfts: [{ collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }]
     }
     const expectedResponse = { signature: { v: 2, r: 'testR2', s: 'testS2', deadline: 987654321 } }
 
-    const safeParams = validateRepay(params) as ActionRequest & { nfts: Array<Nft & { tokenId: string }> }
+    const safeParams = validateRepay(params)
     nock(api.url)
       .post('/signature/loan/repay', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -128,13 +128,15 @@ describe('UnlockdApi', () => {
   })
 
   it('should fetch a prices', async () => {
-    const params = [
-      {
-        collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address,
-        tokenId: 10n,
-        underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9' as Address
-      }
-    ]
+    const params = {
+      nfts: [
+        {
+          collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address,
+          tokenId: 10n,
+          underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9' as Address
+        }
+      ]
+    }
     const expectedResponse = {
       result: [
         {
@@ -147,7 +149,7 @@ describe('UnlockdApi', () => {
       ]
     }
 
-    const safeParams = validatePrices(params) as Array<Nft & { tokenId: string }>
+    const safeParams = validatePrices(params)
     nock(api.url).post('/prices', safeParams).reply(200, expectedResponse)
 
     const response = await api.prices(params)
@@ -156,10 +158,10 @@ describe('UnlockdApi', () => {
   it('should handle an unauthorized exception when the request fails with 401 status', async () => {
     const params: ActionRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nfts: [{ collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }]
+      nfts: [{ collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }]
     }
 
-    const safeParams = validateBorrow(params) as ActionRequest & { nfts: Array<Nft & { tokenId: string }> }
+    const safeParams = validateBorrow(params)
     nock(api['url'])
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -171,10 +173,10 @@ describe('UnlockdApi', () => {
   it('should handle an unexpected exception when the request fails with 500 status', async () => {
     const params: ActionRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nfts: [{ collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }]
+      nfts: [{ collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }]
     }
 
-    const safeParams = validateBorrow(params) as ActionRequest & { nfts: Array<Nft & { tokenId: string }> }
+    const safeParams = validateBorrow(params)
     nock(api['url'])
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
@@ -186,10 +188,10 @@ describe('UnlockdApi', () => {
   it('should handle an unexpected exception when the request fails with an unknown status', async () => {
     const params: ActionRequest = {
       loanId: '0x1234567890abcdef1234567890abcdef12345678' as Address,
-      nfts: [{ collection: '0x1234567890abcdefABCDEF1234567890abcdefAB' as Address, tokenId: 123n }]
+      nfts: [{ collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358' as Address, tokenId: 123n }]
     }
 
-    const safeParams = validateBorrow(params) as ActionRequest & { nfts: Array<Nft & { tokenId: string }> }
+    const safeParams = validateBorrow(params)
     nock(api['url'])
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)

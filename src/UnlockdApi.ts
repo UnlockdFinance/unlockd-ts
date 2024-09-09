@@ -235,10 +235,16 @@ export class UnlockdApi {
    * @param nfts - The nfts to get the prices.
    * @example
    * ```ts
-   * const nfts = [
-   * {collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10',underlyingAsset : '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'}
-   * ]
-   * const result = await api.prices(nfts)
+   * const params = {
+   *   nfts: [
+   *     {
+   *       collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358',
+   *       tokenId: '10'
+   *     }
+   *   ],
+   *   underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
+   * }
+   * const response = await api.prices(params)
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
