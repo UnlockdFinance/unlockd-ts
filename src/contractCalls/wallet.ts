@@ -1,49 +1,62 @@
 import { addresses } from '../addresses'
 import { client, publicClient } from '../client'
 import { abis } from '../abis'
-import { ClientOptions } from '../types/networks'
+import { chains, type ClientOptions } from '../types/networks'
+import { WriteContractReturnType } from 'viem'
 
 /**
- * @description Create the Unlockd abstract wallet
+ * @description Create the Unlockd abstract wallet.
+ *
+ * @param provider EIP-1193 provider
+ * @param {ClientOptions} options
  *
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const createWallet = async (options?: ClientOptions): Promise<void> => {
+export const createWallet = async ({
+  provider,
+  options
+}: {
+  provider: unknown
+  options?: ClientOptions
+}): Promise<WriteContractReturnType> => {
   const delegationController = '0x0000000000000000000000000000000000000000'
-  const contractAddress = addresses(options).walletFactory
-  const walletCli = client(options?.network)
+  const chain = chains(options)
+  const contractAddress = addresses(chain).walletFactory
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
-  await walletCli.writeContract({
+  const { request } = await pubCli.simulateContract({
     address: contractAddress,
     abi: abis.walletFactory,
     functionName: 'deploy',
     args: [delegationController],
-    account
+    account,
+    chain
   })
+  return await walletCli.writeContract(request)
 }
 
 /**
- * @return The wallet address of the user
+ * @returns The Unlockd wallet address of the user.
  *
- * @param options
+ * @param provider EIP-1193 provider
+ * @param {ClientOptions} options
  */
-export const getWallet = async (options?: ClientOptions): Promise<any> => {
-  const contractAddress = addresses(options).walletRegistry
-  const walletCli = client(options?.network)
-  const pubCli = publicClient(options?.network)
+export const getWallet = async ({ provider, options }: { provider: unknown; options?: ClientOptions }) => {
+  const chain = chains(options)
+  const contractAddress = addresses(chain).walletRegistry
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
+
   const [account] = await walletCli.requestAddresses()
 
-  try {
-    const data = (await pubCli.readContract({
-      address: contractAddress,
-      abi: abis.walletRegistry,
-      functionName: 'getOwnerWalletAddresses',
-      args: [account],
-      account
-    })) as string[]
-    return data[0]
-  } catch (e) {
-    return null
-  }
+  const [firstAddress] = await pubCli.readContract({
+    address: contractAddress,
+    abi: abis.walletRegistry,
+    functionName: 'getOwnerWalletAddresses',
+    args: [account],
+    account
+  })
+  return firstAddress
 }

@@ -17,10 +17,10 @@ import {
   SignatureMessageResponse,
   ValidateMessageResponse
 } from './types/responses'
-import { ActionRequest, BuyNowRequest, MarketRequest, SellNowRequest } from './types/requests'
+import { ActionRequest, BuyNowRequest, MarketRequest, PricesRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError } from 'axios'
 import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
-import { Chains } from './types/networks'
+import { type Chain, Chains } from './types/networks'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
@@ -37,7 +37,7 @@ export class UnlockdApi {
    * const api = new UnlockdApi(Chain.Mainnet)
    * ```
    */
-  constructor(private env: Chains = Chains.Mainnet) {
+  constructor(private env: Chain = Chains.Mainnet) {
     switch (this.env) {
       case Chains.Localhost:
         this.url = 'https://api.example.com'
@@ -48,9 +48,11 @@ export class UnlockdApi {
       case Chains.Mainnet:
         this.url = 'https://api-sdk.unlockd.finance'
         break
-      default:
-        this.url = 'https://api-sepolia-sdk.unlockd.finance'
+      case Chains.PolygonAmoy:
+        this.url = 'https://polygon-amoy.staging.unlockd.finance'
         break
+      default:
+        throw new Error(`Unsupported chain: ${this.env}`)
     }
   }
 
@@ -66,9 +68,9 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async signatureMessage(address: string): Promise<SignatureMessageResponse> {
-    validateAddress(address)
-    const response = await axios.get(`${this.url}/auth/${address}/message`).catch(error => {
-      throw new UnexpectedException()
+    const safeAddress = validateAddress(address)
+    const response = await axios.get(`${this.url}/auth/${safeAddress}/message`).catch(error => {
+      throw new UnexpectedException('Failed to retrieve the signature message.')
     })
     return response.data
   }
@@ -87,8 +89,8 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async validateMessage(address: string, signature: string): Promise<ValidateMessageResponse> {
-    validateAddress(address)
-    const response = await axios.post(`${this.url}/auth/${address}/validate`, { signature }).catch(error => {
+    const safeAddress = validateAddress(address)
+    const response = await axios.post(`${this.url}/auth/${safeAddress}/validate`, { signature }).catch(error => {
       throw new InvalidSignatureException()
     })
     return response.data
@@ -111,9 +113,9 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async borrowSignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
-    validateBorrow(params)
+    const safeParams = validateBorrow(params)
     const response = await axios
-      .post(`${this.url}/signature/loan/borrow`, params, {
+      .post(`${this.url}/signature/loan/borrow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -138,9 +140,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async repaySignature(tokenAuth: string, params: ActionRequest): Promise<Signature<Action>> {
-    validateRepay(params)
+    const safeParams = validateRepay(params)
     const response = await axios
-      .post(`${this.url}/signature/loan/repay`, params, {
+      .post(`${this.url}/signature/loan/repay`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -165,9 +167,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async sellNowSignature(tokenAuth: string, params: SellNowRequest): Promise<Signature<SellNow>> {
-    validateSellNow(params)
+    const safeParams = validateSellNow(params)
     const response = await axios
-      .post(`${this.url}/signature/sellnow`, params, {
+      .post(`${this.url}/signature/sellnow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -192,9 +194,9 @@ export class UnlockdApi {
    *  @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async buyNowSignature(tokenAuth: string, params: BuyNowRequest): Promise<Signature<BuyNow>> {
-    validateBuyNow(params)
+    const safeParams = validateBuyNow(params)
     const response = await axios
-      .post(`${this.url}/signature/buynow`, params, {
+      .post(`${this.url}/signature/buynow`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -216,10 +218,9 @@ export class UnlockdApi {
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
   async marketSignature(tokenAuth: string, params: MarketRequest): Promise<Signature<Market>> {
-    validateMarket(params)
-
+    const safeParams = validateMarket(params)
     const response = await axios
-      .post(`${this.url}/signature/market`, params, {
+      .post(`${this.url}/signature/market`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
@@ -234,17 +235,24 @@ export class UnlockdApi {
    * @param nfts - The nfts to get the prices.
    * @example
    * ```ts
-   * const nfts = [
-   * {collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358', tokenId: '10',underlyingAsset : '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'}
-   * ]
-   * const result = await api.prices(nfts)
+   * const params = {
+   *   nfts: [
+   *     {
+   *       collection: '0x1750d2e6f2fb7fdd6a751833f55007cf76fbb358',
+   *       tokenId: '10'
+   *     }
+   *   ],
+   *   underlyingAsset: '0x7b79995e5f793a07bc00c21412e50ecae098e7f9'
+   * }
+   * const response = await api.prices(params)
    * ```
    * @see {@link http://devs.unlockd.finance | 📚Gitbook}
    */
-  async prices(nfts: { collection: string; tokenId: string; underlyingAsset: string }[]): Promise<PricesResponse[]> {
-    validatePrices({ nfts })
+  async prices(request: PricesRequest): Promise<PricesResponse[]> {
+    const safeRequest = validatePrices(request)
+
     const response = await axios
-      .post(`${this.url}/prices`, { nfts })
+      .post(`${this.url}/prices`, safeRequest)
       .catch((error: AxiosError) => mapAxiosException(error))
     return response.data.result
   }

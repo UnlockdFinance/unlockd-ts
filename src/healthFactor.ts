@@ -23,13 +23,17 @@ export type HealthFactorParams = {
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const healthFactor = (params: HealthFactorParams): BigInt => {
-  let { collateral, debt, liquidationThreshold, variations } = params
+export const healthFactor = (params: HealthFactorParams): bigint => {
+  const { collateral, debt, liquidationThreshold, variations } = params
+
   let totalCollateral = collateral
   let totalDebt = debt
 
-  if (params.variations?.collateral) totalCollateral += variations!.collateral!
-  if (variations?.debt) totalDebt += variations!.debt!
+  const collateralVariation = variations?.collateral
+  if (collateralVariation) totalCollateral += collateralVariation
+
+  const debtVariation = variations?.debt
+  if (debtVariation) totalDebt += debtVariation
 
   if (totalCollateral <= BigInt('0') || totalDebt <= BigInt('0')) {
     return BigInt('0')

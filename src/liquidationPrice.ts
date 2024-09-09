@@ -1,4 +1,4 @@
-export type LiquitationPriceProps = {
+export type LiquidationPriceProps = {
   debt: bigint
   liquidationThreshold: bigint
 }
@@ -18,7 +18,10 @@ export type LiquitationPriceProps = {
  * ```
  * @see {@link http://devs.unlockd.finance | 📚Gitbook}
  */
-export const liquidationPrice = (params: LiquitationPriceProps): BigInt => {
-  if (params.liquidationThreshold <= 0n || params.debt <= 0n) return 0n
-  return (params.debt * BigInt(10000)) / params.liquidationThreshold
+export const liquidationPrice = (params: LiquidationPriceProps): BigInt => {
+  const { debt, liquidationThreshold } = params
+
+  if (liquidationThreshold <= 0n || debt <= 0n) return 0n
+
+  return (debt * BigInt(10000)) / liquidationThreshold
 }

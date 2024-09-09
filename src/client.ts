@@ -1,34 +1,37 @@
-import { createPublicClient, createTestClient, createWalletClient, custom, http } from 'viem'
-import { mainnet, sepolia } from 'viem/chains'
-import { Chain } from './types/networks'
+import { createPublicClient, createWalletClient, custom, http, PublicClient, WalletClient } from 'viem'
+import { type Chain } from './types/networks'
+import { EthereumProvider, isEthereumProvider } from './types/provider'
+import { InvalidProviderError } from './errors'
 
-// @ts-ignore
-const mainnetClient = () => createWalletClient({ chain: mainnet, transport: custom(window.ethereum!) })
-// @ts-ignore
-const mainnetPublicClient = () => createPublicClient({ chain: mainnet, transport: custom(window.ethereum!) })
-
-// @ts-ignore
-const sepoliaClient = () => createWalletClient({ chain: sepolia, transport: custom(window.ethereum!) })
-// @ts-ignore
-const sepoliaPublicClient = () => createPublicClient({ chain: sepolia, transport: custom(window.ethereum!) })
-
-export const client = (network?: Chain) => {
-  switch (network) {
-    case 'mainnet':
-      return mainnetClient()
-    case 'sepolia':
-      return sepoliaClient()
-    default:
-      return mainnetClient()
+async function supportsPublicActions(provider: EthereumProvider): Promise<boolean> {
+  try {
+    await provider.request({ method: 'eth_blockNumber' })
+    return true
+  } catch (error) {
+    return false
   }
 }
-export const publicClient = (network?: Chain) => {
-  switch (network) {
-    case 'mainnet':
-      return mainnetPublicClient()
-    case 'sepolia':
-      return sepoliaPublicClient()
-    default:
-      return mainnetPublicClient()
+
+export const client = async ({ provider, chain }: { provider: unknown; chain: Chain }): Promise<WalletClient> => {
+  if (!isEthereumProvider(provider)) {
+    throw new InvalidProviderError()
   }
+
+  return createWalletClient({
+    chain,
+    transport: custom(provider)
+  })
+}
+export const publicClient = async ({ provider, chain }: { provider: unknown; chain: Chain }): Promise<PublicClient> => {
+  if (!isEthereumProvider(provider)) {
+    throw new InvalidProviderError()
+  }
+
+  const hasPublicActions = await supportsPublicActions(provider)
+  const transport = hasPublicActions ? custom(provider) : http()
+
+  return createPublicClient({
+    chain,
+    transport
+  })
 }

@@ -1,3 +1,5 @@
+import { Address } from 'viem'
+
 export type SignatureMessageResponse = {
   message: string
 }
@@ -6,94 +8,86 @@ export type ValidateMessageResponse = {
 }
 
 export type PricesResponse = {
-  collection: string
-  tokenId: string
-  valuation: string
-  ltv: string
-  liquidationThreshold: number
+  collection: Address
+  tokenId: bigint
+  valuation: bigint
+  ltv: bigint
+  liquidationThreshold: bigint
 }
 
-export type SignatureLoanConfig = {
-  loanId: string
-  aggLoanPrice: string
-  aggLtv: number
-  aggLiquidationThreshold: number
-  totalAssets: number
-  nonce: number
-  deadline: number
+type SignatureLoanConfig = SignatureOptions & {
+  loanId: Address
+  aggLoanPrice: bigint
+  aggLtv: bigint
+  aggLiquidationThreshold: bigint
+  totalAssets: bigint
 }
 
-export type Action = {
+export type Action = SignatureOptions & {
   loan: SignatureLoanConfig
-  assets: string[]
-  underlyingAsset: string
-  deadline: number
-  nonce: number
+  assets: Address[]
+  underlyingAsset: Address
 }
 
-export type Auction = {
+export type Auction = SignatureOptions & {
   loan: SignatureLoanConfig
-  assets: string[]
-  assetPrice: string
-  assetLtv: string
+  assets: Address[]
+  assetPrice: bigint
+  assetLtv: bigint
   endTime: number
-  deadline: number
-  nonce: number
 }
-export type Market = {
-  loan: SignatureLoanConfig
-  assetId: string
-  collection: string
-  tokenId: string
-  assetPrice: string
-  assetLtv: number
-  deadline: number
-  nonce: number
-}
-export type SellNow = {
-  loan: SignatureLoanConfig
-  assetId: string
-  // approval
-  marketAdapter: string
-  marketApproval: string
-  marketPrice: string
-  underlyingAsset: string
-  // sell data
-  from: string
-  to: string
-  data: string
-  value: number
 
-  //signature
-  deadline: number
-  nonce: number
+export type Market = SignatureOptions & {
+  loan: SignatureLoanConfig
+  assetId: Address
+  collection: Address
+  tokenId: bigint
+  assetPrice: bigint
+  assetLtv: bigint
 }
-export type BuyNow = {
-  asset: {
-    assetId: string
-    collection: string
-    tokenId: string
-    price: string
-    nonce: number
-    deadline: number
+
+export type SellNow = TransactionData &
+  Configuration &
+  SignatureOptions & {
+    loan: SignatureLoanConfig
+    assetId: Address
   }
-  assetLtv: string
-  assetLiquidationThreshold: number
-  //tx Data
-  from: string
-  to: string
-  data: string
-  value: string
-  //Configuration
-  marketAdapter: string
-  marketApproval: string
-  marketPrice: string
-  underlyingAsset: string
-  //signature
-  deadline: number
-  nonce: number
+
+export type BuyNow = TransactionData &
+  Configuration &
+  SignatureOptions & {
+    asset: {
+      assetId: Address
+      collection: Address
+      tokenId: bigint
+      price: bigint
+      nonce: bigint
+      deadline: bigint
+    }
+    assetLtv: bigint
+    assetLiquidationThreshold: bigint
+  }
+
+type TransactionData = {
+  from: Address
+  to: Address
+  data: Address
+  value: bigint
 }
+
+type Configuration = {
+  marketAdapter: Address
+  marketApproval: Address
+  marketPrice: bigint
+  underlyingAsset: Address
+}
+
+type SignatureOptions = {
+  deadline: bigint
+  nonce: bigint
+}
+
 export type Signature<T> = {
   data: T
-  signature: { v: number; r: string; s: string; deadline: number }
+  signature: { v: number; r: Address; s: Address; deadline: bigint }
 }

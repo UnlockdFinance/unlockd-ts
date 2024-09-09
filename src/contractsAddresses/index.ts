@@ -1,25 +1,25 @@
 import sepolia from './sepolia.json'
 import mainnet from './mainnet.json'
-import amoy from './amoy.json'
-import { Address } from '../addresses'
+import polygonAmoy from './polygonAmoy.json'
 import { Chains } from '../types/networks'
+import { Address } from 'viem'
 
 export const contractsAddresses = {
-  [Chains.Mainnet]: {
+  [Chains.Mainnet.network]: {
     action: mainnet.action as Address,
     auction: mainnet.auction as Address,
     market: mainnet.market as Address,
     buyNow: mainnet.buyNow as Address,
     sellNow: mainnet.sellNow as Address
   },
-  [Chains.Amoy]: {
-    action: amoy.action as Address,
-    auction: amoy.auction as Address,
-    market: amoy.market as Address,
-    buyNow: amoy.buyNow as Address,
-    sellNow: amoy.sellNow as Address
+  [Chains.PolygonAmoy.network]: {
+    action: polygonAmoy.action as Address,
+    auction: polygonAmoy.auction as Address,
+    market: polygonAmoy.market as Address,
+    buyNow: polygonAmoy.buyNow as Address,
+    sellNow: polygonAmoy.sellNow as Address
   },
-  [Chains.Sepolia]: {
+  [Chains.Sepolia.network]: {
     action: sepolia.action as Address,
     auction: sepolia.auction as Address,
     market: sepolia.market as Address,
