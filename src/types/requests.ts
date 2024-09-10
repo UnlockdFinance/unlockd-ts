@@ -52,3 +52,8 @@ export type SafePricesRequest = {
 
 export type MarketRequest = Nft
 export type SafeMarketRequest = SafeNft
+
+export type Asset = {
+  contractAddress: Address
+  amount: bigint
+}
