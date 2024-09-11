@@ -1,11 +1,107 @@
-import { addresses } from '../addresses'
 import { client, publicClient } from '../client'
-import { abis } from '../abis'
 import { getWallet } from './wallet'
 import { chains, type ClientOptions } from '../types/networks'
-import { erc721Abi, WriteContractReturnType } from 'viem'
+import { Address, erc20Abi, erc721Abi, WriteContractReturnType } from 'viem'
+import { Asset, ERC20, Nft } from '../types/requests'
+import { abis } from '../abis'
+import { addresses } from '../addresses'
 import { fulfilledValue } from '../helpers'
-import { Nft } from '../types/requests'
+
+/**
+ * @description Withdraw ERC20 or NFTs from the Unlockd wallet
+ *
+ * @param provider EIP-1193 provider
+ * @param {Asset[]} args.assets - An array of ERC20 or NFT
+ * @param {Address} args.recipient - The address to send to
+ * @param {ClientOptions} options - The client options.
+ *
+ * @see {@link http://devs.unlockd.finance | 📚Gitbook}
+ */
+export const withdrawAssets = async ({
+  provider,
+  args,
+  options
+}: {
+  provider: unknown
+  args: {
+    assets: Asset[]
+    recipient: Address
+  }
+  options?: ClientOptions
+}): Promise<WriteContractReturnType> => {
+  const { assets, recipient } = args
+  const chain = chains(options)
+  const basicWalletVaultAddress = addresses(chain).basicWalletVault
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
+  const [account] = await walletCli.requestAddresses()
+
+  const assetTransfers = assets.map(asset => {
+    if ('collection' in asset) {
+      return {
+        contractAddress: asset.collection,
+        value: asset.tokenId,
+        isERC20: false
+      }
+    } else {
+      return {
+        contractAddress: asset.contractAddress,
+        value: asset.amount,
+        isERC20: true
+      }
+    }
+  })
+
+  const { request } = await pubCli.simulateContract({
+    address: basicWalletVaultAddress,
+    abi: abis.basicWalletVault,
+    functionName: 'withdrawAssets',
+    args: [assetTransfers, recipient],
+    account
+  })
+  return walletCli.writeContract(request)
+}
+
+/** SEND ERC20 TO WALLET */
+
+/**
+ * @description Send ERC20 to the Unlockd user wallet
+ *
+ * @param provider EIP-1193 provider
+ * @param {Address} args.tokenAddress - The asset to send
+ * @param {bigint} args.amount - The amount to send
+ * @param {Address} args.recipient - The address to send to
+ * @param {ClientOptions} options - The client options.
+ *
+ * @see {@link http://devs.unlockd.finance | 📚Gitbook}
+ */
+export const sendERC20ToWallet = async ({
+  provider,
+  asset,
+  options
+}: {
+  provider: unknown
+  asset: ERC20
+  options?: ClientOptions
+}): Promise<WriteContractReturnType> => {
+  const { contractAddress, amount } = asset
+  const chain = chains(options)
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
+  const [account] = await walletCli.requestAddresses()
+  const unlockdWallet = await getWallet({ provider, options })
+
+  const { request } = await pubCli.simulateContract({
+    address: contractAddress,
+    abi: erc20Abi,
+    functionName: 'transfer',
+    args: [unlockdWallet, amount],
+    account
+  })
+  return walletCli.writeContract(request)
+}
+
+/** SEND NFTS TO WALLET */
 
 /**
  * @description Get approval status for a list of NFTs
