@@ -12,7 +12,8 @@ export enum ModuleId {
 export enum ProtocolAddresses {
   WalletRegistry = 'walletRegistry',
   WalletFactory = 'walletFactory',
-  NftBatchTransfer = 'nftBatchTransfer'
+  NftBatchTransfer = 'nftBatchTransfer',
+  BasicWalletVault = 'basicWalletVault'
 }
 export type Addresses = ModuleId | ProtocolAddresses
 
@@ -38,7 +39,8 @@ const mainnetAddresses: AddressMap = {
   [ModuleId.SellNow]: contractsAddresses.mainnet.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0x715988afcbaef9f99a6796f6d6699eeddb48eb20' as Address,
   [ProtocolAddresses.WalletFactory]: '0xae00df7e92923f9c2adcdf7c5e9f16f984cf7379' as Address,
-  [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725' as Address
+  [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725' as Address,
+  [ProtocolAddresses.BasicWalletVault]: '0x1' as Address
 }
 const sepoliaAddresses: AddressMap = {
   [ModuleId.Action]: contractsAddresses.sepolia.action,
@@ -48,7 +50,8 @@ const sepoliaAddresses: AddressMap = {
   [ModuleId.SellNow]: contractsAddresses.sepolia.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0xa24481e94a81a624fadd3c0f833af241023d996e' as Address,
   [ProtocolAddresses.WalletFactory]: '0x4abb1ee1fa5fc610f01b33cb9f0f31b95c2163dd' as Address,
-  [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d' as Address
+  [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d' as Address,
+  [ProtocolAddresses.BasicWalletVault]: '0x1' as Address
 }
 
 const polygonAmoyAddresses: AddressMap = {
@@ -59,7 +62,8 @@ const polygonAmoyAddresses: AddressMap = {
   [ModuleId.SellNow]: contractsAddresses.polygonAmoy.sellNow,
   [ProtocolAddresses.WalletRegistry]: '0x70951076369c376578Fa3E808b1b148bB5177fe2' as Address,
   [ProtocolAddresses.WalletFactory]: '0x661Fa5cE705D6AcdA108a6323B3f2732345b0b45' as Address,
-  [ProtocolAddresses.NftBatchTransfer]: '0x7a18Bc13AfcF9eC02E63ab08129D1fA5fb283Ca6' as Address
+  [ProtocolAddresses.NftBatchTransfer]: '0x7a18Bc13AfcF9eC02E63ab08129D1fA5fb283Ca6' as Address,
+  [ProtocolAddresses.BasicWalletVault]: '0x1' as Address
 }
 
 const mainnetCollections: CollectionMap = {

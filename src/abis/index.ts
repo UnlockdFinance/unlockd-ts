@@ -7,6 +7,7 @@ import sellNowAbi from './SellNow'
 import walletRegistryAbi from './WalletRegistry'
 import walletFactoryAbi from './WalletFactory'
 import nftBatchTransferAbi from './NftBatchTransfer'
+import basicWalletVaultAbi from './BasicWalletVault'
 
 export const abis = {
   unlockd: unlockdAbi,
@@ -17,5 +18,6 @@ export const abis = {
   sellNow: sellNowAbi,
   walletRegistry: walletRegistryAbi,
   walletFactory: walletFactoryAbi,
-  nftBatchTransfer: nftBatchTransferAbi
+  nftBatchTransfer: nftBatchTransferAbi,
+  basicWalletVault: basicWalletVaultAbi
 }
