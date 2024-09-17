@@ -12,7 +12,7 @@
 - [OrderType](enums/OrderType.md)
 - [OrderTypes](enums/OrderTypes.md)
 - [ProtocolAddresses](enums/ProtocolAddresses.md)
-- [UnderlyingsAsset](enums/UnderlyingsAsset.md)
+- [UnderlyingAsset](enums/UnderlyingAsset.md)
 
 ### Classes
 
@@ -53,9 +53,9 @@
 
 ### Variables
 
-- [LIQUIDATION\_THRESHOLD](modules.md#liquidation_threshold)
-- [MAX\_LTV](modules.md#max_ltv)
-- [MIN\_LTV](modules.md#min_ltv)
+- [LIQUIDATION_THRESHOLD](modules.md#liquidation_threshold)
+- [MAX_LTV](modules.md#max_ltv)
+- [MIN_LTV](modules.md#min_ltv)
 - [contractsAddresses](modules.md#contractsaddresses)
 
 ### Functions
@@ -81,7 +81,7 @@
 - [repay](modules.md#repay)
 - [sell](modules.md#sell)
 - [sendNftsToWallet](modules.md#sendnftstowallet)
-- [underlyingsAssets](modules.md#underlyingsassets)
+- [underlyingAssets](modules.md#underlyingAssets)
 
 ## Type Aliases
 
@@ -91,19 +91,19 @@
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `assets` | `string`[] |
-| `deadline` | `number` |
-| `loan` | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
-| `nonce` | `number` |
-| `underlyingAsset` | `string` |
+| Name              | Type                                                    |
+| :---------------- | :------------------------------------------------------ |
+| `assets`          | `string`[]                                              |
+| `deadline`        | `number`                                                |
+| `loan`            | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
+| `nonce`           | `number`                                                |
+| `underlyingAsset` | `string`                                                |
 
 #### Defined in
 
 [types/responses.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L26)
 
-___
+---
 
 ### ActionRequest
 
@@ -111,17 +111,17 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `loanId?` | `string` |
-| `nfts` | [`Nft`](modules.md#nft)[] |
-| `underlyingAsset?` | `string` |
+| Name               | Type                      |
+| :----------------- | :------------------------ |
+| `loanId?`          | `string`                  |
+| `nfts`             | [`Nft`](modules.md#nft)[] |
+| `underlyingAsset?` | `string`                  |
 
 #### Defined in
 
 [types/requests.ts:5](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L5)
 
-___
+---
 
 ### Address
 
@@ -131,7 +131,7 @@ ___
 
 [addresses.ts:28](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L28)
 
-___
+---
 
 ### Addresses
 
@@ -141,7 +141,7 @@ ___
 
 [addresses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L16)
 
-___
+---
 
 ### Auction
 
@@ -149,21 +149,21 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `assetLtv` | `string` |
-| `assetPrice` | `string` |
-| `assets` | `string`[] |
-| `deadline` | `number` |
-| `endTime` | `number` |
-| `loan` | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
-| `nonce` | `number` |
+| Name         | Type                                                    |
+| :----------- | :------------------------------------------------------ |
+| `assetLtv`   | `string`                                                |
+| `assetPrice` | `string`                                                |
+| `assets`     | `string`[]                                              |
+| `deadline`   | `number`                                                |
+| `endTime`    | `number`                                                |
+| `loan`       | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
+| `nonce`      | `number`                                                |
 
 #### Defined in
 
 [types/responses.ts:34](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L34)
 
-___
+---
 
 ### Bid
 
@@ -171,18 +171,18 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name           | Type     |
+| :------------- | :------- |
 | `amountOfDebt` | `string` |
-| `amountToPay` | `string` |
-| `bidAmount` | `string` |
-| `bidder` | `string` |
+| `amountToPay`  | `string` |
+| `bidAmount`    | `string` |
+| `bidder`       | `string` |
 
 #### Defined in
 
 [types/subgraph.ts:22](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L22)
 
-___
+---
 
 ### BorrowValues
 
@@ -190,17 +190,17 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name                | Type     |
+| :------------------ | :------- |
 | `availableToBorrow` | `string` |
-| `ltv` | `string` |
-| `valuation` | `string` |
+| `ltv`               | `string` |
+| `valuation`         | `string` |
 
 #### Defined in
 
 [availableToBorrow.ts:6](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L6)
 
-___
+---
 
 ### BuyNow
 
@@ -208,33 +208,33 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `asset` | \{ `assetId`: `string` ; `collection`: `string` ; `deadline`: `number` ; `nonce`: `number` ; `price`: `string` ; `tokenId`: `string`  } |
-| `asset.assetId` | `string` |
-| `asset.collection` | `string` |
-| `asset.deadline` | `number` |
-| `asset.nonce` | `number` |
-| `asset.price` | `string` |
-| `asset.tokenId` | `string` |
-| `assetLiquidationThreshold` | `number` |
-| `assetLtv` | `string` |
-| `data` | `string` |
-| `deadline` | `number` |
-| `from` | `string` |
-| `marketAdapter` | `string` |
-| `marketApproval` | `string` |
-| `marketPrice` | `string` |
-| `nonce` | `number` |
-| `to` | `string` |
-| `underlyingAsset` | `string` |
-| `value` | `string` |
+| Name                        | Type                                                                                                                                   |
+| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| `asset`                     | \{ `assetId`: `string` ; `collection`: `string` ; `deadline`: `number` ; `nonce`: `number` ; `price`: `string` ; `tokenId`: `string` } |
+| `asset.assetId`             | `string`                                                                                                                               |
+| `asset.collection`          | `string`                                                                                                                               |
+| `asset.deadline`            | `number`                                                                                                                               |
+| `asset.nonce`               | `number`                                                                                                                               |
+| `asset.price`               | `string`                                                                                                                               |
+| `asset.tokenId`             | `string`                                                                                                                               |
+| `assetLiquidationThreshold` | `number`                                                                                                                               |
+| `assetLtv`                  | `string`                                                                                                                               |
+| `data`                      | `string`                                                                                                                               |
+| `deadline`                  | `number`                                                                                                                               |
+| `from`                      | `string`                                                                                                                               |
+| `marketAdapter`             | `string`                                                                                                                               |
+| `marketApproval`            | `string`                                                                                                                               |
+| `marketPrice`               | `string`                                                                                                                               |
+| `nonce`                     | `number`                                                                                                                               |
+| `to`                        | `string`                                                                                                                               |
+| `underlyingAsset`           | `string`                                                                                                                               |
+| `value`                     | `string`                                                                                                                               |
 
 #### Defined in
 
 [types/responses.ts:71](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L71)
 
-___
+---
 
 ### BuyNowRequest
 
@@ -242,26 +242,26 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `nft` | [`Nft`](modules.md#nft) |
-| `underlyingAsset` | `string` |
+| Name              | Type                    |
+| :---------------- | :---------------------- |
+| `nft`             | [`Nft`](modules.md#nft) |
+| `underlyingAsset` | `string`                |
 
 #### Defined in
 
 [types/requests.ts:15](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L15)
 
-___
+---
 
 ### Chain
 
-Ƭ **Chain**: ``"mainnet"`` \| ``"sepolia"`` \| ``"amoy"`` \| ``"localhost"``
+Ƭ **Chain**: `"mainnet"` \| `"sepolia"` \| `"amoy"` \| `"localhost"`
 
 #### Defined in
 
 [types/networks.ts:4](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L4)
 
-___
+---
 
 ### ClientOptions
 
@@ -269,15 +269,15 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                        |
+| :--------- | :-------------------------- |
 | `network?` | [`Chain`](modules.md#chain) |
 
 #### Defined in
 
 [types/networks.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/networks.ts#L1)
 
-___
+---
 
 ### CreateOrderInput
 
@@ -285,19 +285,19 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `debtToSell` | `BigInt` |
-| `endAmount` | `BigInt` |
-| `endTime` | `number` |
+| Name          | Type     |
+| :------------ | :------- |
+| `debtToSell`  | `BigInt` |
+| `endAmount`   | `BigInt` |
+| `endTime`     | `number` |
 | `startAmount` | `BigInt` |
-| `startTime` | `number` |
+| `startTime`   | `number` |
 
 #### Defined in
 
 [contractCalls/market.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L8)
 
-___
+---
 
 ### HealthFactorParams
 
@@ -305,18 +305,18 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `collateral` | `bigint` |
-| `debt` | `bigint` |
-| `liquidationThreshold` | `bigint` |
-| `variations?` | [`HealthFactorVariations`](modules.md#healthfactorvariations) |
+| Name                   | Type                                                          |
+| :--------------------- | :------------------------------------------------------------ |
+| `collateral`           | `bigint`                                                      |
+| `debt`                 | `bigint`                                                      |
+| `liquidationThreshold` | `bigint`                                                      |
+| `variations?`          | [`HealthFactorVariations`](modules.md#healthfactorvariations) |
 
 #### Defined in
 
 [healthFactor.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L3)
 
-___
+---
 
 ### HealthFactorVariations
 
@@ -324,16 +324,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name          | Type     |
+| :------------ | :------- |
 | `collateral?` | `bigint` |
-| `debt?` | `bigint` |
+| `debt?`       | `bigint` |
 
 #### Defined in
 
 [healthFactor.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L1)
 
-___
+---
 
 ### LiquitationPriceProps
 
@@ -341,16 +341,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `debt` | `bigint` |
+| Name                   | Type     |
+| :--------------------- | :------- |
+| `debt`                 | `bigint` |
 | `liquidationThreshold` | `bigint` |
 
 #### Defined in
 
 [liquidationPrice.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/liquidationPrice.ts#L1)
 
-___
+---
 
 ### Market
 
@@ -358,22 +358,22 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `assetId` | `string` |
-| `assetLtv` | `number` |
-| `assetPrice` | `string` |
-| `collection` | `string` |
-| `deadline` | `number` |
-| `loan` | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
-| `nonce` | `number` |
-| `tokenId` | `string` |
+| Name         | Type                                                    |
+| :----------- | :------------------------------------------------------ |
+| `assetId`    | `string`                                                |
+| `assetLtv`   | `number`                                                |
+| `assetPrice` | `string`                                                |
+| `collection` | `string`                                                |
+| `deadline`   | `number`                                                |
+| `loan`       | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
+| `nonce`      | `number`                                                |
+| `tokenId`    | `string`                                                |
 
 #### Defined in
 
 [types/responses.ts:43](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L43)
 
-___
+---
 
 ### MarketRequest
 
@@ -383,7 +383,7 @@ ___
 
 [types/requests.ts:20](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L20)
 
-___
+---
 
 ### MinimumRepayParams
 
@@ -391,19 +391,19 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `auction?` | `boolean` |
-| `indicesToDelete` | `number`[] |
-| `initialLoans` | [`NFTWithValuation`](modules.md#nftwithvaluation)[] |
-| `liquidationThreshold?` | `bigint` |
-| `totalDebt` | `bigint` |
+| Name                    | Type                                                |
+| :---------------------- | :-------------------------------------------------- |
+| `auction?`              | `boolean`                                           |
+| `indicesToDelete`       | `number`[]                                          |
+| `initialLoans`          | [`NFTWithValuation`](modules.md#nftwithvaluation)[] |
+| `liquidationThreshold?` | `bigint`                                            |
+| `totalDebt`             | `bigint`                                            |
 
 #### Defined in
 
 [minimumToRepay.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L8)
 
-___
+---
 
 ### NFTValuation
 
@@ -411,16 +411,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `ltv` | `string` |
+| Name        | Type     |
+| :---------- | :------- |
+| `ltv`       | `string` |
 | `valuation` | `string` |
 
 #### Defined in
 
 [availableToBorrow.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L1)
 
-___
+---
 
 ### NFTWithValuation
 
@@ -428,16 +428,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `ltv` | `bigint` |
+| Name        | Type     |
+| :---------- | :------- |
+| `ltv`       | `bigint` |
 | `valuation` | `bigint` |
 
 #### Defined in
 
 [minimumToRepay.ts:3](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L3)
 
-___
+---
 
 ### Nft
 
@@ -445,16 +445,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name         | Type     |
+| :----------- | :------- |
 | `collection` | `string` |
-| `tokenId` | `string` |
+| `tokenId`    | `string` |
 
 #### Defined in
 
 [types/requests.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L1)
 
-___
+---
 
 ### Order
 
@@ -462,25 +462,25 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `assetId` | `string` |
-| `bids` | [`Bid`](modules.md#bid)[] |
-| `endTime` | `number` |
-| `id` | `string` |
-| `loan` | \{ `id`: `string` ; `nfts`: [`Nft`](modules.md#nft) & \{ `isOnAuction?`: `boolean`  }[] ; `underlyingAsset`: `string`  } |
-| `loan.id` | `string` |
-| `loan.nfts` | [`Nft`](modules.md#nft) & \{ `isOnAuction?`: `boolean`  }[] |
-| `loan.underlyingAsset` | `string` |
-| `nft` | [`Nft`](modules.md#nft) |
-| `owner` | `string` |
-| `type` | [`OrderType`](enums/OrderType.md) |
+| Name                   | Type                                                                                                                   |
+| :--------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `assetId`              | `string`                                                                                                               |
+| `bids`                 | [`Bid`](modules.md#bid)[]                                                                                              |
+| `endTime`              | `number`                                                                                                               |
+| `id`                   | `string`                                                                                                               |
+| `loan`                 | \{ `id`: `string` ; `nfts`: [`Nft`](modules.md#nft) & \{ `isOnAuction?`: `boolean` }[] ; `underlyingAsset`: `string` } |
+| `loan.id`              | `string`                                                                                                               |
+| `loan.nfts`            | [`Nft`](modules.md#nft) & \{ `isOnAuction?`: `boolean` }[]                                                             |
+| `loan.underlyingAsset` | `string`                                                                                                               |
+| `nft`                  | [`Nft`](modules.md#nft)                                                                                                |
+| `owner`                | `string`                                                                                                               |
+| `type`                 | [`OrderType`](enums/OrderType.md)                                                                                      |
 
 #### Defined in
 
 [types/subgraph.ts:7](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/subgraph.ts#L7)
 
-___
+---
 
 ### PricesResponse
 
@@ -488,19 +488,19 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `collection` | `string` |
+| Name                   | Type     |
+| :--------------------- | :------- |
+| `collection`           | `string` |
 | `liquidationThreshold` | `number` |
-| `ltv` | `string` |
-| `tokenId` | `string` |
-| `valuation` | `string` |
+| `ltv`                  | `string` |
+| `tokenId`              | `string` |
+| `valuation`            | `string` |
 
 #### Defined in
 
 [types/responses.ts:8](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L8)
 
-___
+---
 
 ### SellNow
 
@@ -508,26 +508,26 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `assetId` | `string` |
-| `data` | `string` |
-| `deadline` | `number` |
-| `from` | `string` |
-| `loan` | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
-| `marketAdapter` | `string` |
-| `marketApproval` | `string` |
-| `marketPrice` | `string` |
-| `nonce` | `number` |
-| `to` | `string` |
-| `underlyingAsset` | `string` |
-| `value` | `number` |
+| Name              | Type                                                    |
+| :---------------- | :------------------------------------------------------ |
+| `assetId`         | `string`                                                |
+| `data`            | `string`                                                |
+| `deadline`        | `number`                                                |
+| `from`            | `string`                                                |
+| `loan`            | [`SignatureLoanConfig`](modules.md#signatureloanconfig) |
+| `marketAdapter`   | `string`                                                |
+| `marketApproval`  | `string`                                                |
+| `marketPrice`     | `string`                                                |
+| `nonce`           | `number`                                                |
+| `to`              | `string`                                                |
+| `underlyingAsset` | `string`                                                |
+| `value`           | `number`                                                |
 
 #### Defined in
 
 [types/responses.ts:53](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L53)
 
-___
+---
 
 ### SellNowRequest
 
@@ -535,16 +535,16 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `loanId?` | `string` |
-| `nft` | [`Nft`](modules.md#nft) |
+| Name      | Type                    |
+| :-------- | :---------------------- |
+| `loanId?` | `string`                |
+| `nft`     | [`Nft`](modules.md#nft) |
 
 #### Defined in
 
 [types/requests.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/requests.ts#L11)
 
-___
+---
 
 ### Signature
 
@@ -553,25 +553,25 @@ ___
 #### Type parameters
 
 | Name |
-| :------ |
-| `T` |
+| :--- |
+| `T`  |
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `data` | `T` |
-| `signature` | \{ `deadline`: `number` ; `r`: `string` ; `s`: `string` ; `v`: `number`  } |
-| `signature.deadline` | `number` |
-| `signature.r` | `string` |
-| `signature.s` | `string` |
-| `signature.v` | `number` |
+| Name                 | Type                                                                      |
+| :------------------- | :------------------------------------------------------------------------ |
+| `data`               | `T`                                                                       |
+| `signature`          | \{ `deadline`: `number` ; `r`: `string` ; `s`: `string` ; `v`: `number` } |
+| `signature.deadline` | `number`                                                                  |
+| `signature.r`        | `string`                                                                  |
+| `signature.s`        | `string`                                                                  |
+| `signature.v`        | `number`                                                                  |
 
 #### Defined in
 
 [types/responses.ts:96](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L96)
 
-___
+---
 
 ### SignatureLoanConfig
 
@@ -579,21 +579,21 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name                      | Type     |
+| :------------------------ | :------- |
 | `aggLiquidationThreshold` | `number` |
-| `aggLoanPrice` | `string` |
-| `aggLtv` | `number` |
-| `deadline` | `number` |
-| `loanId` | `string` |
-| `nonce` | `number` |
-| `totalAssets` | `number` |
+| `aggLoanPrice`            | `string` |
+| `aggLtv`                  | `number` |
+| `deadline`                | `number` |
+| `loanId`                  | `string` |
+| `nonce`                   | `number` |
+| `totalAssets`             | `number` |
 
 #### Defined in
 
 [types/responses.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L16)
 
-___
+---
 
 ### SignatureMessageResponse
 
@@ -601,15 +601,15 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name      | Type     |
+| :-------- | :------- |
 | `message` | `string` |
 
 #### Defined in
 
 [types/responses.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/types/responses.ts#L1)
 
-___
+---
 
 ### ValidateMessageResponse
 
@@ -617,8 +617,8 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
+| Name    | Type     |
+| :------ | :------- |
 | `token` | `string` |
 
 #### Defined in
@@ -627,35 +627,35 @@ ___
 
 ## Variables
 
-### LIQUIDATION\_THRESHOLD
+### LIQUIDATION_THRESHOLD
 
-• `Const` **LIQUIDATION\_THRESHOLD**: `bigint`
+• `Const` **LIQUIDATION_THRESHOLD**: `bigint`
 
 #### Defined in
 
 [minimumToRepay.ts:1](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L1)
 
-___
+---
 
-### MAX\_LTV
+### MAX_LTV
 
-• `Const` **MAX\_LTV**: ``"7500"``
+• `Const` **MAX_LTV**: `"7500"`
 
 #### Defined in
 
 [availableToBorrow.ts:13](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L13)
 
-___
+---
 
-### MIN\_LTV
+### MIN_LTV
 
-• `Const` **MIN\_LTV**: ``"1000"``
+• `Const` **MIN_LTV**: `"1000"`
 
 #### Defined in
 
 [availableToBorrow.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L12)
 
-___
+---
 
 ### contractsAddresses
 
@@ -663,26 +663,26 @@ ___
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `amoy` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
-| `amoy.action` | \`0x$\{string}\` |
-| `amoy.auction` | \`0x$\{string}\` |
-| `amoy.buyNow` | \`0x$\{string}\` |
-| `amoy.market` | \`0x$\{string}\` |
-| `amoy.sellNow` | \`0x$\{string}\` |
-| `mainnet` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
-| `mainnet.action` | \`0x$\{string}\` |
-| `mainnet.auction` | \`0x$\{string}\` |
-| `mainnet.buyNow` | \`0x$\{string}\` |
-| `mainnet.market` | \`0x$\{string}\` |
-| `mainnet.sellNow` | \`0x$\{string}\` |
-| `sepolia` | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\`  } |
-| `sepolia.action` | \`0x$\{string}\` |
-| `sepolia.auction` | \`0x$\{string}\` |
-| `sepolia.buyNow` | \`0x$\{string}\` |
-| `sepolia.market` | \`0x$\{string}\` |
-| `sepolia.sellNow` | \`0x$\{string}\` |
+| Name              | Type                                                                                                                                                  |
+| :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `amoy`            | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\` } |
+| `amoy.action`     | \`0x$\{string}\`                                                                                                                                      |
+| `amoy.auction`    | \`0x$\{string}\`                                                                                                                                      |
+| `amoy.buyNow`     | \`0x$\{string}\`                                                                                                                                      |
+| `amoy.market`     | \`0x$\{string}\`                                                                                                                                      |
+| `amoy.sellNow`    | \`0x$\{string}\`                                                                                                                                      |
+| `mainnet`         | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\` } |
+| `mainnet.action`  | \`0x$\{string}\`                                                                                                                                      |
+| `mainnet.auction` | \`0x$\{string}\`                                                                                                                                      |
+| `mainnet.buyNow`  | \`0x$\{string}\`                                                                                                                                      |
+| `mainnet.market`  | \`0x$\{string}\`                                                                                                                                      |
+| `mainnet.sellNow` | \`0x$\{string}\`                                                                                                                                      |
+| `sepolia`         | \{ `action`: \`0x$\{string}\` ; `auction`: \`0x$\{string}\` ; `buyNow`: \`0x$\{string}\` ; `market`: \`0x$\{string}\` ; `sellNow`: \`0x$\{string}\` } |
+| `sepolia.action`  | \`0x$\{string}\`                                                                                                                                      |
+| `sepolia.auction` | \`0x$\{string}\`                                                                                                                                      |
+| `sepolia.buyNow`  | \`0x$\{string}\`                                                                                                                                      |
+| `sepolia.market`  | \`0x$\{string}\`                                                                                                                                      |
+| `sepolia.sellNow` | \`0x$\{string}\`                                                                                                                                      |
 
 #### Defined in
 
@@ -696,8 +696,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                        |
+| :--------- | :------------------------------------------ |
 | `options?` | [`ClientOptions`](modules.md#clientoptions) |
 
 #### Returns
@@ -708,7 +708,7 @@ ___
 
 [addresses.ts:92](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L92)
 
-___
+---
 
 ### availableToBorrow
 
@@ -716,8 +716,8 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name   | Type                                        | Description                           |
+| :----- | :------------------------------------------ | :------------------------------------ |
 | `nfts` | [`NFTValuation`](modules.md#nftvaluation)[] | The NFTs to calculate the values for. |
 
 #### Returns
@@ -729,19 +729,19 @@ The total valuation, ltv, and available to borrow for a given array of NFTs.
 **`Example`**
 
 ```ts
- const nfts = [
-   {
-     valuation: (BigInt(100) * oneEth).toString(),
-     ltv: '5000'
-   },
-   {
-     valuation: (BigInt(50) * oneEth).toString(),
-     ltv: '3000'
-   }
- ]
+const nfts = [
+  {
+    valuation: (BigInt(100) * oneEth).toString(),
+    ltv: '5000'
+  },
+  {
+    valuation: (BigInt(50) * oneEth).toString(),
+    ltv: '3000'
+  }
+]
 
- const result = availableToBorrow(nfts)
- ```
+const result = availableToBorrow(nfts)
+```
 
 **`See`**
 
@@ -751,7 +751,7 @@ The total valuation, ltv, and available to borrow for a given array of NFTs.
 
 [availableToBorrow.ts:35](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/availableToBorrow.ts#L35)
 
-___
+---
 
 ### bid
 
@@ -759,12 +759,12 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `amountToPay` | `BigInt` | The amount to pay. |
-| `amountOfDebt` | `BigInt` | The amount of debt. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the bid. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name           | Type                                                                   | Description                                         |
+| :------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- |
+| `amountToPay`  | `BigInt`                                                               | The amount to pay.                                  |
+| `amountOfDebt` | `BigInt`                                                               | The amount of debt.                                 |
+| `signature`    | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the bid.                           |
+| `options?`     | [`ClientOptions`](modules.md#clientoptions)                            | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -787,7 +787,7 @@ const result = await bid(1, 1, signature)
 
 [contractCalls/auction.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L21)
 
-___
+---
 
 ### borrow
 
@@ -795,12 +795,12 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `amount` | `BigInt` | The amount to borrow. |
-| `assets` | [`Nft`](modules.md#nft)[] | The assets to borrow. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Action`](modules.md#action)\> | The signature of the borrow. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name        | Type                                                                 | Description                                         |
+| :---------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `amount`    | `BigInt`                                                             | The amount to borrow.                               |
+| `assets`    | [`Nft`](modules.md#nft)[]                                            | The assets to borrow.                               |
+| `signature` | [`Signature`](modules.md#signature)\<[`Action`](modules.md#action)\> | The signature of the borrow.                        |
+| `options?`  | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -825,7 +825,7 @@ const result = await borrow(1, nfts, signature, options)
 
 [contractCalls/action.ts:23](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/action.ts#L23)
 
-___
+---
 
 ### buyNow
 
@@ -833,14 +833,14 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `claimOnUWallet` | `boolean` | The claimOnUWallet flag. |
-| `orderId` | `string` | The order id to claim. |
-| `amountToPay` | `BigInt` | The amount to pay. |
-| `amountOfDebt` | `BigInt` | The amount of debt. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the claim. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name             | Type                                                                 | Description                                         |
+| :--------------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `claimOnUWallet` | `boolean`                                                            | The claimOnUWallet flag.                            |
+| `orderId`        | `string`                                                             | The order id to claim.                              |
+| `amountToPay`    | `BigInt`                                                             | The amount to pay.                                  |
+| `amountOfDebt`   | `BigInt`                                                             | The amount of debt.                                 |
+| `signature`      | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the claim.                         |
+| `options?`       | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -856,7 +856,7 @@ The transaction hash of the claim market item.
 
 [contractCalls/market.ts:157](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L157)
 
-___
+---
 
 ### cancel
 
@@ -864,9 +864,9 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `orderId` | `string` | The order id to cancel. |
+| Name       | Type                                        | Description                                         |
+| :--------- | :------------------------------------------ | :-------------------------------------------------- |
+| `orderId`  | `string`                                    | The order id to cancel.                             |
 | `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
 
 #### Returns
@@ -883,7 +883,7 @@ The transaction hash of the cancel market item.
 
 [contractCalls/market.ts:52](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L52)
 
-___
+---
 
 ### cancelClaim
 
@@ -891,11 +891,11 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `orderId` | `string` | The order id to cancel. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the cancel claim. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name        | Type                                                                 | Description                                         |
+| :---------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `orderId`   | `string`                                                             | The order id to cancel.                             |
+| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the cancel claim.                  |
+| `options?`  | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -911,7 +911,7 @@ The transaction hash of the cancel claim market item.
 
 [contractCalls/market.ts:132](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L132)
 
-___
+---
 
 ### claim
 
@@ -919,12 +919,12 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `claimOnUWallet` | `boolean` | The claimOnUWallet flag. |
-| `orderId` | `string` | The order id to claim. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the claim. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name             | Type                                                                 | Description                                         |
+| :--------------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `claimOnUWallet` | `boolean`                                                            | The claimOnUWallet flag.                            |
+| `orderId`        | `string`                                                             | The order id to claim.                              |
+| `signature`      | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the claim.                         |
+| `options?`       | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -940,7 +940,7 @@ The transaction hash of the claim market item.
 
 [contractCalls/market.ts:105](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L105)
 
-___
+---
 
 ### collections
 
@@ -948,8 +948,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                        |
+| :------- | :-------------------------- |
 | `chain?` | [`Chain`](modules.md#chain) |
 
 #### Returns
@@ -960,7 +960,7 @@ ___
 
 [addresses.ts:72](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/addresses.ts#L72)
 
-___
+---
 
 ### create
 
@@ -968,13 +968,13 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `underlyingAsset` | \`0x$\{string}\` | The address of the underlying asset. |
-| `orderType` | [`OrderType`](enums/OrderType.md) | The type of the order. |
-| `config` | [`CreateOrderInput`](modules.md#createorderinput) | The configuration of the order. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the create order. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name              | Type                                                                 | Description                                         |
+| :---------------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `underlyingAsset` | \`0x$\{string}\`                                                     | The address of the underlying asset.                |
+| `orderType`       | [`OrderType`](enums/OrderType.md)                                    | The type of the order.                              |
+| `config`          | [`CreateOrderInput`](modules.md#createorderinput)                    | The configuration of the order.                     |
+| `signature`       | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the create order.                  |
+| `options?`        | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -990,7 +990,7 @@ The transaction hash of the create market item.
 
 [contractCalls/market.ts:25](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L25)
 
-___
+---
 
 ### createWallet
 
@@ -998,8 +998,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                        |
+| :--------- | :------------------------------------------ |
 | `options?` | [`ClientOptions`](modules.md#clientoptions) |
 
 #### Returns
@@ -1018,7 +1018,7 @@ Create the Unlockd abstract wallet
 
 [contractCalls/wallet.ts:11](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/wallet.ts#L11)
 
-___
+---
 
 ### finalize
 
@@ -1026,12 +1026,12 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `claimOnUWallet` | `boolean` | The claimOnUWallet flag. |
-| `orderId` | `string` | The orderId. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the redeem. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name             | Type                                                                   | Description                                         |
+| :--------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- |
+| `claimOnUWallet` | `boolean`                                                              | The claimOnUWallet flag.                            |
+| `orderId`        | `string`                                                               | The orderId.                                        |
+| `signature`      | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the redeem.                        |
+| `options?`       | [`ClientOptions`](modules.md#clientoptions)                            | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -1054,7 +1054,7 @@ const result = await finalize(claimOnUWallet, orderId, signature)
 
 [contractCalls/auction.ts:77](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L77)
 
-___
+---
 
 ### getWallet
 
@@ -1062,8 +1062,8 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name       | Type                                        |
+| :--------- | :------------------------------------------ |
 | `options?` | [`ClientOptions`](modules.md#clientoptions) |
 
 #### Returns
@@ -1076,7 +1076,7 @@ The wallet address of the user
 
 [contractCalls/wallet.ts:31](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/wallet.ts#L31)
 
-___
+---
 
 ### healthFactor
 
@@ -1084,8 +1084,8 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name     | Type                                                  | Description                                     |
+| :------- | :---------------------------------------------------- | :---------------------------------------------- |
 | `params` | [`HealthFactorParams`](modules.md#healthfactorparams) | The collateral, debt and liquidation threshold. |
 
 #### Returns
@@ -1097,13 +1097,14 @@ The health factor for a given collateral, debt and liquidation threshold.
 **`Example`**
 
 Returns 17000, this is equals as 1.7:
+
 ```ts
 const oneEth = BigInt(1e18)
 const params = {
-        collateral: (BigInt(100) * oneEth),
-        debt: (BigInt(50) * oneEth),
-        liquidationThreshold: BigInt(8500)
-        }
+  collateral: BigInt(100) * oneEth,
+  debt: BigInt(50) * oneEth,
+  liquidationThreshold: BigInt(8500)
+}
 const result = healthFactor(params)
 ```
 
@@ -1115,7 +1116,7 @@ const result = healthFactor(params)
 
 [healthFactor.ts:26](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/healthFactor.ts#L26)
 
-___
+---
 
 ### liquidationPrice
 
@@ -1123,8 +1124,8 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name     | Type                                                        | Description                         |
+| :------- | :---------------------------------------------------------- | :---------------------------------- |
 | `params` | [`LiquitationPriceProps`](modules.md#liquitationpriceprops) | The debt and liquidation threshold. |
 
 #### Returns
@@ -1136,12 +1137,13 @@ The liquidation price for a given debt and liquidation threshold.
 **`Example`**
 
 Returns 58823529411764705882n:
+
 ```ts
 const oneEth = BigInt(1e18)
 const params = {
-         debt: (BigInt(50) * oneEth),
-         liquidationThreshold: BigInt(8500)
-     }
+  debt: BigInt(50) * oneEth,
+  liquidationThreshold: BigInt(8500)
+}
 const result = liquidationPrice(params)
 ```
 
@@ -1153,7 +1155,7 @@ const result = liquidationPrice(params)
 
 [liquidationPrice.ts:21](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/liquidationPrice.ts#L21)
 
-___
+---
 
 ### marketBid
 
@@ -1161,13 +1163,13 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `orderId` | `string` | The order id to bid. |
-| `amountToPay` | `BigInt` | The amount to pay. |
-| `amountOfDebt` | `BigInt` | The amount of debt. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the bid. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name           | Type                                                                 | Description                                         |
+| :------------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `orderId`      | `string`                                                             | The order id to bid.                                |
+| `amountToPay`  | `BigInt`                                                             | The amount to pay.                                  |
+| `amountOfDebt` | `BigInt`                                                             | The amount of debt.                                 |
+| `signature`    | [`Signature`](modules.md#signature)\<[`Market`](modules.md#market)\> | The signature of the bid.                           |
+| `options?`     | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -1183,7 +1185,7 @@ The transaction hash of the bid market item.
 
 [contractCalls/market.ts:76](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/market.ts#L76)
 
-___
+---
 
 ### minimumToRepay
 
@@ -1191,8 +1193,8 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
+| Name     | Type                                                  | Description                           |
+| :------- | :---------------------------------------------------- | :------------------------------------ |
 | `params` | [`MinimumRepayParams`](modules.md#minimumrepayparams) | The NFTs to calculate the values for. |
 
 #### Returns
@@ -1204,23 +1206,24 @@ The minimum amount of debt to repay for a given array of NFTValuations.
 **`Example`**
 
 Returns 40 eth:
- ```ts
-    const params = {
-         initialLoans: [
-             {
-                 valuation: BigInt(50) * oneEth,
-                 ltv: BigInt(7000),
-             },
-             {
-                 valuation: BigInt(100) * oneEth,
-                 ltv: BigInt(4000),
-             },
-         ],
-         indicesToDelete: [1],
-         totalDebt: BigInt(75) * oneEth,
-     }
-    const result = minimumToRepay(params)
- ```
+
+```ts
+const params = {
+  initialLoans: [
+    {
+      valuation: BigInt(50) * oneEth,
+      ltv: BigInt(7000)
+    },
+    {
+      valuation: BigInt(100) * oneEth,
+      ltv: BigInt(4000)
+    }
+  ],
+  indicesToDelete: [1],
+  totalDebt: BigInt(75) * oneEth
+}
+const result = minimumToRepay(params)
+```
 
 **`See`**
 
@@ -1230,7 +1233,7 @@ Returns 40 eth:
 
 [minimumToRepay.ts:41](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/minimumToRepay.ts#L41)
 
-___
+---
 
 ### redeem
 
@@ -1238,10 +1241,10 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `signature` | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the redeem. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name        | Type                                                                   | Description                                         |
+| :---------- | :--------------------------------------------------------------------- | :-------------------------------------------------- |
+| `signature` | [`Signature`](modules.md#signature)\<[`Auction`](modules.md#auction)\> | The signature of the redeem.                        |
+| `options?`  | [`ClientOptions`](modules.md#clientoptions)                            | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -1264,7 +1267,7 @@ const result = await redeem(signature)
 
 [contractCalls/auction.ts:51](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/auction.ts#L51)
 
-___
+---
 
 ### repay
 
@@ -1272,11 +1275,11 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `amount` | `BigInt` | The amount to repay. |
-| `signature` | [`Signature`](modules.md#signature)\<[`Action`](modules.md#action)\> | The signature of the repay. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name        | Type                                                                 | Description                                         |
+| :---------- | :------------------------------------------------------------------- | :-------------------------------------------------- |
+| `amount`    | `BigInt`                                                             | The amount to repay.                                |
+| `signature` | [`Signature`](modules.md#signature)\<[`Action`](modules.md#action)\> | The signature of the repay.                         |
+| `options?`  | [`ClientOptions`](modules.md#clientoptions)                          | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -1300,7 +1303,7 @@ const result = await reapy(1, signature, options)
 
 [contractCalls/action.ts:55](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/action.ts#L55)
 
-___
+---
 
 ### sell
 
@@ -1308,11 +1311,11 @@ ___
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `asset` | [`Nft`](modules.md#nft) | The asset to sell. |
-| `signature` | [`Signature`](modules.md#signature)\<[`SellNow`](modules.md#sellnow)\> | The signature of the sell operation. |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) | The client options, default value is browser wallet |
+| Name        | Type                                                                   | Description                                         |
+| :---------- | :--------------------------------------------------------------------- | :-------------------------------------------------- |
+| `asset`     | [`Nft`](modules.md#nft)                                                | The asset to sell.                                  |
+| `signature` | [`Signature`](modules.md#signature)\<[`SellNow`](modules.md#sellnow)\> | The signature of the sell operation.                |
+| `options?`  | [`ClientOptions`](modules.md#clientoptions)                            | The client options, default value is browser wallet |
 
 #### Returns
 
@@ -1328,7 +1331,7 @@ The transaction hash of the sell operation.
 
 [contractCalls/sellNow.ts:16](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/sellNow.ts#L16)
 
-___
+---
 
 ### sendNftsToWallet
 
@@ -1336,10 +1339,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `nfts` | \{ `contractAddress`: `string` ; `tokenId`: `string`  }[] |
-| `options?` | [`ClientOptions`](modules.md#clientoptions) |
+| Name       | Type                                                     |
+| :--------- | :------------------------------------------------------- |
+| `nfts`     | \{ `contractAddress`: `string` ; `tokenId`: `string` }[] |
+| `options?` | [`ClientOptions`](modules.md#clientoptions)              |
 
 #### Returns
 
@@ -1357,21 +1360,21 @@ Send NFTs to the unlockd user wallet
 
 [contractCalls/nftBatchTransfer.ts:12](https://github.com/UnlockdFinance/unlockd-ts/blob/98dff94/src/contractCalls/nftBatchTransfer.ts#L12)
 
-___
+---
 
-### underlyingsAssets
+### underlyingAssets
 
-▸ **underlyingsAssets**(`chain?`): `UnderlyingsAssetMap`
+▸ **underlyingAssets**(`chain?`): `UnderlyingAssetMap`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
+| Name     | Type                        |
+| :------- | :-------------------------- |
 | `chain?` | [`Chain`](modules.md#chain) |
 
 #### Returns
 
-`UnderlyingsAssetMap`
+`UnderlyingAssetMap`
 
 #### Defined in
 
