@@ -1,4 +1,4 @@
-import { erc20Abi, WriteContractReturnType } from 'viem'
+import { Address, erc20Abi, WriteContractReturnType } from 'viem'
 import { addresses, UnderlyingAsset, underlyingAssets } from '../addresses'
 import { chains, ClientOptions } from '../types/networks'
 import { client, publicClient } from '../client'
@@ -118,6 +118,87 @@ export const depositToVault = async ({
     abi: abis.uTokenFactory,
     functionName: 'deposit',
     args: [underlyingAssetAddress, amount, account],
+    account
+  })
+  return walletCli.writeContract(request)
+}
+
+/**
+ * @description Check if the user has enough allowance to withdraw from the vault
+ *
+ * @param provider EIP-1193 provider
+ * @param {UnderlyingAsset} args.underlyingAsset - The asset to withdraw
+ * @param {Address} args.receiptTokenAddress - The token to approve
+ * @param {bigint} args.amount - The amount to withdraw
+ * @param {ClientOptions} options - The client options.
+ *
+ * @see {@link http://devs.unlockd.finance | 📚Gitbook}
+ */
+export const isApprovedWithdrawFromVault = async ({
+  provider,
+  args,
+  options
+}: {
+  provider: unknown
+  args: {
+    underlyingAsset: UnderlyingAsset
+    receiptTokenAddress: Address
+    amount: bigint
+  }
+  options?: ClientOptions
+}): Promise<boolean> => {
+  const { underlyingAsset, receiptTokenAddress, amount } = args
+  const chain = chains(options)
+  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
+  const [account] = await walletCli.requestAddresses()
+
+  const allowance = await pubCli.readContract({
+    address: receiptTokenAddress,
+    abi: erc20Abi,
+    functionName: 'allowance',
+    args: [account, uTokenFactoryAddress]
+  })
+  return allowance >= amount
+}
+
+/**
+ * @description Approve the receipt token to be withdrawn from the vault
+ *
+ * @param provider EIP-1193 provider
+ * @param {UnderlyingAsset} args.underlyingAsset - The asset to send
+ * @param {Address} args.receiptTokenAddress - The token to approve
+ * @param {bigint} args.amount - The amount to send
+ * @param {ClientOptions} options - The client options.
+ *
+ * @see {@link http://devs.unlockd.finance | 📚Gitbook}
+ */
+export const approveWithdrawFromVault = async ({
+  provider,
+  args,
+  options
+}: {
+  provider: unknown
+  args: {
+    underlyingAsset: UnderlyingAsset
+    receiptTokenAddress: Address
+    amount: bigint
+  }
+  options?: ClientOptions
+}): Promise<WriteContractReturnType> => {
+  const { underlyingAsset, receiptTokenAddress, amount } = args
+  const chain = chains(options)
+  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+
+  const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
+  const [account] = await walletCli.requestAddresses()
+
+  const { request } = await pubCli.simulateContract({
+    address: receiptTokenAddress,
+    abi: erc20Abi,
+    functionName: 'approve',
+    args: [uTokenFactoryAddress, amount],
     account
   })
   return walletCli.writeContract(request)
