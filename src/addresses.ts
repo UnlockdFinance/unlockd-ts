@@ -14,7 +14,7 @@ export enum ProtocolAddresses {
   WalletFactory = 'walletFactory',
   NftBatchTransfer = 'nftBatchTransfer',
   BasicWalletVault = 'basicWalletVault',
-  UTokenFactory = 'uTokenFactory'
+  uTokenVault = 'uTokenVault'
 }
 export type Addresses = ModuleId | ProtocolAddresses
 
@@ -42,7 +42,7 @@ const mainnetAddresses: AddressMap = {
   [ProtocolAddresses.WalletFactory]: '0xae00df7e92923f9c2adcdf7c5e9f16f984cf7379' as Address,
   [ProtocolAddresses.NftBatchTransfer]: '0x0c331e00703a9857819fa1Eb72aA3d4DE0f6f725' as Address,
   [ProtocolAddresses.BasicWalletVault]: '0x1' as Address,
-  [ProtocolAddresses.UTokenFactory]: '0x25299e9Ec27c242465587B8A2Aa70bcE02636cDA' as Address
+  [ProtocolAddresses.uTokenVault]: '0x25299e9Ec27c242465587B8A2Aa70bcE02636cDA' as Address
 }
 const sepoliaAddresses: AddressMap = {
   [ModuleId.Action]: contractsAddresses.sepolia.action,
@@ -50,11 +50,11 @@ const sepoliaAddresses: AddressMap = {
   [ModuleId.Market]: contractsAddresses.sepolia.market,
   [ModuleId.BuyNow]: contractsAddresses.sepolia.buyNow,
   [ModuleId.SellNow]: contractsAddresses.sepolia.sellNow,
-  [ProtocolAddresses.WalletRegistry]: '0xa24481e94a81a624fadd3c0f833af241023d996e' as Address,
-  [ProtocolAddresses.WalletFactory]: '0x4abb1ee1fa5fc610f01b33cb9f0f31b95c2163dd' as Address,
+  [ProtocolAddresses.WalletRegistry]: '0x14Bfe0cf3F65FDCaeF95Cd9A362B9802E9fB3c21' as Address,
+  [ProtocolAddresses.WalletFactory]: '0x4475CD61aE3E720272943677818c97E0eacAB657' as Address,
   [ProtocolAddresses.NftBatchTransfer]: '0xAbA905EbA39b9a55FD0f910a6415BA91c3E9353d' as Address,
-  [ProtocolAddresses.BasicWalletVault]: '0x1' as Address,
-  [ProtocolAddresses.UTokenFactory]: '0x68D46eafB4A3b312F643b742F1083c64163AfFdA' as Address
+  [ProtocolAddresses.BasicWalletVault]: '0xe0bbb0b3d6c57a4d2c9b9c1614f66b4ae73e815a' as Address,
+  [ProtocolAddresses.uTokenVault]: '0x768cecb670f8550fbde6f18e5005b4facb1199fc' as Address
 }
 
 const polygonAmoyAddresses: AddressMap = {
@@ -67,7 +67,7 @@ const polygonAmoyAddresses: AddressMap = {
   [ProtocolAddresses.WalletFactory]: '0x661Fa5cE705D6AcdA108a6323B3f2732345b0b45' as Address,
   [ProtocolAddresses.NftBatchTransfer]: '0x7a18Bc13AfcF9eC02E63ab08129D1fA5fb283Ca6' as Address,
   [ProtocolAddresses.BasicWalletVault]: '0x1' as Address,
-  [ProtocolAddresses.UTokenFactory]: '0xaEE2941b6E78858E203036E34110063EFc8350D4' as Address
+  [ProtocolAddresses.uTokenVault]: '0xaEE2941b6E78858E203036E34110063EFc8350D4' as Address
 }
 
 const mainnetCollections: CollectionMap = {
