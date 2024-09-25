@@ -28,7 +28,7 @@ export const isApprovedDepositToVault = async ({
 }): Promise<boolean> => {
   const { underlyingAsset, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
   const underlyingAssetAddress = underlyingAssets(chain)[underlyingAsset]
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
@@ -38,7 +38,7 @@ export const isApprovedDepositToVault = async ({
     address: underlyingAssetAddress,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [account, uTokenFactoryAddress]
+    args: [account, uTokenVaultAddress]
   })
   return allowance >= amount
 }
@@ -67,7 +67,7 @@ export const approveDepositToVault = async ({
 }): Promise<WriteContractReturnType> => {
   const { underlyingAsset, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
   const underlyingAssetAddress = underlyingAssets(chain)[underlyingAsset]
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
@@ -77,7 +77,7 @@ export const approveDepositToVault = async ({
     address: underlyingAssetAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [uTokenFactoryAddress, amount],
+    args: [uTokenVaultAddress, amount],
     account
   })
   return walletCli.writeContract(request)
@@ -107,15 +107,15 @@ export const depositToVault = async ({
 }): Promise<WriteContractReturnType> => {
   const { underlyingAsset, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
   const underlyingAssetAddress = underlyingAssets(chain)[underlyingAsset]
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
-    address: uTokenFactoryAddress,
-    abi: abis.uTokenFactory,
+    address: uTokenVaultAddress,
+    abi: abis.uTokenVault,
     functionName: 'deposit',
     args: [underlyingAssetAddress, amount, account],
     account
@@ -149,7 +149,7 @@ export const isApprovedWithdrawFromVault = async ({
 }): Promise<boolean> => {
   const { underlyingAsset, receiptTokenAddress, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
@@ -158,7 +158,7 @@ export const isApprovedWithdrawFromVault = async ({
     address: receiptTokenAddress,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [account, uTokenFactoryAddress]
+    args: [account, uTokenVaultAddress]
   })
   return allowance >= amount
 }
@@ -189,7 +189,7 @@ export const approveWithdrawFromVault = async ({
 }): Promise<WriteContractReturnType> => {
   const { underlyingAsset, receiptTokenAddress, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
@@ -198,7 +198,7 @@ export const approveWithdrawFromVault = async ({
     address: receiptTokenAddress,
     abi: erc20Abi,
     functionName: 'approve',
-    args: [uTokenFactoryAddress, amount],
+    args: [uTokenVaultAddress, amount],
     account
   })
   return walletCli.writeContract(request)
@@ -228,15 +228,15 @@ export const withdrawFromVault = async ({
 }): Promise<WriteContractReturnType> => {
   const { underlyingAsset, amount } = args
   const chain = chains(options)
-  const uTokenFactoryAddress = addresses(chain).uTokenFactory
+  const uTokenVaultAddress = addresses(chain).uTokenVault
   const underlyingAssetAddress = underlyingAssets(chain)[underlyingAsset]
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
 
   const { request } = await pubCli.simulateContract({
-    address: uTokenFactoryAddress,
-    abi: abis.uTokenFactory,
+    address: uTokenVaultAddress,
+    abi: abis.uTokenVault,
     functionName: 'withdraw',
     args: [underlyingAssetAddress, amount, account],
     account

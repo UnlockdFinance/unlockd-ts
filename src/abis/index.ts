@@ -8,7 +8,7 @@ import walletRegistryAbi from './WalletRegistry'
 import walletFactoryAbi from './WalletFactory'
 import nftBatchTransferAbi from './NftBatchTransfer'
 import basicWalletVaultAbi from './BasicWalletVault'
-import uTokenFactoryAbi from './UTokenFactory'
+import uTokenVaultAbi from './UTokenVault'
 
 export const abis = {
   unlockd: unlockdAbi,
@@ -21,5 +21,5 @@ export const abis = {
   walletFactory: walletFactoryAbi,
   nftBatchTransfer: nftBatchTransferAbi,
   basicWalletVault: basicWalletVaultAbi,
-  uTokenFactory: uTokenFactoryAbi
+  uTokenVault: uTokenVaultAbi
 }
