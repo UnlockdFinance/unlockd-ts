@@ -15,6 +15,15 @@ import {
 import { Order, OrderType } from './types/subgraph'
 import { Address, isAddress } from 'viem'
 
+const hashSchema = Joi.string().custom((value, helpers) => {
+  if (!value.startsWith('0x')) {
+    return helpers.error('any.invalid', {
+      message: `The address "${value}" is not a valid Ethereum address.`
+    })
+  }
+  return value.toLowerCase()
+})
+
 const addressSchema = Joi.string().custom((value, helpers) => {
   if (!isAddress(value)) {
     return helpers.error('any.invalid', {
@@ -80,8 +89,8 @@ export const validateBorrow = (body: ActionRequest): SafeActionRequest => {
 
 export const validateRepay = (body: ActionRequest): SafeActionRequest => {
   const schema = Joi.object({
-    loanId: addressSchema.optional(),
-    nfts: Joi.array().items(nftSchema).min(1).max(100).required()
+    loanId: hashSchema.optional(),
+    nfts: Joi.array().items(nftSchema).min(0).max(100).required()
   })
     .unknown(true)
     .required()
