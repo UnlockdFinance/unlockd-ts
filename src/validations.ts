@@ -12,28 +12,27 @@ import {
   SafeSellNowRequest,
   SellNowRequest
 } from './types/requests'
-import { Order, OrderType } from './types/subgraph'
-import { Address, isAddress } from 'viem'
+import { Address, isAddress, isHex } from 'viem'
 
-const hashSchema = Joi.string().custom((value, helpers) => {
-  if (!value.startsWith('0x')) {
+export const hashSchema = Joi.string().custom((value, helpers) => {
+  if (!isHex(value)) {
     return helpers.error('any.invalid', {
-      message: `The address "${value}" is not a valid Ethereum address.`
+      message: `The value "${value}" is not a valid hash.`
     })
   }
   return value.toLowerCase()
 })
 
-const addressSchema = Joi.string().custom((value, helpers) => {
+export const addressSchema = Joi.string().custom((value, helpers) => {
   if (!isAddress(value)) {
     return helpers.error('any.invalid', {
-      message: `The address "${value}" is not a valid Ethereum address.`
+      message: `The value "${value}" is not a valid Ethereum address.`
     })
   }
   return value.toLowerCase()
 })
 
-const bigintSchema = Joi.alternatives().try(
+export const bigintSchema = Joi.alternatives().try(
   Joi.custom((value, helpers) => {
     if (typeof value === 'bigint') {
       return value.toString()
@@ -45,16 +44,9 @@ const bigintSchema = Joi.alternatives().try(
   })
 )
 
-const nftSchema = Joi.object({
+export const nftSchema = Joi.object({
   collection: addressSchema.required(),
   tokenId: bigintSchema.required()
-}).unknown(true)
-
-const bidSchema = Joi.object({
-  bidAmount: Joi.string().required(),
-  bidder: addressSchema.required(),
-  amountOfDebt: Joi.string().required(),
-  amountToPay: Joi.string().required()
 }).unknown(true)
 
 export const validateAddress = (address: string): Address => {
@@ -68,8 +60,8 @@ export const validateAddress = (address: string): Address => {
 
 export const validateBorrow = (body: ActionRequest): SafeActionRequest => {
   const schema = Joi.object({
-    loanId: addressSchema.optional(),
-    nfts: Joi.array().items(nftSchema).min(1).max(100).required(),
+    loanId: hashSchema.optional(),
+    nfts: Joi.array().items(nftSchema).min(0).max(100).optional(),
     underlyingAsset: addressSchema.when('loanId', {
       is: Joi.exist(),
       then: Joi.optional(),
@@ -90,7 +82,7 @@ export const validateBorrow = (body: ActionRequest): SafeActionRequest => {
 export const validateRepay = (body: ActionRequest): SafeActionRequest => {
   const schema = Joi.object({
     loanId: hashSchema.optional(),
-    nfts: Joi.array().items(nftSchema).min(0).max(100).required()
+    nfts: Joi.array().items(nftSchema).min(0).max(100).optional()
   })
     .unknown(true)
     .required()
@@ -105,7 +97,7 @@ export const validateRepay = (body: ActionRequest): SafeActionRequest => {
 
 export const validateSellNow = (body: SellNowRequest): SafeSellNowRequest => {
   const schema = Joi.object({
-    loanId: addressSchema.optional(),
+    loanId: hashSchema.optional(),
     nft: nftSchema.required()
   })
     .unknown(true)
@@ -165,46 +157,4 @@ export const validatePrices = (body: PricesRequest): SafePricesRequest => {
   }
 
   return value as SafePricesRequest
-}
-
-export const validateOrder = (body: any): Order => {
-  const schema = Joi.object({
-    id: Joi.string().required(),
-    type: Joi.number()
-      .valid(
-        OrderType.TYPE_LIQUIDATION_AUCTION,
-        OrderType.TYPE_AUCTION,
-        OrderType.TYPE_FIXED_PRICE,
-        OrderType.TYPE_FIXED_PRICE_AND_AUCTION
-      )
-      .required(),
-    assetId: addressSchema.required(),
-    nft: nftSchema.required(),
-    loan: Joi.object({
-      id: Joi.string().required(),
-      underlyingAsset: addressSchema.required(),
-      nfts: Joi.array()
-        .items(
-          nftSchema.keys({
-            isOnAuction: addressSchema.optional()
-          })
-        )
-        .max(100)
-        .required()
-    })
-      .unknown(true)
-      .required(),
-    owner: addressSchema,
-    bids: Joi.array().items(bidSchema).required(),
-    endTime: Joi.number().required()
-  })
-    .unknown(true)
-    .required()
-
-  const { error, value } = schema.validate(body)
-  if (error) {
-    throw error
-  }
-
-  return value as Order
 }
