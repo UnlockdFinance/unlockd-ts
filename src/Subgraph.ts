@@ -1,36 +1,48 @@
 import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
-import { type Chain, Chains } from './types/networks'
+import { type Chain, chains, Chains, ClientOptions } from './types/networks'
 import { Address } from 'viem'
 import { validateOrder } from './validations'
-import { SubgraphCriticalError } from './errors'
+import { BaseError, SubgraphCriticalError, SubgraphMissingClient } from './errors'
 import Joi from 'joi'
 
 export class Subgraph {
   public readonly httpClient
 
   /**
-   * @param {Chain} chain - Environment to use in the SDK
+   * @param {ClientOptions} options - Environment to use in the SDK
    * @example
    * ```ts
-   * const api = new Subgraph(Chain.Mainnet)
+   * const api = new Subgraph({ chain: Chains.Mainnet })
    * ```
    */
-  constructor(private chain: Chain = Chains.Mainnet) {
-    switch (this.chain) {
+  constructor(private options: ClientOptions = { chain: Chains.Mainnet }) {
+    let chain: Chain
+    try {
+      chain = chains(this.options)
+    } catch (error) {
+      if (error instanceof BaseError) {
+        console.error(`Unlockd Subgraph: ${error.message}`)
+      } else {
+        console.error('Unlockd Subgraph: Invalid client options')
+      }
+      return
+    }
+
+    switch (chain) {
       case Chains.Localhost:
         this.httpClient = axios.create({
           baseURL: 'https://api.example.com'
         })
         break
-      case Chains.Sepolia:
-        this.httpClient = axios.create({
-          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-ethereum-sepolia/api'
-        })
-        break
       case Chains.Mainnet:
         this.httpClient = axios.create({
           baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-mainnet-sub/api'
+        })
+        break
+      case Chains.Sepolia:
+        this.httpClient = axios.create({
+          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockdv2-ethereum-sepolia/api'
         })
         break
       case Chains.PolygonAmoy:
@@ -39,14 +51,16 @@ export class Subgraph {
         })
         break
       default:
-        this.httpClient = axios.create({
-          baseURL: 'https://subgraph.satsuma-prod.com/bb7d5107614b/unlockd/unlockd-subgraph-development/api'
-        })
+        console.error(`Unlockd Subgraph: Unsupported chain: ${chain.network}`)
         break
     }
   }
 
   async allOrders(limit = 100, offset = 0, order = OrderTypes.DESC, ended = false): Promise<Order[]> {
+    if (!this.httpClient) {
+      throw new SubgraphMissingClient()
+    }
+
     const results: Order[] = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`
@@ -113,6 +127,10 @@ export class Subgraph {
     collections: Address[] = [],
     ended = false
   ): Promise<Order[]> {
+    if (!this.httpClient) {
+      throw new SubgraphMissingClient()
+    }
+
     const results: Order[] = []
     const time = parseInt((Date.now() / 1000).toFixed())
     let endTime = `endTime_gt: ${time}`
