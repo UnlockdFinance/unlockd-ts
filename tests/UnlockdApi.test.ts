@@ -19,7 +19,7 @@ describe('UnlockdApi', () => {
   const tokenAuth = 'valid-token'
 
   beforeAll(() => {
-    api = new UnlockdApi(Chains.Localhost)
+    api = new UnlockdApi({ chain: Chains.Localhost })
   })
 
   afterEach(() => {

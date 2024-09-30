@@ -133,7 +133,17 @@ export class InvalidLTVError extends BaseError {
 export class SubgraphCriticalError extends BaseError {
   override name = 'SubgraphCriticalError'
   constructor(message: string) {
-    super(`Subgraph returned invalid data: ${message}. Please contact the Unlockd team if the problem persists.`)
+    super(
+      `Unlockd Subgraph returned invalid data: ${message}. Please contact the Unlockd team if the problem persists.`
+    )
+    this.isCritical = true
+  }
+}
+
+export class SubgraphMissingClient extends BaseError {
+  override name = 'SubgraphMissingClient'
+  constructor() {
+    super('Unlockd Subgraph not available due to HTTP client missing.')
     this.isCritical = true
   }
 }

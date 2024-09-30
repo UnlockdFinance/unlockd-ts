@@ -19,8 +19,8 @@ import {
 } from './types/responses'
 import { ActionRequest, BuyNowRequest, MarketRequest, PricesRequest, SellNowRequest } from './types/requests'
 import axios, { AxiosError } from 'axios'
-import { InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
-import { type Chain, Chains } from './types/networks'
+import { BaseError, InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
+import { type Chain, chains, Chains, ClientOptions } from './types/networks'
 
 /**
  * UnlockdApi wrapper of the Unlockd REST API
@@ -31,28 +31,41 @@ export class UnlockdApi {
   public readonly url
 
   /**
-   * @param {Chain} env - Environment to use in the SDK
+   * @param {ClientOptions} options - Environment to use in the SDK
    * @example
    * ```ts
-   * const api = new UnlockdApi(Chain.Mainnet)
+   * const api = new UnlockdApi({ chain: Chains.Mainnet })
    * ```
    */
-  constructor(private env: Chain = Chains.Mainnet) {
-    switch (this.env) {
+  constructor(private options: ClientOptions = { chain: Chains.Mainnet }) {
+    let chain: Chain
+    try {
+      chain = chains(this.options)
+    } catch (error) {
+      if (error instanceof BaseError) {
+        console.error(`UnlockdApi: ${error.message}`)
+      } else {
+        console.error('UnlockdApi: Invalid client options')
+      }
+      return
+    }
+
+    switch (chain) {
       case Chains.Localhost:
         this.url = 'https://api.example.com'
         break
-      case Chains.Sepolia:
-        this.url = 'https://unlockd-api.staging.unlockd.finance'
-        break
       case Chains.Mainnet:
         this.url = 'https://api-sdk.unlockd.finance'
+        break
+      case Chains.Sepolia:
+        this.url = 'https://unlockd-api.staging.unlockd.finance'
         break
       case Chains.PolygonAmoy:
         this.url = 'https://polygon-amoy.staging.unlockd.finance'
         break
       default:
-        throw new Error(`Unsupported chain: ${this.env}`)
+        console.error(`UnlockdApi: Unsupported chain: ${chain.network}`)
+        break
     }
   }
 
