@@ -27,7 +27,6 @@ import { type Chain, chains, Chains, ClientOptions } from './types/networks'
  * @class
  */
 export class UnlockdApi {
-  /** @ignore */
   public readonly url
 
   /**

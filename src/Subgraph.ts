@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Order, OrderTypes } from './types/subgraph'
 import { type Chain, chains, Chains, ClientOptions } from './types/networks'
 import { Address } from 'viem'
-import { validateOrder } from './validations'
+import { validateOrder } from './subgraph-validations'
 import { BaseError, SubgraphCriticalError, SubgraphMissingClient } from './errors'
 import Joi from 'joi'
 
