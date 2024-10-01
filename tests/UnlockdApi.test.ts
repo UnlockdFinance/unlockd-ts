@@ -16,10 +16,12 @@ import { validateBorrow, validateMarket, validatePrices, validateRepay, validate
 
 describe('UnlockdApi', () => {
   let api: UnlockdApi
+  let apiUrl: string
   const tokenAuth = 'valid-token'
 
   beforeAll(() => {
     api = new UnlockdApi({ chain: Chains.Localhost })
+    apiUrl = api.url || 'https://api.example.com'
   })
 
   afterEach(() => {
@@ -30,7 +32,7 @@ describe('UnlockdApi', () => {
     const address = '0x0000000000000000000000000000000000000000'
     const expectedResponse: SignatureMessageResponse = { message: 'Test message' }
 
-    nock(api.url).get(`/auth/${address}/message`).reply(200, expectedResponse)
+    nock(apiUrl).get(`/auth/${address}/message`).reply(200, expectedResponse)
 
     const response = await api.signatureMessage(address)
     expect(response).toEqual(expectedResponse)
@@ -39,7 +41,7 @@ describe('UnlockdApi', () => {
   it('should throw exception on a signature message fails', async () => {
     const address = '0x0000000000000000000000000000000000000000'
 
-    nock(api.url).get(`/auth/${address}/message`).reply(500)
+    nock(apiUrl).get(`/auth/${address}/message`).reply(500)
 
     await expect(api.signatureMessage(address)).rejects.toThrow(UnexpectedException)
   })
@@ -49,7 +51,7 @@ describe('UnlockdApi', () => {
     const signature = 'testSignature'
     const expectedResponse: ValidateMessageResponse = { token: tokenAuth }
 
-    nock(api.url).post(`/auth/${address}/validate`, { signature }).reply(200, expectedResponse)
+    nock(apiUrl).post(`/auth/${address}/validate`, { signature }).reply(200, expectedResponse)
 
     const response = await api.validateMessage(address, signature)
     expect(response).toEqual(expectedResponse)
@@ -58,7 +60,7 @@ describe('UnlockdApi', () => {
     const address = '0x0000000000000000000000000000000000000000'
     const signature = 'testSignature'
 
-    nock(api.url).post(`/auth/${address}/validate`, { signature }).reply(500)
+    nock(apiUrl).post(`/auth/${address}/validate`, { signature }).reply(500)
 
     await expect(api.validateMessage(address, signature)).rejects.toThrow(InvalidSignatureException)
   })
@@ -71,7 +73,7 @@ describe('UnlockdApi', () => {
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
     const safeParams = validateBorrow(params)
-    nock(api.url)
+    nock(apiUrl)
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(200, expectedResponse)
@@ -88,7 +90,7 @@ describe('UnlockdApi', () => {
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
     const safeParams = validateSellNow(params)
-    nock(api.url)
+    nock(apiUrl)
       .post('/signature/sellnow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(200, expectedResponse)
@@ -101,7 +103,7 @@ describe('UnlockdApi', () => {
     const expectedResponse = { signature: { v: 1, r: 'testR', s: 'testS', deadline: 123456789 } }
 
     const safeParams = validateMarket(params)
-    nock(api.url)
+    nock(apiUrl)
       .post('/signature/market', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(200, expectedResponse)
@@ -118,7 +120,7 @@ describe('UnlockdApi', () => {
     const expectedResponse = { signature: { v: 2, r: 'testR2', s: 'testS2', deadline: 987654321 } }
 
     const safeParams = validateRepay(params)
-    nock(api.url)
+    nock(apiUrl)
       .post('/signature/loan/repay', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(200, expectedResponse)
@@ -150,7 +152,7 @@ describe('UnlockdApi', () => {
     }
 
     const safeParams = validatePrices(params)
-    nock(api.url).post('/prices', safeParams).reply(200, expectedResponse)
+    nock(apiUrl).post('/prices', safeParams).reply(200, expectedResponse)
 
     const response = await api.prices(params)
     expect(response).toEqual(expectedResponse.result)
@@ -162,7 +164,7 @@ describe('UnlockdApi', () => {
     }
 
     const safeParams = validateBorrow(params)
-    nock(api['url'])
+    nock(apiUrl)
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(401)
@@ -177,7 +179,7 @@ describe('UnlockdApi', () => {
     }
 
     const safeParams = validateBorrow(params)
-    nock(api['url'])
+    nock(apiUrl)
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(500)
@@ -192,7 +194,7 @@ describe('UnlockdApi', () => {
     }
 
     const safeParams = validateBorrow(params)
-    nock(api['url'])
+    nock(apiUrl)
       .post('/signature/loan/borrow', safeParams)
       .matchHeader('Authorization', `Bearer ${tokenAuth}`)
       .reply(400)
