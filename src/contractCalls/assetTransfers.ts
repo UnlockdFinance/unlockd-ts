@@ -210,7 +210,7 @@ export const approveNfts = async ({
 
   const results = await Promise.all(writePromises)
 
-  return results.filter(Boolean)
+  return results.filter( _ => _ !== undefined)
 }
 
 /**
