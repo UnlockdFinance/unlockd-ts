@@ -61,7 +61,7 @@ export const validateAddress = (address: string): Address => {
 export const validateBorrow = (body: ActionRequest): SafeActionRequest => {
   const schema = Joi.object({
     loanId: hashSchema.optional(),
-    nfts: Joi.array().items(nftSchema).min(1).max(100).optional(),
+    nfts: Joi.array().items(nftSchema).min(0).max(100).optional(),
     underlyingAsset: addressSchema.when('loanId', {
       is: Joi.exist(),
       then: Joi.optional(),
