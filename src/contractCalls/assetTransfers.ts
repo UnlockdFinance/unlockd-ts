@@ -31,7 +31,7 @@ export const withdrawAssets = async ({
 }): Promise<WriteContractReturnType> => {
   const { assets, recipient } = args
   const chain = chains(options)
-  const basicWalletVaultAddress = await getWallet({provider, options})
+  const basicWalletVaultAddress = await getWallet({ provider, options })
 
   const [pubCli, walletCli] = await Promise.all([publicClient({ provider, chain }), client({ provider, chain })])
   const [account] = await walletCli.requestAddresses()
@@ -208,7 +208,9 @@ export const approveNfts = async ({
     })
     .filter(request => request !== undefined)
 
-  return await Promise.all(writePromises)
+  const results = await Promise.all(writePromises)
+
+  return results.filter(Boolean)
 }
 
 /**
