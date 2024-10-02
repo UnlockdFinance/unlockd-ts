@@ -210,7 +210,7 @@ export const approveNfts = async ({
 
   const results = await Promise.all(writePromises)
 
-  return results.filter( _ => _ !== undefined)
+  return results.filter((result): result is WriteContractReturnType => result !== undefined);
 }
 
 /**
