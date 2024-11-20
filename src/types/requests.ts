@@ -32,6 +32,11 @@ export type PricesRequest = {
 
 export type MarketRequest = Nft
 
+export type AuctionRequest = {
+  loanId: Address,
+  nft: Nft
+}
+
 /**
  * Safe types for api requests (convert bigint to string etc)
  */
@@ -61,3 +66,8 @@ export type SafePricesRequest = {
   nfts: (SafeNft & { underlyingAsset: Address })[]
 }
 export type SafeMarketRequest = SafeNft
+
+export type SafeAuctionRequest = {
+  loanId: Address
+  nft: SafeNft
+}
