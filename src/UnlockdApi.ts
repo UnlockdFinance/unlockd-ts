@@ -1,14 +1,17 @@
 import {
-  validateAddress, validateAuction,
+  validateAddress,
+  validateAuction,
   validateBorrow,
   validateBuyNow,
   validateMarket,
-  validatePrices, validateRedeem,
+  validatePrices,
+  validateRedeem,
   validateRepay,
   validateSellNow
 } from './validations'
 import {
-  Action, Auction,
+  Action,
+  Auction,
   BuyNow,
   Market,
   PricesResponse,
@@ -22,7 +25,8 @@ import {
   AuctionRequest,
   BuyNowRequest,
   MarketRequest,
-  PricesRequest, RedeemRequest,
+  PricesRequest,
+  RedeemRequest,
   SellNowRequest
 } from './types/requests'
 import axios, { AxiosError } from 'axios'

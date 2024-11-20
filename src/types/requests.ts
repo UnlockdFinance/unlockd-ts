@@ -33,12 +33,12 @@ export type PricesRequest = {
 export type MarketRequest = Nft
 
 export type AuctionRequest = {
-  loanId: Address,
+  loanId: Address
   nft: Nft
 }
 
 export type RedeemRequest = {
-  loanId: Address,
+  loanId: Address
 }
 
 /**

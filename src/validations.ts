@@ -1,14 +1,18 @@
 import { InvalidAddressFormat, InvalidRequestParams } from './errors'
 import Joi from 'joi'
 import {
-  ActionRequest, AuctionRequest,
+  ActionRequest,
+  AuctionRequest,
   BuyNowRequest,
   MarketRequest,
-  PricesRequest, RedeemRequest,
-  SafeActionRequest, SafeAuctionRequest,
+  PricesRequest,
+  RedeemRequest,
+  SafeActionRequest,
+  SafeAuctionRequest,
   SafeBuyNowRequest,
   SafeMarketRequest,
-  SafePricesRequest, SafeRedeemRequest,
+  SafePricesRequest,
+  SafeRedeemRequest,
   SafeSellNowRequest,
   SellNowRequest
 } from './types/requests'
@@ -153,7 +157,7 @@ export const validateAuction = (body: AuctionRequest): SafeAuctionRequest => {
 
 export const validateRedeem = (body: RedeemRequest): SafeRedeemRequest => {
   const schema = Joi.object({
-    loanId: hashSchema.required(),
+    loanId: hashSchema.required()
   })
 
   const { error, value } = schema.validate(body)
