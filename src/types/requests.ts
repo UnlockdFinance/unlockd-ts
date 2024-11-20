@@ -37,6 +37,10 @@ export type AuctionRequest = {
   nft: Nft
 }
 
+export type RedeemRequest = {
+  loanId: Address,
+}
+
 /**
  * Safe types for api requests (convert bigint to string etc)
  */
@@ -70,4 +74,8 @@ export type SafeMarketRequest = SafeNft
 export type SafeAuctionRequest = {
   loanId: Address
   nft: SafeNft
+}
+
+export type SafeRedeemRequest = {
+  loanId: Address
 }

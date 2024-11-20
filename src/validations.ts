@@ -4,11 +4,11 @@ import {
   ActionRequest, AuctionRequest,
   BuyNowRequest,
   MarketRequest,
-  PricesRequest,
+  PricesRequest, RedeemRequest,
   SafeActionRequest, SafeAuctionRequest,
   SafeBuyNowRequest,
   SafeMarketRequest,
-  SafePricesRequest,
+  SafePricesRequest, SafeRedeemRequest,
   SafeSellNowRequest,
   SellNowRequest
 } from './types/requests'
@@ -142,8 +142,6 @@ export const validateAuction = (body: AuctionRequest): SafeAuctionRequest => {
     loanId: hashSchema.required(),
     nft: nftSchema.required()
   })
-    .unknown(true)
-    .required()
 
   const { error, value } = schema.validate(body)
   if (error) {
@@ -151,6 +149,19 @@ export const validateAuction = (body: AuctionRequest): SafeAuctionRequest => {
   }
 
   return value as SafeAuctionRequest
+}
+
+export const validateRedeem = (body: RedeemRequest): SafeRedeemRequest => {
+  const schema = Joi.object({
+    loanId: hashSchema.required(),
+  })
+
+  const { error, value } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
+  }
+
+  return value as SafeRedeemRequest
 }
 
 export const validatePrices = (body: PricesRequest): SafePricesRequest => {

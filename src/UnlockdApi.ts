@@ -3,7 +3,7 @@ import {
   validateBorrow,
   validateBuyNow,
   validateMarket,
-  validatePrices,
+  validatePrices, validateRedeem,
   validateRepay,
   validateSellNow
 } from './validations'
@@ -22,7 +22,7 @@ import {
   AuctionRequest,
   BuyNowRequest,
   MarketRequest,
-  PricesRequest,
+  PricesRequest, RedeemRequest,
   SellNowRequest
 } from './types/requests'
 import axios, { AxiosError } from 'axios'
@@ -252,6 +252,18 @@ export class UnlockdApi {
     const safeParams = validateAuction(params)
     const response = await axios
       .post(`${this.url}/signature/auction/bid`, safeParams, {
+        headers: {
+          Authorization: `Bearer ${tokenAuth}`
+        }
+      })
+      .catch((error: AxiosError) => mapAxiosException(error))
+    return response.data
+  }
+
+  async redeemSignature(tokenAuth: string, params: RedeemRequest): Promise<Signature<Auction>> {
+    const safeParams = validateRedeem(params)
+    const response = await axios
+      .post(`${this.url}/signature/redeem`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }
