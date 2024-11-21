@@ -1,14 +1,17 @@
 import {
   validateAddress,
+  validateAuction,
   validateBorrow,
   validateBuyNow,
   validateMarket,
   validatePrices,
+  validateRedeem,
   validateRepay,
   validateSellNow
 } from './validations'
 import {
   Action,
+  Auction,
   BuyNow,
   Market,
   PricesResponse,
@@ -17,7 +20,15 @@ import {
   SignatureMessageResponse,
   ValidateMessageResponse
 } from './types/responses'
-import { ActionRequest, BuyNowRequest, MarketRequest, PricesRequest, SellNowRequest } from './types/requests'
+import {
+  ActionRequest,
+  AuctionRequest,
+  BuyNowRequest,
+  MarketRequest,
+  PricesRequest,
+  RedeemRequest,
+  SellNowRequest
+} from './types/requests'
 import axios, { AxiosError } from 'axios'
 import { BaseError, InvalidSignatureException, mapAxiosException, UnexpectedException } from './errors'
 import { type Chain, chains, Chains, ClientOptions } from './types/networks'
@@ -233,6 +244,30 @@ export class UnlockdApi {
     const safeParams = validateMarket(params)
     const response = await axios
       .post(`${this.url}/signature/market`, safeParams, {
+        headers: {
+          Authorization: `Bearer ${tokenAuth}`
+        }
+      })
+      .catch((error: AxiosError) => mapAxiosException(error))
+    return response.data
+  }
+
+  async auctionSignature(tokenAuth: string, params: AuctionRequest): Promise<Signature<Auction>> {
+    const safeParams = validateAuction(params)
+    const response = await axios
+      .post(`${this.url}/signature/auction/bid`, safeParams, {
+        headers: {
+          Authorization: `Bearer ${tokenAuth}`
+        }
+      })
+      .catch((error: AxiosError) => mapAxiosException(error))
+    return response.data
+  }
+
+  async redeemSignature(tokenAuth: string, params: RedeemRequest): Promise<Signature<Auction>> {
+    const safeParams = validateRedeem(params)
+    const response = await axios
+      .post(`${this.url}/signature/redeem`, safeParams, {
         headers: {
           Authorization: `Bearer ${tokenAuth}`
         }

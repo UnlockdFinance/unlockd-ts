@@ -2,13 +2,17 @@ import { InvalidAddressFormat, InvalidRequestParams } from './errors'
 import Joi from 'joi'
 import {
   ActionRequest,
+  AuctionRequest,
   BuyNowRequest,
   MarketRequest,
   PricesRequest,
+  RedeemRequest,
   SafeActionRequest,
+  SafeAuctionRequest,
   SafeBuyNowRequest,
   SafeMarketRequest,
   SafePricesRequest,
+  SafeRedeemRequest,
   SafeSellNowRequest,
   SellNowRequest
 } from './types/requests'
@@ -61,7 +65,7 @@ export const validateAddress = (address: string): Address => {
 export const validateBorrow = (body: ActionRequest): SafeActionRequest => {
   const schema = Joi.object({
     loanId: hashSchema.optional(),
-    nfts: Joi.array().items(nftSchema).min(1).max(100).optional(),
+    nfts: Joi.array().items(nftSchema).min(0).max(100).optional(),
     underlyingAsset: addressSchema.when('loanId', {
       is: Joi.exist(),
       then: Joi.optional(),
@@ -135,6 +139,33 @@ export const validateMarket = (body: MarketRequest): SafeMarketRequest => {
   }
 
   return value as SafeMarketRequest
+}
+
+export const validateAuction = (body: AuctionRequest): SafeAuctionRequest => {
+  const schema = Joi.object({
+    loanId: hashSchema.required(),
+    nft: nftSchema.required()
+  })
+
+  const { error, value } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
+  }
+
+  return value as SafeAuctionRequest
+}
+
+export const validateRedeem = (body: RedeemRequest): SafeRedeemRequest => {
+  const schema = Joi.object({
+    loanId: hashSchema.required()
+  })
+
+  const { error, value } = schema.validate(body)
+  if (error) {
+    throw new InvalidRequestParams(error.message)
+  }
+
+  return value as SafeRedeemRequest
 }
 
 export const validatePrices = (body: PricesRequest): SafePricesRequest => {
